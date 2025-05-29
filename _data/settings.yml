@@ -9,7 +9,7 @@ description:
 # Author Settings
 author:
   name: Jared Teerlink
-  image: 01.jpg
+  image: headshot.jpg
   say-hello: Hello, I’m <strong>Jared</strong>
   bio: Data Scientist passionate about <strong>artificial intelligence</strong>, <strong>machine learning</strong>, <strong>analytics</strong>, and turning data into insights. Welcome!
 

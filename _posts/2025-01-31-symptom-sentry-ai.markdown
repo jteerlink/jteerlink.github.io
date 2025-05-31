@@ -9,7 +9,7 @@ tags:   AI
 
 SymptomSentryAI is an advanced AI-powered healthcare application that provides intelligent medical insights through image analysis. This platform enables users to upload throat and ear images for instant analysis using state-of-the-art machine learning models.
 
-<!-- ![SymptomSentryAI Logo](generated-icon.png) -->
+#### <strong>[Github Repository](https://github.com/jteerlink/SymptomSentinelAI)</strong>
 
 ## Features
 

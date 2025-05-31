@@ -7,6 +7,8 @@ tags:   Machine Learning
 ---
 This project develops a predictive model to identify customers at high risk of defaulting on cash advances. The solution integrates exploratory data analysis, thoughtful feature engineering, robust feature selection, and a tuned machine learning model to support informed credit decisioning.
 
+#### <strong>[Github Repository](https://github.com/jteerlink/credit_default)</strong>
+
 ---
 
 ## 1. Exploratory Data Analysis (EDA)

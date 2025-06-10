@@ -12,7 +12,7 @@ I am adept at fostering cross-functional collaboration and leveraging advanced a
 ***
 
 #### Lead Data Scientist, Capital One
-<small>April 2022 - Present</small>
+<small>April 2022 - May 2025</small>
 
 As Lead Data Scientist at Capital One, I spearheaded the development of a next-best-action engine, which significantly boosted offer acceptance by 18% and generated an impressive $14M in additional revenue. I also drove a $6M uplift in annualized revenue by leading the automation of core marketing data workflows and optimizing campaign infrastructure. A key part of my role involved mentoring and developing data science talent through structured one-on-one sessions and personalized project alignment, which markedly enhanced team engagement and productivity. Furthermore, I was instrumental in improving model accuracy by 15% for a critical $100M lead generation product by identifying and incorporating additional data sources and modernizing the model rebuild with an advanced XGBoost algorithm.
 

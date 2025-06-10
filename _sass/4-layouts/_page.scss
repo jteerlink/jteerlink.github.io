@@ -114,3 +114,50 @@
     line-height: 1.6;
   }
 }
+
+.posts-list {
+  .post-item {
+    margin-bottom: 2rem;
+    padding-bottom: 2rem;
+    border-bottom: 1px solid $light-gray;
+    
+    &:last-child {
+      border-bottom: none;
+    }
+    
+    .post-item__image {
+      margin-bottom: 1rem;
+      
+      .post-image {
+        height: 200px;
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        background-color: $light-gray;
+      }
+    }
+    
+    .post-item__title {
+      margin-bottom: 0.5rem;
+      
+      a {
+        color: $dark;
+        text-decoration: none;
+        
+        &:hover {
+          color: $black;
+        }
+      }
+    }
+    
+    .post-item__meta {
+      margin-bottom: 1rem;
+      color: $gray;
+      font-size: 0.9rem;
+    }
+    
+    .post-item__excerpt {
+      line-height: 1.6;
+    }
+  }
+}

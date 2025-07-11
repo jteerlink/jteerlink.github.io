@@ -30,7 +30,7 @@ Our **hybrid multi-agent system** consists of two distinct content pipelines, or
 
 ### **Hybrid Pipeline Architecture**
 
-![Hybrid Pipeline Architecture](../images/hybrid-pipeline-architecture.png)
+![Hybrid Pipeline Architecture](/images/hybrid-pipeline-architecture.png)
 *The complete hybrid multi-agent system architecture showing the intelligent routing between Daily Quick Pipeline (90% of content) and Deep Dive Pipeline (10% of content), with comprehensive quality assurance and multi-format output capabilities.*
 
 ### **Daily Quick Pipeline (90% of Content)**
@@ -47,7 +47,7 @@ The **Daily Quick Pipeline** is optimized for rapid generation of high-quality 5
 
 The **Deep Dive Pipeline** handles comprehensive weekly analysis articles through sophisticated multi-agent collaboration:
 
-![Multi-Agent Deep Dive Architecture](../images/multi-agent-deep-dive.png)
+![Multi-Agent Deep Dive Architecture](/images/multi-agent-deep-dive.png)
 *The sophisticated multi-agent deep dive architecture showing parallel and sequential processing streams, with specialized agents for planning, research, writing, and editing, supported by local LLM infrastructure and comprehensive data sources.*
 
 **Key Agents and Their Roles:**
@@ -62,7 +62,7 @@ The **Deep Dive Pipeline** handles comprehensive weekly analysis articles throug
 
 Our **multi-gate quality assurance system** ensures every piece meets rigorous publication standards:
 
-![Quality Assurance Pipeline](../images/quality-assurance-pipeline.png)
+![Quality Assurance Pipeline](/images/quality-assurance-pipeline.png)
 *The comprehensive multi-gate quality assurance system with technical accuracy validation, mobile readability compliance, code validation, and performance monitoring, ensuring every newsletter meets rigorous publication standards.*
 
 **Quality Gates:**
@@ -76,7 +76,7 @@ Our **multi-gate quality assurance system** ensures every piece meets rigorous p
 
 Our system is built on a robust, production-ready technology stack designed for reliability, scalability, and performance:
 
-![Technology Stack](../images/technology-stack.png)
+![Technology Stack](/images/technology-stack.png)
 *The complete technology stack showing the modern Streamlit UI, hybrid workflow orchestration, multi-agent architecture, local AI infrastructure, comprehensive data layer, and integrated quality assurance and analytics systems.*
 
 ### **Local AI Infrastructure**
@@ -116,8 +116,7 @@ Our **local AI deployment** strategy provides complete control over AI infrastru
 
 Our **modern Streamlit interface** represents a complete reimagining of AI content creation tools, moving beyond basic forms to deliver a sophisticated, production-ready experience that makes advanced AI capabilities accessible to users of all technical backgrounds.
 
-![Hybrid Newsletter System Interface](../images/hybrid_newsletter_system_ui.png)
-*The production-ready Streamlit interface showcasing the Deep Dive Pipeline configuration with intelligent content routing, real-time quality monitoring, and comprehensive customization options.*
+*The production-ready Streamlit interface showcases the Deep Dive Pipeline configuration with intelligent content routing, real-time quality monitoring, and comprehensive customization options.*
 
 ### **Design Philosophy: Mobile-First Professional Interface**
 

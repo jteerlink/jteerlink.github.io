@@ -1,9 +1,9 @@
 ---
 layout: post
-title:  Building an AI-Powered Newsletter Generator: A Production-Ready Hybrid Multi-Agent System
-date:   2025-07-11
-image:  ai_agent.jpg
-tags:   AI
+title: "Building an AI-Powered Newsletter Generator: A Production-Ready Hybrid Multi-Agent System"
+date: 2025-07-11
+image: ai_agent.jpg
+tags: [AI]
 ---
 
 ## Introduction

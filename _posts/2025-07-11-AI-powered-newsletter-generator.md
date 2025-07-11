@@ -6,7 +6,7 @@ image: ai_agent.jpg
 tags: [AI]
 ---
 
-## Introduction
+
 
 The digital content landscape is flooded with AI-generated text that lacks depth, accuracy, and the human touch that makes content genuinely valuable. Most AI content tools prioritize speed over quality, producing generic summaries that require extensive human editing to be truly useful. We set out to solve this fundamental problem by building something entirely different: an **AI-powered newsletter generator** that doesn't just aggregate existing content, but creates original, deeply researched articles that rival the best human-written newsletters.
 
@@ -30,66 +30,8 @@ Our **hybrid multi-agent system** consists of two distinct content pipelines, or
 
 ### **Hybrid Pipeline Architecture**
 
-```mermaid
-graph TB
-    subgraph "Input Layer"
-        A[User Topic Input] --> B[Hybrid Workflow Manager]
-        B --> C{Content Complexity Analysis}
-    end
-    
-    subgraph "Pipeline Selection"
-        C -->|Simple/Daily| D[Daily Quick Pipeline]
-        C -->|Complex/Weekly| E[Deep Dive Pipeline]
-    end
-    
-    subgraph "Daily Quick Pipeline<br/>(90% of content)"
-        D --> F[NewsAggregatorAgent]
-        F --> G[ContentCuratorAgent]
-        G --> H[QuickBitesAgent]
-        H --> I[SubjectLineAgent]
-        I --> J[NewsletterAssemblerAgent]
-    end
-    
-    subgraph "Deep Dive Pipeline<br/>(10% of content)"
-        E --> K[ManagerAgent]
-        K --> L[PlannerAgent]
-        K --> M[ResearchAgent]
-        K --> N[WriterAgent]
-        K --> O[EditorAgent]
-    end
-    
-    subgraph "Quality Assurance System"
-        P[Technical Accuracy Validation]
-        Q[Mobile Readability Compliance]
-        R[Code Validation]
-        S[Performance Monitoring]
-    end
-    
-    J --> P
-    O --> P
-    P --> Q
-    Q --> R
-    R --> S
-    S --> T[Multi-Format Output]
-    
-    subgraph "Output Layer"
-        T --> U[HTML Newsletter]
-        T --> V[Markdown Export]
-        T --> W[Plain Text]
-        T --> X[Notion Publishing]
-    end
-    
-    style A fill:#e1f5fe
-    style B fill:#fff3e0
-    style C fill:#f3e5f5
-    style D fill:#e8f5e8
-    style E fill:#fff8e1
-    style K fill:#ff6b6b
-    style P fill:#4ecdc4
-    style Q fill:#4ecdc4
-    style R fill:#4ecdc4
-    style S fill:#4ecdc4
-```
+![Hybrid Pipeline Architecture](images/hybrid-pipeline-architecture.png)
+*The complete hybrid multi-agent system architecture showing the intelligent routing between Daily Quick Pipeline (90% of content) and Deep Dive Pipeline (10% of content), with comprehensive quality assurance and multi-format output capabilities.*
 
 ### **Daily Quick Pipeline (90% of Content)**
 
@@ -105,62 +47,8 @@ The **Daily Quick Pipeline** is optimized for rapid generation of high-quality 5
 
 The **Deep Dive Pipeline** handles comprehensive weekly analysis articles through sophisticated multi-agent collaboration:
 
-```mermaid
-graph LR
-    subgraph "Multi-Agent Deep Dive Architecture"
-        A[ManagerAgent<br/>🎯 Orchestrator] --> B{Workflow Planning}
-        B --> C[PlannerAgent<br/>📋 Editorial Strategy]
-        B --> D[ResearchAgent<br/>🔍 Multi-Source Research]
-        
-        C --> E[WriterAgent<br/>✍️ Content Creation]
-        D --> E
-        
-        E --> F[EditorAgent<br/>📝 Quality Review]
-        
-        F --> G[Quality Gates]
-    end
-    
-    subgraph "Parallel Processing"
-        H[Planning Stream<br/>• Audience Analysis<br/>• Content Strategy<br/>• Editorial Framework]
-        I[Research Stream<br/>• Primary Research<br/>• Trend Analysis<br/>• Source Validation]
-    end
-    
-    subgraph "Sequential Processing"
-        J[Writing Stream<br/>• Draft Newsletter<br/>• Storytelling Flow<br/>• Engagement Optimization]
-        K[Editing Stream<br/>• Quality Review<br/>• Fact Checking<br/>• Final Polish]
-    end
-    
-    subgraph "AI Infrastructure"
-        L[Local LLM Models<br/>• LLaMA 3 - General<br/>• Gemma 3 - Technical<br/>• DeepSeek-R1 - Reasoning]
-        M[Ollama Runtime<br/>• Model Management<br/>• Memory Optimization<br/>• Inference Engine]
-    end
-    
-    subgraph "Data Sources"
-        N[Web Sources<br/>• Crawl4AI Scraper<br/>• RSS Feeds<br/>• 40+ Premium Sources]
-        O[Knowledge Base<br/>• Vector Store<br/>• Enhanced RAG<br/>• Semantic Search]
-    end
-    
-    C --> H
-    D --> I
-    H --> J
-    I --> J
-    J --> K
-    
-    E --> L
-    F --> L
-    L --> M
-    
-    D --> N
-    D --> O
-    
-    style A fill:#ff6b6b
-    style C fill:#4ecdc4
-    style D fill:#45b7d1
-    style E fill:#96ceb4
-    style F fill:#feca57
-    style L fill:#ff9ff3
-    style M fill:#54a0ff
-```
+![Multi-Agent Deep Dive Architecture](images/multi-agent-deep-dive.png)
+*The sophisticated multi-agent deep dive architecture showing parallel and sequential processing streams, with specialized agents for planning, research, writing, and editing, supported by local LLM infrastructure and comprehensive data sources.*
 
 **Key Agents and Their Roles:**
 
@@ -174,66 +62,8 @@ graph LR
 
 Our **multi-gate quality assurance system** ensures every piece meets rigorous publication standards:
 
-```mermaid
-flowchart TD
-    subgraph "Quality Assurance Pipeline"
-        A[Generated Content] --> B[Quality Gate System]
-        
-        B --> C[Technical Accuracy Gate<br/>≥80% Threshold]
-        B --> D[Mobile Readability Gate<br/>≥80% Threshold]
-        B --> E[Code Validation Gate<br/>≥80% Threshold]
-        B --> F[Performance Monitor<br/>Sub-2s Processing]
-        
-        C --> G{Technical<br/>Accuracy<br/>Check}
-        G -->|Pass| H[✅ Fact Verification]
-        G -->|Fail| I[❌ Requires Revision]
-        
-        D --> J{Mobile<br/>Readability<br/>Check}
-        J -->|Pass| K[✅ Mobile Optimized]
-        J -->|Fail| L[❌ Format Adjustment]
-        
-        E --> M{Code<br/>Validation<br/>Check}
-        M -->|Pass| N[✅ Syntax Verified]
-        M -->|Fail| O[❌ Code Correction]
-        
-        F --> P{Performance<br/>Monitor}
-        P -->|Pass| Q[✅ Speed Optimized]
-        P -->|Fail| R[❌ Processing Delay]
-        
-        H --> S[Quality Scorecard]
-        K --> S
-        N --> S
-        Q --> S
-        
-        S --> T{Overall<br/>Quality<br/>Score}
-        T -->|≥80%| U[✅ Approved for Publishing]
-        T -->|<80%| V[❌ Back to Revision]
-        
-        I --> W[Agent Feedback Loop]
-        L --> W
-        O --> W
-        R --> W
-        W --> X[Continuous Improvement]
-        
-        U --> Y[Multi-Format Export]
-        Y --> Z1[📱 Mobile HTML]
-        Y --> Z2[📄 Markdown]
-        Y --> Z3[📝 Plain Text]
-        Y --> Z4[📋 Notion Export]
-    end
-    
-    style A fill:#e1f5fe
-    style B fill:#fff3e0
-    style C fill:#4ecdc4
-    style D fill:#4ecdc4
-    style E fill:#4ecdc4
-    style F fill:#4ecdc4
-    style U fill:#96ceb4
-    style V fill:#ff6b6b
-    style S fill:#feca57
-    style W fill:#ff9ff3
-    style X fill:#54a0ff
-```
+![Quality Assurance Pipeline](images/quality-assurance-pipeline.png)
+*The comprehensive multi-gate quality assurance system with technical accuracy validation, mobile readability compliance, code validation, and performance monitoring, ensuring every newsletter meets rigorous publication standards.*
 
 **Quality Gates:**
 
@@ -246,79 +76,8 @@ flowchart TD
 
 Our system is built on a robust, production-ready technology stack designed for reliability, scalability, and performance:
 
-```mermaid
-graph TB
-    subgraph "User Interface Layer"
-        A[Modern Streamlit UI<br/>• Real-time Quality Dashboard<br/>• Mobile-First Design<br/>• Multi-Format Preview]
-    end
-    
-    subgraph "Orchestration Layer"
-        B[Hybrid Workflow Manager<br/>• Content Complexity Analysis<br/>• Pipeline Routing<br/>• Resource Allocation]
-        C[MCP Orchestrator<br/>• Multi-Tool Integration<br/>• Workflow Automation<br/>• Publishing Coordination]
-    end
-    
-    subgraph "Agent Layer"
-        D[Daily Quick Pipeline<br/>• NewsAggregatorAgent<br/>• ContentCuratorAgent<br/>• QuickBitesAgent<br/>• SubjectLineAgent<br/>• NewsletterAssemblerAgent]
-        E[Deep Dive Pipeline<br/>• ManagerAgent<br/>• PlannerAgent<br/>• ResearchAgent<br/>• WriterAgent<br/>• EditorAgent]
-    end
-    
-    subgraph "AI Infrastructure"
-        F[Local LLM Stack<br/>• Ollama Runtime<br/>• Model Management<br/>• Memory Optimization]
-        G[AI Models<br/>• LLaMA 3 - General<br/>• Gemma 3 - Technical<br/>• DeepSeek-R1 - Reasoning]
-    end
-    
-    subgraph "Data Layer"
-        H[Web Scraping<br/>• Crawl4AI Integration<br/>• RSS Extractors<br/>• 40+ Premium Sources]
-        I[Vector Database<br/>• ChromaDB<br/>• Enhanced RAG<br/>• Semantic Search]
-        J[Content Storage<br/>• SQLite Database<br/>• Metadata Enrichment<br/>• Quality Metrics]
-    end
-    
-    subgraph "Quality & Analytics"
-        K[Quality Assurance<br/>• Technical Accuracy<br/>• Mobile Readability<br/>• Code Validation<br/>• Performance Monitoring]
-        L[Feedback System<br/>• User Feedback Collection<br/>• Quality Analytics<br/>• Continuous Learning]
-    end
-    
-    subgraph "Integration Layer"
-        M[Publishing Tools<br/>• Notion Integration<br/>• Multi-Format Export<br/>• API Endpoints]
-        N[Monitoring & Analytics<br/>• Performance Tracking<br/>• Usage Analytics<br/>• System Health]
-    end
-    
-    A --> B
-    A --> C
-    B --> D
-    B --> E
-    C --> M
-    
-    D --> F
-    E --> F
-    F --> G
-    
-    D --> H
-    E --> H
-    H --> I
-    I --> J
-    
-    E --> K
-    K --> L
-    L --> N
-    
-    K --> M
-    
-    style A fill:#e1f5fe
-    style B fill:#fff3e0
-    style C fill:#f3e5f5
-    style D fill:#e8f5e8
-    style E fill:#fff8e1
-    style F fill:#ff9ff3
-    style G fill:#54a0ff
-    style H fill:#4ecdc4
-    style I fill:#96ceb4
-    style J fill:#feca57
-    style K fill:#ff6b6b
-    style L fill:#45b7d1
-    style M fill:#a55eea
-    style N fill:#26de81
-```
+![Technology Stack](images/technology-stack.png)
+*The complete technology stack showing the modern Streamlit UI, hybrid workflow orchestration, multi-agent architecture, local AI infrastructure, comprehensive data layer, and integrated quality assurance and analytics systems.*
 
 ### **Local AI Infrastructure**
 

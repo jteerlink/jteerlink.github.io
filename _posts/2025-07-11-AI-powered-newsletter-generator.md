@@ -6,7 +6,6 @@ image:  ai_agent.jpg
 tags:   AI
 ---
 
-
 ## Introduction
 
 The digital content landscape is flooded with AI-generated text that lacks depth, accuracy, and the human touch that makes content genuinely valuable. Most AI content tools prioritize speed over quality, producing generic summaries that require extensive human editing to be truly useful. We set out to solve this fundamental problem by building something entirely different: an **AI-powered newsletter generator** that doesn't just aggregate existing content, but creates original, deeply researched articles that rival the best human-written newsletters.

@@ -1,9 +1,9 @@
 ---
 layout: post
-title:  Building an AI-Powered Newsletter Generator: A Custom Multi-Agent System
+title:  "Building an AI-Powered Newsletter Generator: A Custom Multi-Agent System"
 date:   2025-08-11
 image:  ai_agent.jpg
-tags:   AI
+tags:   [AI]
 ---
 
 ## Introduction

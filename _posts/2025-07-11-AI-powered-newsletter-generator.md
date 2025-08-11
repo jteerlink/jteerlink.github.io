@@ -29,61 +29,7 @@ Our system is built around a **custom agent framework** with specialized agents 
 
 ### **Core Agent Framework**
 
-```mermaid
-graph TB
-    subgraph "Workflow Orchestration"
-        A[WorkflowOrchestrator<br/>🎯 Central Coordination] --> B[ManagerAgent<br/>📋 Strategic Planning]
-        B --> C[Agent Task Distribution]
-    end
-    
-    subgraph "Specialized Agents"
-        D[ResearchAgent<br/>🔍 Multi-Source Research]
-        E[WriterAgent<br/>✍️ Content Creation]
-        F[EditorAgent<br/>📝 Quality Assurance]
-        G[AgenticRAGAgent<br/>🧠 Enhanced Retrieval]
-    end
-    
-    subgraph "Phase 3 Code Generation"
-        H[TechnicalCodeGenerator<br/>🔧 AI/ML Code Examples]
-        I[SyntaxValidator<br/>✅ Code Quality Check]
-        J[SafeCodeExecutor<br/>🏃 Sandboxed Testing]
-        K[CodeTemplateLibrary<br/>📚 Framework Templates]
-    end
-    
-    subgraph "Quality Assurance System"
-        L[Technical Accuracy<br/>≥80% Threshold]
-        M[Mobile Readability<br/>≥80% Threshold]
-        N[Code Validation<br/>≥80% Threshold]
-        O[Performance Monitor<br/>Sub-2s Core Processing]
-    end
-    
-    subgraph "AI Infrastructure"
-        P[NVIDIA Cloud API<br/>⚡ Fast Processing]
-        Q[Ollama Local<br/>🔒 Privacy Control]
-        R[Model Switching<br/>🔄 Flexible Deployment]
-    end
-    
-    C --> D
-    C --> E
-    C --> F
-    C --> G
-    
-    E --> H
-    H --> I
-    I --> J
-    H --> K
-    
-    E --> L
-    E --> M
-    E --> N
-    E --> O
-    
-    D --> P
-    E --> P
-    F --> P
-    P --> Q
-    Q --> R
-```
+![Core agent framework architecture diagram](/images/diagrams/newsletter-core-architecture.svg)
 
 ### **Agent Specializations**
 
@@ -125,49 +71,7 @@ Our **Phase 3 enhancement** represents a major advancement in AI-powered technic
 
 ### **Code Generation Pipeline**
 
-```mermaid
-flowchart TD
-    subgraph "Code Generation Workflow"
-        A[Topic Analysis] --> B[Framework Selection]
-        B --> C[Template Matching]
-        B --> D[Custom Generation]
-        
-        C --> E[Code Assembly]
-        D --> E
-        
-        E --> F[Syntax Validation]
-        F --> G[Style Checking]
-        G --> H[Best Practices Review]
-        
-        H --> I[Safe Execution]
-        I --> J[Output Capture]
-        J --> K[Error Handling]
-        
-        K --> L{Validation Success?}
-        L -->|Pass| M[✅ Approved Code]
-        L -->|Fail| N[❌ Regenerate]
-        
-        N --> B
-        M --> O[Newsletter Integration]
-    end
-    
-    subgraph "Validation Layers"
-        P[Syntax Validator<br/>• Python, JavaScript, R<br/>• AST Parsing<br/>• Error Detection]
-        Q[Code Executor<br/>• Sandboxed Environment<br/>• Timeout Controls<br/>• Output Capture]
-        R[Template Library<br/>• Framework Templates<br/>• Complexity Levels<br/>• Best Practices]
-    end
-    
-    F --> P
-    I --> Q
-    C --> R
-    
-    style A fill:#e1f5fe
-    style M fill:#96ceb4
-    style N fill:#ff6b6b
-    style P fill:#4ecdc4
-    style Q fill:#feca57
-    style R fill:#ff9ff3
-```
+![Code generation pipeline diagram](/images/diagrams/code-generation-pipeline.svg)
 
 ### **Framework Intelligence**
 

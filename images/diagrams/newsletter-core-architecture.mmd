@@ -1,0 +1,55 @@
+graph TB
+    subgraph "Workflow Orchestration"
+        A[WorkflowOrchestrator<br/>🎯 Central Coordination] --> B[ManagerAgent<br/>📋 Strategic Planning]
+        B --> C[Agent Task Distribution]
+    end
+    
+    subgraph "Specialized Agents"
+        D[ResearchAgent<br/>🔍 Multi-Source Research]
+        E[WriterAgent<br/>✍️ Content Creation]
+        F[EditorAgent<br/>📝 Quality Assurance]
+        G[AgenticRAGAgent<br/>🧠 Enhanced Retrieval]
+    end
+    
+    subgraph "Phase 3 Code Generation"
+        H[TechnicalCodeGenerator<br/>🔧 AI/ML Code Examples]
+        I[SyntaxValidator<br/>✅ Code Quality Check]
+        J[SafeCodeExecutor<br/>🏃 Sandboxed Testing]
+        K[CodeTemplateLibrary<br/>📚 Framework Templates]
+    end
+    
+    subgraph "Quality Assurance System"
+        L[Technical Accuracy<br/>≥80% Threshold]
+        M[Mobile Readability<br/>≥80% Threshold]
+        N[Code Validation<br/>≥80% Threshold]
+        O[Performance Monitor<br/>Sub-2s Core Processing]
+    end
+    
+    subgraph "AI Infrastructure"
+        P[NVIDIA Cloud API<br/>⚡ Fast Processing]
+        Q[Ollama Local<br/>🔒 Privacy Control]
+        R[Model Switching<br/>🔄 Flexible Deployment]
+    end
+    
+    C --> D
+    C --> E
+    C --> F
+    C --> G
+    
+    E --> H
+    H --> I
+    I --> J
+    H --> K
+    
+    E --> L
+    E --> M
+    E --> N
+    E --> O
+    
+    D --> P
+    E --> P
+    F --> P
+    P --> Q
+    Q --> R
+
+

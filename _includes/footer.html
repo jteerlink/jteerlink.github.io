@@ -1,18 +1,18 @@
-<!-- begin footer -->
-<footer class="footer">
-  <div class="container">
-
-    {% if site.data.settings.mailchimp %}
-    {% include subscribe.html %}
-    {% else %} {% endif %}
-
-    {% if site.data.settings.instagram %}
-    {% include instagram.html %}
-    {% else %} {% endif %}
-
-    {% include contact-link.html %}
-
-    <div class="copyright">Copyright &copy; {{site.time | date: '%Y'}} <a href="/">{{ site.data.settings.title }}</a> — All right Reserved. Powered by <a href="https://jekyllrb.com/">Jekyll</a>.</div>
-</div>
+<footer class="site-footer">
+  <div class="site-footer-inner">
+    <div>
+      <div class="site-footer-cta">Let's work <em>together.</em></div>
+      <div class="site-footer-email">jteerlink@gmail.com</div>
+    </div>
+    <div class="site-footer-links">
+      <a href="https://linkedin.com/in/jaredwteerlink">LinkedIn ↗</a>
+      <a href="https://github.com/jteerlink">GitHub ↗</a>
+      <a href="{{ site.baseurl }}/contact/">Contact →</a>
+    </div>
+    <div class="site-footer-meta">© {{ site.time | date: '%Y' }} — set in Instrument Serif &amp; Inter</div>
+  </div>
+  <div class="site-footer-copy">
+    <span>Jared Teerlink</span>
+    <span>Data Science Leader · AI / ML</span>
+  </div>
 </footer>
-<!-- end footer -->

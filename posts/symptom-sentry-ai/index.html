@@ -1,0 +1,163 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Symptom Sentry AI — Jared Teerlink</title>
+  <meta name="description" content="An advanced AI-powered healthcare application providing intelligent medical insights through binary image classification of throat and ear conditions.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/assets/css/portfolio.css">
+</head>
+<body class="grain">
+
+  <nav class="site-nav">
+    <div class="site-nav-inner">
+      <a href="/" class="site-nav-mark">Jared Teerlink</a>
+      <div class="site-nav-links">
+        <a href="/">Home</a>
+        <a href="/work.html">Work</a>
+        <a href="/about.html">About</a>
+        <a href="/contact.html">Contact</a>
+      </div>
+      <span class="site-nav-meta">— available Q3 2026</span>
+      <button class="site-nav-hamburger" aria-label="Open menu"><span></span><span></span><span></span></button>
+    </div>
+  </nav>
+
+  <section class="cs-hero reveal">
+    <div class="cs-hero-meta">
+      <div class="eyebrow">Case Study</div>
+      <div class="cs-tags"><span class="tag">AI</span><span class="tag">Computer Vision</span></div>
+      <time class="cs-date">January 2025</time>
+    </div>
+    <h1>Symptom Sentry AI</h1>
+    <p class="cs-lede">An AI-powered healthcare application that classifies throat and ear images as Normal or Infected — combining a TensorFlow model backend with a Node.js/Express API and browser-side TensorFlow.js for real-time medical insights.</p>
+  </section>
+
+  <div class="cs-cover reveal">
+    <img src="/images/generated-icon.png" alt="Symptom Sentry AI">
+  </div>
+
+  <article class="cs-body reveal">
+
+    <p>SymptomSentryAI is an advanced AI-powered healthcare application that provides intelligent medical insights through image analysis. The platform enables users to upload throat and ear images for instant analysis using state-of-the-art machine learning models.</p>
+
+    <p><strong><a href="https://github.com/jteerlink/SymptomSentinelAI">GitHub Repository ↗</a></strong></p>
+
+    <h2>Features</h2>
+
+    <h3>Core Functionality</h3>
+    <ul>
+      <li><strong>Binary Medical Image Classification:</strong> Analyzes throat and ear images and classifies them as either "Normal" or "Infected/Abnormal" with confidence scores.</li>
+      <li><strong>Secure User Authentication:</strong> Complete user registration, login, and profile management with HTTP-only cookies.</li>
+      <li><strong>Analysis History:</strong> Stores and retrieves past analyses for tracking health conditions over time.</li>
+      <li><strong>Detailed Health Insights:</strong> Provides comprehensive information about potential conditions with treatment recommendations.</li>
+    </ul>
+
+    <h3>Technical Features</h3>
+    <ul>
+      <li><strong>Enhanced ML Model Bridge:</strong> Connects JavaScript frontend with Python-based TensorFlow models.</li>
+      <li><strong>Animated Medical Loading Spinner:</strong> Visual feedback during analysis with medical-themed animations.</li>
+      <li><strong>Collapsible UI Components:</strong> Dynamic interface that adapts to each stage of the analysis workflow.</li>
+      <li><strong>Comprehensive Security:</strong> CSRF protection, rate limiting, and secure session management.</li>
+      <li><strong>Robust Error Handling:</strong> Detailed error messages and graceful failure recovery across all functions.</li>
+    </ul>
+
+    <h2>Architecture</h2>
+
+    <h3>Frontend</h3>
+    <ul>
+      <li>JavaScript with browser-compatible TensorFlow.js for client-side processing.</li>
+      <li>Responsive design with collapsible components for optimal user experience.</li>
+      <li>Real-time visualization of analysis results with attention maps.</li>
+    </ul>
+
+    <h3>Backend</h3>
+    <ul>
+      <li>Node.js/Express server handling authentication, image processing, and API endpoints.</li>
+      <li>Advanced middleware for security, authentication, and request validation.</li>
+      <li>PostgreSQL database for user data and analysis history storage.</li>
+    </ul>
+
+    <h3>ML Components</h3>
+    <ul>
+      <li>Python TensorFlow models for medical image analysis.</li>
+      <li>Support for multiple model types (ensemble, custom, version-specific).</li>
+      <li>Binary classification system focusing on clear "Normal" vs "Infected" results.</li>
+    </ul>
+
+    <h2>API Reference</h2>
+
+    <h3>Authentication</h3>
+    <pre><code>POST /api/register       — Register a new user
+POST /api/login          — User login
+POST /api/logout         — User logout
+GET  /api/user           — Get current user profile
+POST /api/refresh-token  — Refresh authentication token</code></pre>
+
+    <h3>Analysis</h3>
+    <pre><code>POST /analyze                — Analyze an image (throat or ear)
+GET  /api/analysis-history   — Get user's analysis history
+GET  /api/analysis/:id       — Get a specific analysis by ID
+POST /api/save-analysis      — Save analysis results
+DELETE /api/analysis/:id     — Delete a specific analysis</code></pre>
+
+    <h2>Security</h2>
+    <p>SymptomSentryAI implements several layers of security:</p>
+    <ul>
+      <li><strong>HTTP-only Cookies:</strong> Authentication tokens stored in HTTP-only cookies to prevent XSS attacks.</li>
+      <li><strong>CSRF Protection:</strong> Cross-Site Request Forgery protection with CSRF tokens.</li>
+      <li><strong>Rate Limiting:</strong> API rate limiting to prevent brute force attacks.</li>
+      <li><strong>Secure Password Storage:</strong> Passwords are hashed using scrypt/bcrypt.</li>
+      <li><strong>Input Validation:</strong> Thorough validation of all user input.</li>
+      <li><strong>Session Management:</strong> Proper session handling with timeout functionality.</li>
+    </ul>
+
+    <h2>Getting Started</h2>
+    <pre><code>git clone https://github.com/jteerlink/SymptomSentinelAI.git
+cd SymptomSentinelAI
+npm install</code></pre>
+    <p>Set up your <code>.env</code> file:</p>
+    <pre><code>DATABASE_URL=postgresql://username:password@localhost:5432/symptom_sentry
+JWT_SECRET=your_jwt_secret
+SESSION_SECRET=your_session_secret</code></pre>
+    <pre><code>npm start
+# Application available at http://localhost:5000</code></pre>
+
+  </article>
+
+  <nav class="post-nav">
+    <a href="/posts/ai-powered-newsletter-generator/" class="post-nav-prev">
+      <span class="post-nav-label">← Previous</span>
+      <span class="post-nav-title">AI-Powered Newsletter Generator</span>
+    </a>
+    <a href="/posts/symptom-sentinel-model-build/" class="post-nav-next">
+      <span class="post-nav-label">Next →</span>
+      <span class="post-nav-title">Symptom Sentry Model Build</span>
+    </a>
+  </nav>
+
+  <footer class="site-footer">
+    <div class="site-footer-inner">
+      <div>
+        <div class="site-footer-cta">Let's work <em>together.</em></div>
+        <div class="site-footer-email">jteerlink@gmail.com</div>
+      </div>
+      <div class="site-footer-links">
+        <a href="https://linkedin.com/in/jaredwteerlink">LinkedIn ↗</a>
+        <a href="https://github.com/jteerlink">GitHub ↗</a>
+        <a href="/contact.html">Contact →</a>
+      </div>
+      <div class="site-footer-meta">© 2026 — set in Instrument Serif &amp; Inter</div>
+    </div>
+    <div class="site-footer-copy">
+      <span>Jared Teerlink</span>
+      <span>Data Science Leader · AI / ML</span>
+    </div>
+  </footer>
+
+  <script src="/js/portfolio.js"></script>
+</body>
+</html>

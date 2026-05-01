@@ -1,23 +1,34 @@
-<!-- begin c-hero -->
-<div class="hero">
-  <div class="container">
-    <div class="row">
-      <div class="col col-6 col-t-12 last-item">
-        <div class="hero__content">
-          <h1 class="hero__title">{{ site.data.settings.author.say-hello }}</h1>
-          <p class="hero__subtitle">{{ site.data.settings.author.bio }}</p>
-          <div class="hero__social">
-            <span class="hero__social-title">Follow Me |</span>
-            {% include contact-link.html %}
+<section class="home-hero">
+  <div class="home-hero-grid">
+    <div>
+      <div class="eyebrow home-hero-eyebrow reveal">↳ Portfolio · Vol. 04 · 2026</div>
+      <h1 class="home-hero-title reveal">
+        Building <em>machine learning</em> systems that compound — in revenue, in clarity, in the people I work with.
+      </h1>
+      <div class="home-hero-footer reveal">
+        <div>
+          <div class="eyebrow" style="margin-bottom: 8px;">Currently</div>
+          <div class="home-hero-currently">
+            Lead Data Scientist (most recently at Capital One).<br>
+            Available for new leadership and IC roles in AI/ML.
           </div>
         </div>
-      </div>
-      <div class="col col-6 col-t-12">
-        <div class="hero__image">
-          <img src="{{site.baseurl}}/images/{{ site.data.settings.author.image }}" alt="">
-        </div>
+        <a href="{{ site.baseurl }}/work/" class="btn">
+          <span>See selected work</span>
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.4">
+            <path d="M4 10h12M11 5l5 5-5 5"/>
+          </svg>
+        </a>
       </div>
     </div>
+    <aside>
+      <div class="home-portrait">
+        <img src="{{ site.baseurl }}/images/headshot.jpg" alt="Jared Teerlink">
+        <div class="home-portrait-cap">
+          <div class="eyebrow">Plate 01</div>
+          <div class="cap-name">J. Teerlink, 2026</div>
+        </div>
+      </div>
+    </aside>
   </div>
-</div>
-<!-- end hero -->
+</section>

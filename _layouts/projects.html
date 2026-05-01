@@ -1,0 +1,134 @@
+---
+layout: default
+---
+<section class="page-header">
+  <div class="eyebrow">Work · {{ site.posts.size }} projects · 2024–2026</div>
+  <h1>Selected projects.</h1>
+  <p>A small set of recent work — production systems, research, and the occasional weekend rabbit-hole. Each links to a full write-up.</p>
+</section>
+
+<div class="filters">
+  <div class="filter-group">
+    <button class="filter-pill is-active" data-filter="all">All</button>
+    <button class="filter-pill" data-filter="ai">AI / Multi-agent</button>
+    <button class="filter-pill" data-filter="cv">Computer vision</button>
+    <button class="filter-pill" data-filter="ml">Classical ML</button>
+  </div>
+  <div class="filter-meta"><span id="filter-count">{% assign cnt = site.posts.size %}{% if cnt < 10 %}0{{ cnt }}{% else %}{{ cnt }}{% endif %}</span> projects shown</div>
+</div>
+
+<div class="projects-list">
+  {% for post in site.posts %}
+    {% assign cat = "other" %}
+    {% for tag in post.tags %}
+      {% assign tag_lower = tag | downcase %}
+      {% if tag_lower contains "agent" or tag_lower contains "llm" or tag_lower contains "gpt" %}
+        {% assign cat = "ai" %}
+      {% elsif tag_lower contains "vision" or tag_lower contains "efficientnet" or tag_lower contains "cnn" or tag_lower contains "tensorflow" or tag_lower contains "image" %}
+        {% assign cat = "cv" %}
+      {% elsif tag_lower contains "xgboost" or tag_lower contains "credit" or tag_lower contains "risk" or tag_lower contains "sklearn" %}
+        {% assign cat = "ml" %}
+      {% endif %}
+    {% endfor %}
+    {% assign pnum = forloop.index %}
+    <a href="{{ post.url | prepend: site.baseurl }}" class="project-row reveal" data-cat="{{ cat }}">
+      <div class="project-num">{% if pnum < 10 %}0{{ pnum }}{% else %}{{ pnum }}{% endif %}</div>
+      <div class="project-body">
+        <div class="project-meta" style="flex-direction: row; gap: 16px; align-items: center; margin-bottom: 12px;">
+          <span class="eyebrow">{% if post.tags.size >= 1 %}{{ post.tags[0] }}{% endif %}</span>
+          <span class="eyebrow num-tabular">{{ post.date | date: "%Y" }}</span>
+        </div>
+        <h2 class="project-title">{{ post.title }}</h2>
+        {% if post.subtitle %}
+          <p class="project-subtitle">{{ post.subtitle }}</p>
+        {% elsif post.tags.size >= 2 %}
+          <p class="project-subtitle">{{ post.tags[1] }}</p>
+        {% endif %}
+        <p class="project-summary">{% if post.description %}{{ post.description }}{% else %}{{ post.content | strip_html | truncate: 200 }}{% endif %}</p>
+        {% if post.tags.size >= 1 %}
+        <div class="project-stack">
+          {% for tag in post.tags limit: 5 %}
+            <span class="stack-pill">{{ tag }}</span>
+          {% endfor %}
+        </div>
+        {% endif %}
+        <div class="project-cta">
+          Read case study
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
+        </div>
+      </div>
+      <div class="project-thumb">
+        {% if post.url contains 'newsletter' or post.url contains 'Newsletter' %}
+          <svg viewBox="0 0 400 250" preserveAspectRatio="xMidYMid slice">
+            <defs><pattern id="gp{{ pnum }}" width="20" height="20" patternUnits="userSpaceOnUse"><path d="M 20 0 L 0 0 0 20" fill="none" stroke="#0A0A0A" stroke-width="0.3" opacity="0.18"/></pattern></defs>
+            <rect width="400" height="250" fill="#F2EEE5"/><rect width="400" height="250" fill="url(#gp{{ pnum }})"/>
+            <circle cx="200" cy="115" r="22" fill="#0A0A0A"/>
+            <circle cx="200" cy="115" r="48" fill="none" stroke="#0A0A0A" stroke-width="0.5" opacity="0.4"/>
+            <circle cx="200" cy="115" r="80" fill="none" stroke="#0A0A0A" stroke-width="0.5" opacity="0.25"/>
+            <line x1="200" y1="115" x2="110" y2="65" stroke="#0A0A0A" stroke-width="0.6" opacity="0.5"/><circle cx="110" cy="65" r="9" fill="#FAFAF7" stroke="#0A0A0A" stroke-width="1.2"/>
+            <line x1="200" y1="115" x2="290" y2="65" stroke="#0A0A0A" stroke-width="0.6" opacity="0.5"/><circle cx="290" cy="65" r="6" fill="#FAFAF7" stroke="#0A0A0A" stroke-width="1.2"/>
+            <line x1="200" y1="115" x2="320" y2="170" stroke="#0A0A0A" stroke-width="0.6" opacity="0.5"/><circle cx="320" cy="170" r="6" fill="#FAFAF7" stroke="#0A0A0A" stroke-width="1.2"/>
+            <line x1="200" y1="115" x2="80" y2="175" stroke="#0A0A0A" stroke-width="0.6" opacity="0.5"/><circle cx="80" cy="175" r="6" fill="#FAFAF7" stroke="#0A0A0A" stroke-width="1.2"/>
+            <text x="20" y="232" font-family="monospace" font-size="9" fill="#0A0A0A" opacity="0.55" letter-spacing="2">MULTI-AGENT · ORCHESTRATION</text>
+          </svg>
+        {% elsif post.url contains 'sentry-ai' %}
+          <svg viewBox="0 0 400 250" preserveAspectRatio="xMidYMid slice">
+            <rect width="400" height="250" fill="#F2EEE5"/>
+            <g transform="translate(50,68) skewY(-15)"><rect width="60" height="120" fill="#0A0A0A" opacity="0.08" stroke="#0A0A0A" stroke-width="0.5"/></g>
+            <g transform="translate(78,64) skewY(-15)"><rect width="54" height="128" fill="#0A0A0A" opacity="0.14" stroke="#0A0A0A" stroke-width="0.5"/></g>
+            <g transform="translate(106,60) skewY(-15)"><rect width="48" height="136" fill="#0A0A0A" opacity="0.20" stroke="#0A0A0A" stroke-width="0.5"/></g>
+            <g transform="translate(162,52) skewY(-15)"><rect width="36" height="152" fill="#0A0A0A" opacity="0.26" stroke="#0A0A0A" stroke-width="0.5"/></g>
+            <g transform="translate(260,70)">
+              <rect x="0" y="0" width="100" height="20" fill="none" stroke="#0A0A0A" stroke-width="0.8"/><rect x="0" y="0" width="80" height="20" fill="#0A0A0A"/>
+              <text x="105" y="14" font-family="monospace" font-size="9" fill="#0A0A0A">0.91</text>
+              <rect x="0" y="40" width="100" height="20" fill="none" stroke="#0A0A0A" stroke-width="0.8"/><rect x="0" y="40" width="35" height="20" fill="#0A0A0A" opacity="0.3"/>
+              <text x="105" y="54" font-family="monospace" font-size="9" fill="#0A0A0A">0.09</text>
+            </g>
+            <text x="20" y="232" font-family="monospace" font-size="9" fill="#0A0A0A" opacity="0.55" letter-spacing="2">CNN · BINARY CLASSIFIER</text>
+          </svg>
+        {% elsif post.url contains 'defaults' %}
+          <svg viewBox="0 0 400 250" preserveAspectRatio="xMidYMid slice">
+            <rect width="400" height="250" fill="#F2EEE5"/>
+            <line x1="40" y1="200" x2="380" y2="200" stroke="#0A0A0A" stroke-width="0.6"/>
+            <line x1="40" y1="40"  x2="40"  y2="200" stroke="#0A0A0A" stroke-width="0.6"/>
+            <rect x="50"  y="60"  width="24" height="140" fill="#0A0A0A"/>
+            <rect x="82"  y="79"  width="24" height="121" fill="#0A0A0A"/>
+            <rect x="114" y="95"  width="24" height="105" fill="#0A0A0A" opacity="0.8"/>
+            <rect x="146" y="111" width="24" height="89"  fill="#0A0A0A" opacity="0.54"/>
+            <rect x="178" y="127" width="24" height="73"  fill="#0A0A0A" opacity="0.42"/>
+            <rect x="210" y="141" width="24" height="59"  fill="#0A0A0A" opacity="0.34"/>
+            <rect x="242" y="153" width="24" height="47"  fill="#0A0A0A" opacity="0.26"/>
+            <rect x="274" y="163" width="24" height="37"  fill="#0A0A0A" opacity="0.22"/>
+            <rect x="306" y="172" width="24" height="28"  fill="#0A0A0A" opacity="0.20"/>
+            <rect x="338" y="180" width="24" height="20"  fill="#0A0A0A" opacity="0.18"/>
+            <path d="M 40 200 Q 120 180 180 130 T 320 60 L 380 50" fill="none" stroke="#0A0A0A" stroke-width="1.2" stroke-dasharray="2,3"/>
+            <text x="20" y="232" font-family="monospace" font-size="9" fill="#0A0A0A" opacity="0.55" letter-spacing="2">XGB · DECILE LIFT · AUC 0.72</text>
+          </svg>
+        {% elsif post.url contains 'sentinel-model' or post.url contains 'model-build' %}
+          <svg viewBox="0 0 400 250" preserveAspectRatio="xMidYMid slice">
+            <rect width="400" height="250" fill="#F2EEE5"/>
+            <line x1="40"  y1="40" x2="40"  y2="210" stroke="#0A0A0A" stroke-width="1.2" opacity="0.7"/>
+            <line x1="64"  y1="40" x2="64"  y2="210" stroke="#0A0A0A" stroke-width="0.4" opacity="0.3"/>
+            <line x1="112" y1="40" x2="112" y2="210" stroke="#0A0A0A" stroke-width="1.2" opacity="0.7"/>
+            <line x1="136" y1="40" x2="136" y2="210" stroke="#0A0A0A" stroke-width="0.4" opacity="0.3"/>
+            <line x1="184" y1="40" x2="184" y2="210" stroke="#0A0A0A" stroke-width="1.2" opacity="0.7"/>
+            <line x1="208" y1="40" x2="208" y2="210" stroke="#0A0A0A" stroke-width="0.4" opacity="0.3"/>
+            <line x1="256" y1="40" x2="256" y2="210" stroke="#0A0A0A" stroke-width="1.2" opacity="0.7"/>
+            <line x1="280" y1="40" x2="280" y2="210" stroke="#0A0A0A" stroke-width="0.4" opacity="0.3"/>
+            <line x1="328" y1="40" x2="328" y2="210" stroke="#0A0A0A" stroke-width="1.2" opacity="0.7"/>
+            <rect x="120" y="60" width="80" height="160" fill="none" stroke="#0A0A0A" stroke-width="1.5"/>
+            <circle cx="160" cy="140" r="28" fill="#0A0A0A" opacity="0.92"/>
+            <circle cx="160" cy="140" r="44" fill="none" stroke="#0A0A0A" stroke-width="0.5" opacity="0.35"/>
+            <text x="20" y="232" font-family="monospace" font-size="9" fill="#0A0A0A" opacity="0.55" letter-spacing="2">EFFICIENTNET · FEATURE MAP</text>
+          </svg>
+        {% else %}
+          <svg viewBox="0 0 400 250" preserveAspectRatio="xMidYMid slice">
+            <defs><pattern id="ps{{ pnum }}" width="6" height="6" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><line x1="0" y1="0" x2="0" y2="6" stroke="#0A0A0A" stroke-width="0.6" opacity="0.12"/></pattern></defs>
+            <rect width="400" height="250" fill="#F2EEE5"/><rect width="400" height="250" fill="url(#ps{{ pnum }})"/>
+            <text x="200" y="130" text-anchor="middle" font-family="monospace" font-size="11" fill="#0A0A0A" opacity="0.4" letter-spacing="3">PROJECT</text>
+          </svg>
+        {% endif %}
+      </div>
+    </a>
+  {% endfor %}
+</div>

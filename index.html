@@ -1,25 +1,273 @@
----
-layout: default
----
-{% include hero.html %}
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Jared Teerlink — Data Science Leader · AI/ML</title>
+  <meta name="description" content="Portfolio of Jared Teerlink — Lead Data Scientist specializing in production ML systems, multi-agent AI, and team leadership.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/assets/css/portfolio.css">
+</head>
+<body class="grain">
 
-<div class="container">
-	<div class="row">
-		<div class="col col-12">
-			{% if site.posts.size > 0 %}
-				<h4 class="lates-title">Projects</h4>
-			{% endif %}
-		</div>
-	</div>
-</div>
+  <nav class="site-nav">
+    <div class="site-nav-inner">
+      <a href="/" class="site-nav-mark">Jared Teerlink</a>
+      <div class="site-nav-links">
+        <a href="/">Home</a>
+        <a href="/work.html">Work</a>
+        <a href="/about.html">About</a>
+        <a href="/contact.html">Contact</a>
+      </div>
+      <span class="site-nav-meta">— available Q3 2026</span>
+      <button class="site-nav-hamburger" aria-label="Open menu"><span></span><span></span><span></span></button>
+    </div>
+  </nav>
 
-<div class="container">
-	<div class="row">
-	{% if site.posts.size > 0 %}
-		{% for post in paginator.posts %}
-			{% include article-content.html %}
-		{% endfor %}
-	{% endif %}
-	</div>
-</div>
-{% include pagination.html %}
+  <!-- Hero -->
+  <section class="home-hero">
+    <div class="home-hero-grid">
+      <div>
+        <div class="eyebrow home-hero-eyebrow reveal">↳ Portfolio · Vol. 04 · 2026</div>
+        <h1 class="home-hero-title reveal">
+          Building <em>machine learning</em> systems that compound — in revenue, in clarity, in the people I work with.
+        </h1>
+        <div class="home-hero-footer reveal">
+          <div>
+            <div class="eyebrow" style="margin-bottom: 8px;">Currently</div>
+            <div class="home-hero-currently">
+              Lead Data Scientist (most recently at Capital One).<br>
+              Available for new leadership and IC roles in AI/ML.
+            </div>
+          </div>
+          <a href="/work.html" class="btn">
+            <span>See selected work</span>
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M4 10h12M11 5l5 5-5 5"/></svg>
+          </a>
+        </div>
+      </div>
+      <aside>
+        <div class="home-portrait">
+          <img src="/images/headshot.jpg" alt="Jared Teerlink">
+          <div class="home-portrait-cap">
+            <div class="eyebrow">Plate 01</div>
+            <div class="cap-name">J. Teerlink, 2026</div>
+          </div>
+        </div>
+      </aside>
+    </div>
+  </section>
+
+  <!-- Metrics -->
+  <div class="metric-strip">
+    <div class="metric reveal">
+      <div class="metric-value num-tabular">$30M+</div>
+      <div class="metric-label">Revenue generated</div>
+      <div class="metric-note">Across deployed ML systems</div>
+    </div>
+    <div class="metric reveal">
+      <div class="metric-value num-tabular">7yrs</div>
+      <div class="metric-label">Production ML experience</div>
+      <div class="metric-note">Modeling, infra, leadership</div>
+    </div>
+    <div class="metric reveal">
+      <div class="metric-value num-tabular">18%</div>
+      <div class="metric-label">Lift on next-best-action</div>
+      <div class="metric-note">Capital One offer engine</div>
+    </div>
+    <div class="metric reveal">
+      <div class="metric-value num-tabular">150%</div>
+      <div class="metric-label">Retention improvement</div>
+      <div class="metric-note">Daikin propensity model</div>
+    </div>
+  </div>
+
+  <!-- Selected Work -->
+  <section class="home-section" id="work">
+    <div class="section-head">
+      <div class="eyebrow">§ 01 Selected Work</div>
+      <h2 class="section-title">Four projects at the intersection of <em>research</em> and <em>production</em>.</h2>
+    </div>
+    <div class="project-list">
+
+      <!-- 01 -->
+      <a href="/posts/ai-powered-newsletter-generator/" class="project-row reveal">
+        <div class="project-meta">
+          <div class="project-index">01</div>
+          <div class="eyebrow">Multi-agent AI</div>
+          <div class="eyebrow num-tabular">2025</div>
+        </div>
+        <div class="project-body">
+          <h3 class="project-title">AI-Powered Newsletter Generator</h3>
+          <p class="project-subtitle">A custom multi-agent architecture for technical content</p>
+          <p class="project-summary">A purpose-built agent framework that researches, writes, and validates technical newsletters end-to-end — including code that actually executes. Five specialized agents, sandbox-validated examples, a quality dashboard.</p>
+          <div class="project-stack">
+            <span class="stack-pill">Python</span><span class="stack-pill">ChromaDB</span><span class="stack-pill">Crawl4AI</span><span class="stack-pill">PyTorch</span><span class="stack-pill">Streamlit</span>
+          </div>
+        </div>
+        <div class="project-thumb">
+          <svg viewBox="0 0 400 250" preserveAspectRatio="xMidYMid slice">
+            <defs><pattern id="g1" width="20" height="20" patternUnits="userSpaceOnUse"><path d="M 20 0 L 0 0 0 20" fill="none" stroke="#0A0A0A" stroke-width="0.3" opacity="0.18"/></pattern></defs>
+            <rect width="400" height="250" fill="#F2EEE5"/><rect width="400" height="250" fill="url(#g1)"/>
+            <circle cx="200" cy="115" r="22" fill="#0A0A0A"/>
+            <circle cx="200" cy="115" r="48" fill="none" stroke="#0A0A0A" stroke-width="0.5" opacity="0.4"/>
+            <circle cx="200" cy="115" r="80" fill="none" stroke="#0A0A0A" stroke-width="0.5" opacity="0.25"/>
+            <line x1="200" y1="115" x2="110" y2="65" stroke="#0A0A0A" stroke-width="0.6" opacity="0.5"/><circle cx="110" cy="65" r="9" fill="#FAFAF7" stroke="#0A0A0A" stroke-width="1.2"/>
+            <line x1="200" y1="115" x2="290" y2="65" stroke="#0A0A0A" stroke-width="0.6" opacity="0.5"/><circle cx="290" cy="65" r="6" fill="#FAFAF7" stroke="#0A0A0A" stroke-width="1.2"/>
+            <line x1="200" y1="115" x2="320" y2="170" stroke="#0A0A0A" stroke-width="0.6" opacity="0.5"/><circle cx="320" cy="170" r="6" fill="#FAFAF7" stroke="#0A0A0A" stroke-width="1.2"/>
+            <line x1="200" y1="115" x2="80" y2="175" stroke="#0A0A0A" stroke-width="0.6" opacity="0.5"/><circle cx="80" cy="175" r="6" fill="#FAFAF7" stroke="#0A0A0A" stroke-width="1.2"/>
+            <line x1="200" y1="115" x2="200" y2="38" stroke="#0A0A0A" stroke-width="0.6" opacity="0.5"/><circle cx="200" cy="38" r="6" fill="#FAFAF7" stroke="#0A0A0A" stroke-width="1.2"/>
+            <text x="20" y="232" font-family="monospace" font-size="9" fill="#0A0A0A" opacity="0.55" letter-spacing="2">MULTI-AGENT · ORCHESTRATION</text>
+          </svg>
+        </div>
+      </a>
+
+      <!-- 02 -->
+      <a href="/posts/symptom-sentry-ai/" class="project-row reveal">
+        <div class="project-meta">
+          <div class="project-index">02</div>
+          <div class="eyebrow">Computer vision</div>
+          <div class="eyebrow num-tabular">2025</div>
+        </div>
+        <div class="project-body">
+          <h3 class="project-title">Symptom Sentry AI</h3>
+          <p class="project-subtitle">Medical image classification for consumer healthcare</p>
+          <p class="project-summary">A production web app that classifies throat and ear images for early infection detection, with a hardened auth + analysis-history backend and on-device TensorFlow.js inference.</p>
+          <div class="project-stack">
+            <span class="stack-pill">TensorFlow</span><span class="stack-pill">TensorFlow.js</span><span class="stack-pill">Node.js</span><span class="stack-pill">PostgreSQL</span><span class="stack-pill">Express</span>
+          </div>
+        </div>
+        <div class="project-thumb">
+          <svg viewBox="0 0 400 250" preserveAspectRatio="xMidYMid slice">
+            <rect width="400" height="250" fill="#F2EEE5"/>
+            <g transform="translate(50,68) skewY(-15)"><rect width="60" height="120" fill="#0A0A0A" opacity="0.08" stroke="#0A0A0A" stroke-width="0.5"/></g>
+            <g transform="translate(78,64) skewY(-15)"><rect width="54" height="128" fill="#0A0A0A" opacity="0.14" stroke="#0A0A0A" stroke-width="0.5"/></g>
+            <g transform="translate(106,60) skewY(-15)"><rect width="48" height="136" fill="#0A0A0A" opacity="0.20" stroke="#0A0A0A" stroke-width="0.5"/></g>
+            <g transform="translate(162,52) skewY(-15)"><rect width="36" height="152" fill="#0A0A0A" opacity="0.26" stroke="#0A0A0A" stroke-width="0.5"/></g>
+            <g transform="translate(260,70)">
+              <rect x="0" y="0" width="100" height="20" fill="none" stroke="#0A0A0A" stroke-width="0.8"/><rect x="0" y="0" width="80" height="20" fill="#0A0A0A"/>
+              <text x="105" y="14" font-family="monospace" font-size="9" fill="#0A0A0A">0.91</text>
+              <rect x="0" y="40" width="100" height="20" fill="none" stroke="#0A0A0A" stroke-width="0.8"/><rect x="0" y="40" width="35" height="20" fill="#0A0A0A" opacity="0.3"/>
+              <text x="105" y="54" font-family="monospace" font-size="9" fill="#0A0A0A">0.09</text>
+            </g>
+            <text x="20" y="232" font-family="monospace" font-size="9" fill="#0A0A0A" opacity="0.55" letter-spacing="2">CNN · BINARY CLASSIFIER</text>
+          </svg>
+        </div>
+      </a>
+
+      <!-- 03 -->
+      <a href="/posts/predicting-cash-advance-defaults/" class="project-row reveal">
+        <div class="project-meta">
+          <div class="project-index">03</div>
+          <div class="eyebrow">Credit risk · XGBoost</div>
+          <div class="eyebrow num-tabular">2025</div>
+        </div>
+        <div class="project-body">
+          <h3 class="project-title">Predicting Cash Advance Defaults</h3>
+          <p class="project-subtitle">Credit risk modeling for fintech lending</p>
+          <p class="project-summary">An XGBoost-driven default prediction model with thoughtful feature engineering and an Optuna-tuned scoring pipeline ready for production. Tuned AUC of 0.72; strong decile lift.</p>
+          <div class="project-stack">
+            <span class="stack-pill">XGBoost</span><span class="stack-pill">Optuna</span><span class="stack-pill">Python</span><span class="stack-pill">scikit-learn</span>
+          </div>
+        </div>
+        <div class="project-thumb">
+          <svg viewBox="0 0 400 250" preserveAspectRatio="xMidYMid slice">
+            <rect width="400" height="250" fill="#F2EEE5"/>
+            <line x1="40" y1="200" x2="380" y2="200" stroke="#0A0A0A" stroke-width="0.6"/>
+            <line x1="40" y1="40"  x2="40"  y2="200" stroke="#0A0A0A" stroke-width="0.6"/>
+            <rect x="50"  y="60"  width="24" height="140" fill="#0A0A0A"/>
+            <rect x="82"  y="79"  width="24" height="121" fill="#0A0A0A"/>
+            <rect x="114" y="95"  width="24" height="105" fill="#0A0A0A" opacity="0.8"/>
+            <rect x="146" y="111" width="24" height="89"  fill="#0A0A0A" opacity="0.54"/>
+            <rect x="178" y="127" width="24" height="73"  fill="#0A0A0A" opacity="0.42"/>
+            <rect x="210" y="141" width="24" height="59"  fill="#0A0A0A" opacity="0.34"/>
+            <rect x="242" y="153" width="24" height="47"  fill="#0A0A0A" opacity="0.26"/>
+            <rect x="274" y="163" width="24" height="37"  fill="#0A0A0A" opacity="0.22"/>
+            <rect x="306" y="172" width="24" height="28"  fill="#0A0A0A" opacity="0.20"/>
+            <rect x="338" y="180" width="24" height="20"  fill="#0A0A0A" opacity="0.18"/>
+            <path d="M 40 200 Q 120 180 180 130 T 320 60 L 380 50" fill="none" stroke="#0A0A0A" stroke-width="1.2" stroke-dasharray="2,3"/>
+            <text x="20" y="232" font-family="monospace" font-size="9" fill="#0A0A0A" opacity="0.55" letter-spacing="2">XGB · DECILE LIFT · AUC 0.72</text>
+          </svg>
+        </div>
+      </a>
+
+      <!-- 04 -->
+      <a href="/posts/symptom-sentinel-model-build/" class="project-row reveal">
+        <div class="project-meta">
+          <div class="project-index">04</div>
+          <div class="eyebrow">Deep learning</div>
+          <div class="eyebrow num-tabular">2024</div>
+        </div>
+        <div class="project-body">
+          <h3 class="project-title">Symptom Sentinel: Model Build</h3>
+          <p class="project-subtitle">EfficientNet-driven medical image classifier</p>
+          <p class="project-summary">The training repository powering Symptom Sentry — labeled datasets, EfficientNet baselines, and a reproducible setup for ear and throat infection detection.</p>
+          <div class="project-stack">
+            <span class="stack-pill">TensorFlow</span><span class="stack-pill">Keras</span><span class="stack-pill">Python</span><span class="stack-pill">Jupyter</span>
+          </div>
+        </div>
+        <div class="project-thumb">
+          <svg viewBox="0 0 400 250" preserveAspectRatio="xMidYMid slice">
+            <rect width="400" height="250" fill="#F2EEE5"/>
+            <line x1="40"  y1="40" x2="40"  y2="210" stroke="#0A0A0A" stroke-width="1.2" opacity="0.7"/>
+            <line x1="64"  y1="40" x2="64"  y2="210" stroke="#0A0A0A" stroke-width="0.4" opacity="0.3"/>
+            <line x1="112" y1="40" x2="112" y2="210" stroke="#0A0A0A" stroke-width="1.2" opacity="0.7"/>
+            <line x1="136" y1="40" x2="136" y2="210" stroke="#0A0A0A" stroke-width="0.4" opacity="0.3"/>
+            <line x1="184" y1="40" x2="184" y2="210" stroke="#0A0A0A" stroke-width="1.2" opacity="0.7"/>
+            <line x1="208" y1="40" x2="208" y2="210" stroke="#0A0A0A" stroke-width="0.4" opacity="0.3"/>
+            <line x1="256" y1="40" x2="256" y2="210" stroke="#0A0A0A" stroke-width="1.2" opacity="0.7"/>
+            <line x1="280" y1="40" x2="280" y2="210" stroke="#0A0A0A" stroke-width="0.4" opacity="0.3"/>
+            <line x1="328" y1="40" x2="328" y2="210" stroke="#0A0A0A" stroke-width="1.2" opacity="0.7"/>
+            <rect x="120" y="60" width="80" height="160" fill="none" stroke="#0A0A0A" stroke-width="1.5"/>
+            <circle cx="160" cy="140" r="28" fill="#0A0A0A" opacity="0.92"/>
+            <circle cx="160" cy="140" r="44" fill="none" stroke="#0A0A0A" stroke-width="0.5" opacity="0.35"/>
+            <text x="20" y="232" font-family="monospace" font-size="9" fill="#0A0A0A" opacity="0.55" letter-spacing="2">EFFICIENTNET · FEATURE MAP</text>
+          </svg>
+        </div>
+      </a>
+
+    </div>
+  </section>
+
+  <!-- About strip -->
+  <section class="home-section home-section--alt" id="about">
+    <div class="about-grid">
+      <div>
+        <div class="eyebrow">§ 02 About</div>
+        <h2 class="section-title">I'm Jared. I build ML systems and the teams that ship them.</h2>
+      </div>
+      <div class="reveal">
+        <p class="about-para">Over seven years, I've led the development of next-best-action engines, credit risk models, marketing mix attribution, and customer lifetime value systems. The work has produced more than <strong>$30M in revenue</strong> across financial services, e-commerce, and manufacturing.</p>
+        <p class="about-para">I'm equally happy in a notebook, a boardroom, or a 1:1. The pattern that runs through everything is the same: turn ambiguous business questions into models that ship, then build the team and the infrastructure that lets the next model ship faster.</p>
+        <a href="/about.html" class="btn">
+          <span>Read the long version</span>
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M4 10h12M11 5l5 5-5 5"/></svg>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <footer class="site-footer">
+    <div class="site-footer-inner">
+      <div>
+        <div class="site-footer-cta">Let's work <em>together.</em></div>
+        <div class="site-footer-email">jteerlink@gmail.com</div>
+      </div>
+      <div class="site-footer-links">
+        <a href="https://linkedin.com/in/jaredwteerlink">LinkedIn ↗</a>
+        <a href="https://github.com/jteerlink">GitHub ↗</a>
+        <a href="/contact.html">Contact →</a>
+      </div>
+      <div class="site-footer-meta">© 2026 — set in Instrument Serif &amp; Inter</div>
+    </div>
+    <div class="site-footer-copy">
+      <span>Jared Teerlink</span>
+      <span>Data Science Leader · AI / ML</span>
+    </div>
+  </footer>
+
+  <script src="/js/portfolio.js"></script>
+</body>
+</html>

@@ -3,27 +3,17 @@
 
 {% include head.html %}
 
-<body>
-
-  {% if site.data.settings.google-analytics %}
-  {% include google-analytics.html %}
-  {% endif %}
+<body class="grain">
 
   {% include header.html %}
 
-  <!-- begin content -->
-  <main class="content" aria-label="Content">
+  <main>
     {{ content }}
   </main>
-  <!-- end content -->
-
-  <div class="top ion ion-ios-arrow-up" title="Top"></div>
-
-  {% include search.html %}
 
   {% include footer.html %}
 
-  {% include javascripts.html %}
+  <script src="{{ site.baseurl }}/js/portfolio.js"></script>
 </body>
 
 </html>

@@ -1,12 +1,60 @@
----
-layout: page
-title: Page not found
-image: 07.jpg
-permalink: /404.html
----
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>404 — Jared Teerlink</title>
+  <meta name="description" content="Page not found.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/assets/css/portfolio.css">
+</head>
+<body class="grain">
 
-<div class="page-box">
-  <h2>404</h2>
-  <p>The requested page could not be found.</p>
-  <p class="back-arrow"><i class="ion ion-md-arrow-back"></i> <a href="{{site.baseurl}}/">Back to the blog</a></p>
-</div>
+  <nav class="site-nav">
+    <div class="site-nav-inner">
+      <a href="/" class="site-nav-mark">Jared Teerlink</a>
+      <div class="site-nav-links">
+        <a href="/">Home</a>
+        <a href="/work.html">Work</a>
+        <a href="/about.html">About</a>
+        <a href="/contact.html">Contact</a>
+      </div>
+      <span class="site-nav-meta">— available Q3 2026</span>
+      <button class="site-nav-hamburger" aria-label="Open menu"><span></span><span></span><span></span></button>
+    </div>
+  </nav>
+
+  <section class="not-found reveal">
+    <div class="eyebrow">404</div>
+    <h1>Page <em>not found.</em></h1>
+    <p>The page you're looking for doesn't exist or has moved.</p>
+    <a href="/" class="btn" style="margin-top: 2rem; display: inline-flex; align-items: center; gap: .5rem;">
+      <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M13 8H3M7 4 3 8l4 4"/></svg>
+      <span>Back to home</span>
+    </a>
+  </section>
+
+  <footer class="site-footer">
+    <div class="site-footer-inner">
+      <div>
+        <div class="site-footer-cta">Let's work <em>together.</em></div>
+        <div class="site-footer-email">jteerlink@gmail.com</div>
+      </div>
+      <div class="site-footer-links">
+        <a href="https://linkedin.com/in/jaredwteerlink">LinkedIn ↗</a>
+        <a href="https://github.com/jteerlink">GitHub ↗</a>
+        <a href="/contact.html">Contact →</a>
+      </div>
+      <div class="site-footer-meta">© 2026 — set in Instrument Serif &amp; Inter</div>
+    </div>
+    <div class="site-footer-copy">
+      <span>Jared Teerlink</span>
+      <span>Data Science Leader · AI / ML</span>
+    </div>
+  </footer>
+
+  <script src="/js/portfolio.js"></script>
+</body>
+</html>

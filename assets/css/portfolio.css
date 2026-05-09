@@ -271,7 +271,7 @@ img { display: block; max-width: 100%; }
   grid-template-columns: repeat(4, 1fr);
   border-top: 1px solid var(--line-strong);
   border-bottom: 1px solid var(--line-strong);
-  margin: 0 48px 0;
+  margin: 60px 48px;
 }
 .metric {
   padding: 40px 32px;
@@ -291,7 +291,7 @@ img { display: block; max-width: 100%; }
 /* ========================================
    HOME — SECTIONS + PROJECT ROWS
    ======================================== */
-.home-section { padding: 80px 48px; }
+.home-section { padding: 120px 48px; }
 .home-section--alt { background: var(--paper-2); }
 .section-head { max-width: 1400px; margin: 0 auto 80px; }
 .section-title {
@@ -1064,12 +1064,12 @@ a.project-row:hover .project-thumb { transform: scale(1.01); }
   .home-hero-footer { grid-template-columns: 1fr; gap: 20px; }
   .home-portrait { max-width: 380px; }
 
-  .metric-strip { grid-template-columns: repeat(2, 1fr); margin: 0 24px; }
+  .metric-strip { grid-template-columns: repeat(2, 1fr); margin: 40px 24px; }
   .metric:nth-child(2) { border-right: 0; }
   .metric { padding: 28px 20px; }
   .metric-value { font-size: 48px; }
 
-  .home-section { padding: 60px 24px; }
+  .home-section { padding: 80px 24px; }
   .section-head { margin-bottom: 48px; }
 
   .project-row { grid-template-columns: 1fr; gap: 20px; padding: 36px 0; }

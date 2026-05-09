@@ -38,7 +38,59 @@
 
   <div class="cs-cover reveal">
     <div class="cs-cover-inner">
-      <img src="/images/ai_agent.jpg" alt="AI-Powered Newsletter Generator">
+      <svg viewBox="0 0 1400 700" preserveAspectRatio="xMidYMid slice" class="arch">
+        <defs>
+          <pattern id="hero-grid" width="40" height="40" patternUnits="userSpaceOnUse">
+            <path d="M 40 0 L 0 0 0 40" fill="none" stroke="currentColor" stroke-width="0.5" opacity="0.15"/>
+          </pattern>
+        </defs>
+        <rect width="1400" height="700" fill="var(--paper-2)"/>
+        <rect width="1400" height="700" fill="url(#hero-grid)" style="color: var(--ink)"/>
+        <!-- Center node: Manager -->
+        <circle cx="700" cy="350" r="60" fill="var(--ink)"/>
+        <text x="700" y="345" text-anchor="middle" style="fill: var(--paper)" class="label">Manager</text>
+        <text x="700" y="362" text-anchor="middle" style="fill: var(--paper)" class="ko">orchestrator</text>
+        <!-- Concentric rings -->
+        <circle cx="700" cy="350" r="180" fill="none" stroke="var(--ink)" stroke-width="0.5" opacity="0.4"/>
+        <circle cx="700" cy="350" r="280" fill="none" stroke="var(--ink)" stroke-width="0.5" opacity="0.25"/>
+        <!-- Agent satellites -->
+        <g>
+          <line x1="700" y1="350" x2="430" y2="200" stroke="var(--ink)" stroke-width="0.8" opacity="0.5"/>
+          <circle cx="430" cy="200" r="36" style="fill: var(--paper)" stroke="var(--ink)" stroke-width="1.5"/>
+          <text x="430" y="196" text-anchor="middle" class="label">Research</text>
+          <text x="430" y="212" text-anchor="middle" class="ko">crawl + rag</text>
+        </g>
+        <g>
+          <line x1="700" y1="350" x2="970" y2="200" stroke="var(--ink)" stroke-width="0.8" opacity="0.5"/>
+          <circle cx="970" cy="200" r="36" style="fill: var(--paper)" stroke="var(--ink)" stroke-width="1.5"/>
+          <text x="970" y="196" text-anchor="middle" class="label">Writer</text>
+          <text x="970" y="212" text-anchor="middle" class="ko">narrative</text>
+        </g>
+        <g>
+          <line x1="700" y1="350" x2="430" y2="500" stroke="var(--ink)" stroke-width="0.8" opacity="0.5"/>
+          <circle cx="430" cy="500" r="36" style="fill: var(--paper)" stroke="var(--ink)" stroke-width="1.5"/>
+          <text x="430" y="496" text-anchor="middle" class="label">Editor</text>
+          <text x="430" y="512" text-anchor="middle" class="ko">quality gate</text>
+        </g>
+        <g>
+          <line x1="700" y1="350" x2="970" y2="500" stroke="var(--ink)" stroke-width="0.8" opacity="0.5"/>
+          <circle cx="970" cy="500" r="36" style="fill: var(--paper)" stroke="var(--ink)" stroke-width="1.5"/>
+          <text x="970" y="496" text-anchor="middle" class="label">Code Gen</text>
+          <text x="970" y="512" text-anchor="middle" class="ko">sandbox</text>
+        </g>
+        <g>
+          <line x1="700" y1="350" x2="700" y2="100" stroke="var(--ink)" stroke-width="0.8" opacity="0.5"/>
+          <circle cx="700" cy="100" r="32" style="fill: var(--paper)" stroke="var(--ink)" stroke-width="1.5"/>
+          <text x="700" y="96" text-anchor="middle" class="label">Agentic RAG</text>
+          <text x="700" y="112" text-anchor="middle" class="ko">retrieval planner</text>
+        </g>
+        <g>
+          <line x1="700" y1="350" x2="700" y2="600" stroke="var(--ink)" stroke-width="0.8" opacity="0.5"/>
+          <rect x="630" y="585" width="140" height="36" style="fill: var(--paper)" stroke="var(--ink)" stroke-width="1.5"/>
+          <text x="700" y="608" text-anchor="middle" class="label">Newsletter</text>
+        </g>
+        <text x="40" y="680" class="ko" fill="var(--ink)" opacity="0.6">FIG · 01 — System architecture · five agents around a single coordinator</text>
+      </svg>
     </div>
   </div>
 

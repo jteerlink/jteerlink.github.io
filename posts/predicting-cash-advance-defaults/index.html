@@ -38,7 +38,51 @@
 
   <div class="cs-cover reveal">
     <div class="cs-cover-inner">
-      <img src="/images/cash.jpg" alt="Predicting Cash Advance Defaults">
+      <svg viewBox="0 0 1400 700" preserveAspectRatio="xMidYMid slice" class="arch">
+        <defs>
+          <pattern id="cagrid" width="40" height="40" patternUnits="userSpaceOnUse">
+            <path d="M 40 0 L 0 0 0 40" fill="none" stroke="currentColor" stroke-width="0.5" opacity="0.13"/>
+          </pattern>
+        </defs>
+        <rect width="1400" height="700" fill="var(--paper-2)"/>
+        <rect width="1400" height="700" fill="url(#cagrid)" style="color: var(--ink)"/>
+        <!-- ROC curve -->
+        <g transform="translate(180, 100)">
+          <line x1="0" y1="500" x2="500" y2="500" stroke="var(--ink)" stroke-width="1"/>
+          <line x1="0" y1="0" x2="0" y2="500" stroke="var(--ink)" stroke-width="1"/>
+          <line x1="0" y1="500" x2="500" y2="0" stroke="var(--ink)" stroke-width="0.6" stroke-dasharray="4,5" opacity="0.4"/>
+          <text x="430" y="60" class="ko" fill="var(--ink)" opacity="0.5">RANDOM AUC = 0.50</text>
+          <path d="M 0 500 Q 80 320 200 200 Q 320 100 500 0" fill="none" stroke="var(--ink)" stroke-width="2.2"/>
+          <text x="180" y="160" class="ko" fill="var(--ink)">MODEL AUC = 0.72</text>
+          <text x="-12" y="-10" text-anchor="end" class="ko" fill="var(--ink)" opacity="0.6">TPR</text>
+          <text x="510" y="520" class="ko" fill="var(--ink)" opacity="0.6">FPR</text>
+          <line x1="0" y1="500" x2="-6" y2="500" stroke="var(--ink)" stroke-width="0.6"/>
+          <line x1="0" y1="0" x2="-6" y2="0" stroke="var(--ink)" stroke-width="0.6"/>
+          <line x1="0" y1="500" x2="0" y2="506" stroke="var(--ink)" stroke-width="0.6"/>
+          <line x1="500" y1="500" x2="500" y2="506" stroke="var(--ink)" stroke-width="0.6"/>
+          <text x="-12" y="504" text-anchor="end" class="ko" fill="var(--ink)" opacity="0.6">0</text>
+          <text x="-12" y="4" text-anchor="end" class="ko" fill="var(--ink)" opacity="0.6">1</text>
+          <text x="0" y="520" text-anchor="middle" class="ko" fill="var(--ink)" opacity="0.6">0</text>
+          <text x="500" y="520" text-anchor="middle" class="ko" fill="var(--ink)" opacity="0.6">1</text>
+        </g>
+        <!-- KPI stack -->
+        <g transform="translate(870, 130)">
+          <text x="0" y="0" class="ko" fill="var(--ink)">TUNED PERFORMANCE</text>
+          <line x1="0" y1="14" x2="380" y2="14" stroke="var(--ink)" stroke-width="0.6"/>
+          <text x="0" y="80" font-family="var(--font-display)" font-size="64" fill="var(--ink)">0.72</text>
+          <text x="160" y="80" class="ko" fill="var(--ink)">AUC</text>
+          <line x1="0" y1="100" x2="380" y2="100" stroke="var(--ink)" stroke-width="0.4" opacity="0.4"/>
+          <text x="0" y="170" font-family="var(--font-display)" font-size="64" fill="var(--ink)">3.0×</text>
+          <text x="160" y="170" class="ko" fill="var(--ink)">TOP DECILE LIFT</text>
+          <line x1="0" y1="190" x2="380" y2="190" stroke="var(--ink)" stroke-width="0.4" opacity="0.4"/>
+          <text x="0" y="260" font-family="var(--font-display)" font-size="64" fill="var(--ink)">~30%</text>
+          <text x="160" y="260" class="ko" fill="var(--ink)">DEFAULTS CAPTURED</text>
+          <line x1="0" y1="280" x2="380" y2="280" stroke="var(--ink)" stroke-width="0.4" opacity="0.4"/>
+          <text x="0" y="350" font-family="var(--font-display)" font-size="64" fill="var(--ink)">+8%</text>
+          <text x="160" y="350" class="ko" fill="var(--ink)">APPROVE RATE @ FIXED LOSS</text>
+        </g>
+        <text x="40" y="680" class="ko" fill="var(--ink)" opacity="0.6">FIG · 01 — ROC and headline metrics, tuned model</text>
+      </svg>
     </div>
   </div>
 

@@ -992,6 +992,28 @@ img { display: block; max-width: 100%; }
 }
 .cs-body pre code { background: none; padding: 0; font-size: 14px; color: inherit; }
 .cs-body img { margin: 32px 0; border: 1px solid var(--line); }
+.cs-body figure { margin: 56px 0; }
+.cs-body figure img {
+  display: block;
+  width: 100%;
+  margin: 0;
+  border: 1px solid var(--line);
+  background: var(--paper-2);
+}
+.cs-body figcaption {
+  margin-top: 12px;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  line-height: 1.55;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+.cs-body .cs-figure-wide {
+  width: min(1100px, calc(100vw - 48px));
+  margin-left: 50%;
+  transform: translateX(-50%);
+}
 .cs-body blockquote {
   font-family: var(--font-display);
   font-style: italic;

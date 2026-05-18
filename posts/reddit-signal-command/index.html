@@ -1,0 +1,273 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Reddit Signal Command — Jared Teerlink</title>
+  <meta name="description" content="A long-form case study on a Reddit intelligence platform that collects AI-community discussion through scheduled Reddit API pulls, models sentiment and topics, forecasts shifts, and serves the work in a full-stack dashboard.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/assets/css/portfolio.css">
+</head>
+<body class="grain">
+
+  <nav class="site-nav">
+    <div class="site-nav-inner">
+      <a href="/" class="site-nav-mark">Jared Teerlink</a>
+      <div class="site-nav-links">
+        <a href="/">Home</a>
+        <a href="/work.html">Work</a>
+        <a href="/about.html">About</a>
+        <a href="/contact.html">Contact</a>
+      </div>
+      <span class="site-nav-meta">— available Q3 2026</span>
+      <button class="site-nav-hamburger" aria-label="Open menu"><span></span><span></span><span></span></button>
+    </div>
+  </nav>
+
+  <section class="cs-hero reveal">
+    <div class="cs-meta">
+      <div class="eyebrow">Case Study</div>
+      <div class="cs-tags"><span class="tag">Reddit API</span><span class="tag">NLP</span><span class="tag">Dashboard</span><span class="tag">Forecasting</span></div>
+      <time class="cs-date">May 2026</time>
+    </div>
+    <h1>A Reddit intelligence dashboard built from daily API pulls, model diagnostics, and narrative signal.</h1>
+    <p class="cs-lede">Signal Command turns AI-community Reddit discussion into a living analysis loop: scheduled collection, fault-tolerant storage, weak supervision, fine-tuned sentiment, topic discovery, semantic search, anomaly events, forecasts, analyst briefs, and model-health checks in one full-stack dashboard.</p>
+  </section>
+
+  <div class="cs-cover reveal">
+    <div class="cs-cover-inner">
+      <svg viewBox="0 0 1400 700" preserveAspectRatio="xMidYMid slice" class="arch" role="img" aria-label="Signal Command Reddit analysis architecture">
+        <defs>
+          <pattern id="ra-grid" width="40" height="40" patternUnits="userSpaceOnUse">
+            <path d="M 40 0 L 0 0 0 40" fill="none" stroke="currentColor" stroke-width="0.5" opacity="0.14"/>
+          </pattern>
+          <marker id="ra-arrow" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 z" fill="var(--ink)"/></marker>
+        </defs>
+        <rect width="1400" height="700" fill="var(--paper-2)"/>
+        <rect width="1400" height="700" fill="url(#ra-grid)" style="color: var(--ink)"/>
+        <text x="54" y="72" class="ko">FIG · 01 — scheduled social signal pipeline</text>
+
+        <g transform="translate(80 150)">
+          <rect x="0" y="0" width="250" height="120" fill="var(--paper)" stroke="var(--ink)"/>
+          <text x="24" y="38" class="label">Reddit API Pull</text>
+          <text x="24" y="66" class="ko">PRAW · read-only · rolling window</text>
+          <text x="24" y="90" class="ko">new posts · keyword filters · comments</text>
+          <rect x="0" y="210" width="250" height="120" fill="var(--paper)" stroke="var(--ink)"/>
+          <text x="24" y="248" class="label">Fault Tolerance</text>
+          <text x="24" y="276" class="ko">rate limit · backoff · circuit breaker</text>
+          <text x="24" y="300" class="ko">batch storage · dedupe</text>
+        </g>
+
+        <g transform="translate(465 142)">
+          <rect x="0" y="0" width="250" height="330" fill="var(--ink)"/>
+          <text x="28" y="46" class="label" style="fill: var(--paper)">Model Pipeline</text>
+          <line x1="28" y1="74" x2="222" y2="74" stroke="var(--paper)" opacity="0.28"/>
+          <text x="28" y="112" class="ko" style="fill: var(--paper)">clean text + MiniLM embeddings</text>
+          <text x="28" y="152" class="ko" style="fill: var(--paper)">VADER weak labels</text>
+          <text x="28" y="192" class="ko" style="fill: var(--paper)">DistilBERT sentiment</text>
+          <text x="28" y="232" class="ko" style="fill: var(--paper)">BERTopic + coherence</text>
+          <text x="28" y="272" class="ko" style="fill: var(--paper)">change points + Prophet forecast</text>
+        </g>
+
+        <g transform="translate(850 150)">
+          <rect x="0" y="0" width="220" height="120" fill="var(--paper)" stroke="var(--ink)"/>
+          <text x="24" y="38" class="label">FastAPI Surface</text>
+          <text x="24" y="66" class="ko">summary · topics · sentiment</text>
+          <text x="24" y="90" class="ko">semantic search · health · briefs</text>
+          <rect x="0" y="210" width="220" height="120" fill="var(--paper)" stroke="var(--ink)"/>
+          <text x="24" y="248" class="label">Next Dashboard</text>
+          <text x="24" y="276" class="ko">operations · diagnostics · intelligence</text>
+          <text x="24" y="300" class="ko">screen-level exploration</text>
+        </g>
+
+        <g transform="translate(1180 224)">
+          <circle cx="60" cy="60" r="58" fill="none" stroke="var(--ink)" stroke-width="1.4"/>
+          <circle cx="60" cy="60" r="28" fill="var(--ink)"/>
+          <text x="60" y="56" text-anchor="middle" class="ko" style="fill: var(--paper)">SIGNAL</text>
+          <text x="60" y="76" text-anchor="middle" class="ko" style="fill: var(--paper)">COMMAND</text>
+        </g>
+
+        <g stroke="var(--ink)" stroke-width="1.3" fill="none" marker-end="url(#ra-arrow)" opacity="0.7">
+          <path d="M330 212 C390 208 410 210 465 210"/>
+          <path d="M330 420 C390 430 410 408 465 380"/>
+          <path d="M715 268 C775 240 795 216 850 210"/>
+          <path d="M715 348 C780 372 800 414 850 420"/>
+          <path d="M1070 330 C1112 320 1140 296 1182 282"/>
+        </g>
+
+        <g transform="translate(250 558)">
+          <rect x="0" y="0" width="900" height="58" fill="var(--paper)" stroke="var(--ink)"/>
+          <text x="28" y="36" class="label">Daily social data becomes a monitored intelligence product: collect → model → explore → diagnose → brief.</text>
+        </g>
+      </svg>
+    </div>
+  </div>
+
+  <article class="cs-body reveal">
+
+    <p>Reddit is noisy in the way useful markets are noisy. The first hour after an AI release is a mess of jokes, benchmarks, installation problems, pricing complaints, “is this worth it?” threads, and early power-user observations. A week later, the same release has turned into a different conversation: workflows, breakages, trust, cost, whether people stayed with it, whether open-source alternatives caught up, whether the excitement survived contact with real work.</p>
+
+    <p>The project started with that texture. There was enough signal in the AI communities to matter, but not enough structure to reason about it by scrolling. The system had to behave more like an analyst than a scraper. It needed a daily habit, a memory, a model layer, a diagnostic layer, and a dashboard that could move from macro trend to individual thread without changing tools.</p>
+
+    <p><strong><a href="https://github.com/jteerlink/reddit-analysis">GitHub Repository ↗</a></strong></p>
+
+    <h2>The collection loop begins with the clock.</h2>
+    <p>The actual collection method is a scheduled Reddit API pull. The repository uses PRAW in read-only mode, initialized with a client ID, client secret, and user agent; username and password are intentionally left out. That decision keeps the collector in the safer lane for public subreddit monitoring: it is gathering public discussion, not acting as a Reddit user.</p>
+
+    <p>The scheduled job calls the historical collector through the CLI. The checked-in cron wrapper runs an overlapping two-day window, which is the important operational detail: each run can re-read the recent edge of the stream, skip records already present in storage, and deduplicate again after the batch completes. In a daily operating rhythm, that overlap is the cushion that keeps a missed run or a temporary API issue from creating a clean break in the series.</p>
+
+    <pre><code>uv run python -m reddit_api.cli historical --days 2 --posts 150 --comments 50</code></pre>
+
+    <p>The command looks small because the real system is in the collection path behind it. The target list is opinionated around AI discussion: OpenAI and ChatGPT communities, Anthropic and Claude communities, Google AI communities, infrastructure spaces like NVIDIA and Hugging Face, open-source communities like LocalLLaMA and Stable Diffusion, and broader machine-learning subreddits. Each subreddit also carries a durable parent group — OpenAI, Anthropic, Google AI, AI Infrastructure, Open Source, ML &amp; Research, or Other — so the dashboard can talk about communities instead of only individual forums.</p>
+
+    <p>Each pull asks Reddit for the newest posts, over-fetches to survive filtering, and then narrows the result by timestamp and keywords. The default keyword set is deliberately broad: AI, LLM, machine learning, artificial intelligence, ChatGPT, Claude, GPT, neural network. For posts that pass, the collector records title, content, upvotes, created time, subreddit, author, author karma, URL, comment count, and parent group. It then collects comments from those posts, filters comments by the same keyword strategy, and stores comment metadata against the parent post.</p>
+
+    <p>The collector is built like something expected to run unattended. It enforces a 600-request-per-10-minute window, wraps requests in exponential backoff, and opens a circuit breaker after repeated failures. The historical path adds a more conservative delay, chunks longer time frames, tracks progress, and writes after each subreddit so an interrupted process does not lose everything it already collected. Existing post and comment IDs are preloaded for the current window, so repeat pulls avoid wasting work before the final dedupe pass runs.</p>
+
+    <p>That collection loop is not glamorous. It is the part that makes the rest of the product possible. A dashboard about social signal is only as credible as the habit feeding it.</p>
+
+    <h2>The raw stream becomes a model-ready corpus.</h2>
+    <p>Once the data lands, the pipeline shifts from collection to interpretation. The preprocessing step cleans posts and comments, writes kept records into a preprocessed table, and builds a sentence-embedding cache with a MiniLM-style representation. That cache becomes the bridge between ordinary keyword search and the semantic map later in the dashboard.</p>
+
+    <p>The first sentiment labels come from weak supervision. VADER scores the cleaned text, a confidence threshold keeps only stronger examples, and neutral examples are included with their own threshold so the model does not learn a two-class caricature of Reddit mood. Those weak labels become training data for a DistilBERT sentiment model. The gate is explicit: the sentiment model is expected to clear a validation macro-F1 threshold before batch inference fills the sentiment prediction table.</p>
+
+    <p>Topic modeling follows the same pattern of useful constraints. BERTopic discovers themes from the embedded conversation, UMAP and HDBSCAN do the projection and clustering work, and coherence scoring keeps the topic layer from becoming a pile of arbitrary labels. The time-series step then aggregates daily sentiment, computes moving averages, identifies change points, and fits a 14-day Prophet forecast with confidence bands.</p>
+
+    <p>By the time the dashboard loads, the underlying data has been through several kinds of discipline: Reddit API collection, duplicate control, text cleaning, embedding, weak labeling, supervised sentiment, unsupervised topic discovery, temporal aggregation, forecasting, and artifact generation. The interface is not just drawing charts. It is exposing the state of that loop.</p>
+
+    <figure class="cs-figure-wide">
+      <img src="/images/reddit-analysis/overview.png" alt="Signal Command dashboard overview with trending topics, metrics, sentiment stream, pipeline health, and community groups">
+      <figcaption>Overview: filters, parent groups, trending topics, totals, sentiment stream, pipeline health, and community-level summaries in one command surface.</figcaption>
+    </figure>
+
+    <h2>The overview behaves like a briefing room.</h2>
+    <p>The first screen is built for orientation. The left rail keeps the monitored community map visible: OpenAI, Anthropic, Google AI, Open Source, ML &amp; Research, and AI Infrastructure. The command bar carries parent filters, subreddit filters, and date range. The top cards answer the questions an analyst asks before touching a chart: how much data is in the window, how much conversation mass is available, when the ML layer last ran, and what the current sentiment mix looks like.</p>
+
+    <p>The trending signal panel turns topics into a front door. It does not force the user to start with a chart axis or SQL-like filter. It starts with what is moving: agent workflows, inference infrastructure, pricing and access, local models, benchmarks. The dashboard can then route the user into the deep-dive view with context already attached.</p>
+
+    <p>The central stream chart layers daily sentiment and volume. Positive, neutral, and negative movement live beside comment mass, and the generated chart summary sits underneath as an analyst note rather than a decorative caption. On the right, pipeline health and parent-group summaries keep operational status in view. If collection or modeling is stale, the dashboard has a place to say so before the user over-trusts the shape of the chart.</p>
+
+    <figure class="cs-figure-wide">
+      <img src="/images/reddit-analysis/sentiment.png" alt="Sentiment trends page with daily sentiment, moving averages, change points, and forecast chart">
+      <figcaption>Sentiment trends: daily mean sentiment, optional moving averages, detected change points, and a 14-day Prophet forecast with confidence bands.</figcaption>
+    </figure>
+
+    <h2>The sentiment page turns mood into a time series.</h2>
+    <p>Sentiment is easy to oversell. A mean score is not a verdict, and Reddit sarcasm is not kind to shallow models. The sentiment screen works because it treats mood as a time-series object instead of a single number. Daily mean sentiment can be viewed directly or smoothed with seven-day and thirty-day moving averages. Change points appear as vertical markers, making it easier to see where the distribution shifted instead of mentally drawing a line through noise.</p>
+
+    <p>The forecast panel extends the same view forward. Prophet is not there to pretend Reddit can be predicted like a deterministic system; it is there to create a baseline expectation. When the next collection window arrives, the question becomes sharper: did the community stay inside the expected band, or did something meaningful happen? That changes the dashboard from retrospective reporting into a monitoring loop.</p>
+
+    <figure class="cs-figure-wide">
+      <img src="/images/reddit-analysis/topics.png" alt="Topic explorer with subreddit network, topic lens, weekly topic counts, and keyword chips">
+      <figcaption>Topic explorer: subreddit similarity network, topic lens, comment-volume ordering, weekly counts, and keyword context.</figcaption>
+    </figure>
+
+    <h2>The topic explorer gives the conversation a map.</h2>
+    <p>Topics make the system feel less like analytics and more like terrain. The graph view can show subreddit similarity, where nodes are communities and edges combine author overlap with shared topic structure. It can also shift toward topic similarity, where the graph is about semantic proximity between themes. That matters because AI Reddit does not organize itself according to one clean taxonomy. A pricing thread can become an infrastructure thread. A local-model thread can become a benchmark thread. A release thread can become a workflow thread by the second day.</p>
+
+    <p>The right rail turns that map into a lens. Topics are ordered by comment count, keywords remain visible, and selected topics get their own weekly history. A heatmap ties topic and sentiment together over time. The effect is a useful tension: the graph invites exploration, while the ranked lists and weekly counts keep the user honest about scale.</p>
+
+    <figure class="cs-figure-wide">
+      <img src="/images/reddit-analysis/deep-dive.png" alt="Deep dive page with semantic search results across Reddit posts and comments">
+      <figcaption>Deep dive: keyword and semantic search across preprocessed posts and comments, with sentiment labels, confidence, scores, filters, and export controls.</figcaption>
+    </figure>
+
+    <h2>The deep dive keeps the dashboard attached to language.</h2>
+    <p>A social dashboard can drift away from the posts that created it. The deep-dive page prevents that. It supports ordinary keyword search for targeted inspection and semantic search for questions that do not fit a literal phrase. Results can be filtered by sentiment label, content type, subreddit, parent group, date range, and topic context. Rows carry date, subreddit, post/comment type, sentiment label, model confidence, semantic score when relevant, and a preview of the underlying text.</p>
+
+    <p>The export buttons matter more than they look. A useful dashboard does not trap its evidence. CSV and JSON export make it possible to take a slice of conversation into a notebook, a memo, a QA pass, or a model-review workflow. The point is not that every user will export every day. The point is that the dashboard is built as part of an analysis system, not a terminal display.</p>
+
+    <figure class="cs-figure-wide">
+      <img src="/images/reddit-analysis/embedding-map.png" alt="Embedding map page with projected conversation points colored by community, topic, cluster, or sentiment">
+      <figcaption>Embedding map: projected conversation embeddings with topic filters, search, diagnostics, and color modes for parent group, cluster, or sentiment.</figcaption>
+    </figure>
+
+    <h2>The embedding map is where the corpus becomes spatial.</h2>
+    <p>The embedding map uses the sentence representation created during preprocessing and projects the corpus into an exploratory plane. Points can be colored by parent group, cluster, or sentiment. Filters keep topic and date context attached. Diagnostics report how many points are available, how many topics are represented, whether outliers dominate, and which topic carries the largest share.</p>
+
+    <p>This view is useful because it catches a different kind of pattern. A topic table can tell you that agent workflows are large. A sentiment chart can tell you that OpenAI discussion moved upward. The embedding map can reveal that several communities are clustering around the same operational pain: tool reliability, GPU access, pricing tiers, deployment cost, benchmark trust. It is less precise than a table and more intuitive than a vector index, which is exactly why it earns a place in the dashboard.</p>
+
+    <figure class="cs-figure-wide">
+      <img src="/images/reddit-analysis/events.png" alt="Narrative events page with persisted anomaly and lifecycle events from the analysis pipeline">
+      <figcaption>Events: persisted anomaly and lifecycle signals, including date windows, lifecycle state, dominant terms, and narrative summaries.</figcaption>
+    </figure>
+
+    <h2>Narrative events turn anomalies into objects.</h2>
+    <p>The events page sits between time-series monitoring and human interpretation. Change points and forecast deviations are useful, but they become more useful when the system can persist them as named events with a date window, peak date, lifecycle state, summary, dominant subreddits, top terms, and source post anchors. “Positive sentiment rose” is a chart observation. “Agent reliability debate accelerates” is an object an analyst can revisit.</p>
+
+    <p>That object boundary is a small leadership decision in the product design. It says the dashboard should not just answer the question in front of it; it should build a memory of prior moments. The next time a similar spike arrives, the system has precedent.</p>
+
+    <figure class="cs-figure-wide">
+      <img src="/images/reddit-analysis/briefs.png" alt="Analyst briefs page with generated summary sections, evidence, freshness, and model provider status">
+      <figcaption>Briefs: generated analyst narrative with evidence links, artifact freshness, provider status, source events, and model metadata.</figcaption>
+    </figure>
+
+    <h2>The briefs page gives the system an analyst voice.</h2>
+    <p>Briefs are where the analysis loop becomes readable. The page combines generated sections, evidence anchors, source events, artifact freshness, and model-provider status. It can surface an executive summary, risks and anomalies, and other structured sections without hiding the provenance that made the text possible.</p>
+
+    <p>There is a practical reason to include model registry and freshness beside the prose. Generated analysis without operational context is too easy to trust. A brief produced from stale artifacts is different from one produced after the morning collection, preprocessing, sentiment run, topic refresh, and event generation. Keeping those signals visible makes the prose feel accountable to the system that produced it.</p>
+
+    <figure class="cs-figure-wide">
+      <img src="/images/reddit-analysis/model-health.png" alt="Model health page with confidence distribution, VADER agreement, low-confidence examples, disagreements, and confidence by subreddit">
+      <figcaption>Model health: confidence distribution, VADER agreement, low-confidence examples, lexicon/model disagreements, and confidence by subreddit.</figcaption>
+    </figure>
+
+    <h2>The model health page keeps the predictions humble.</h2>
+    <p>Every sentiment system needs a place where confidence can be inspected instead of assumed. The diagnostics page starts with mean confidence, high-confidence share, and VADER agreement. It then breaks the story open: confidence distribution, VADER agreement by subreddit, low-confidence examples, lexicon/model disagreements, and confidence by subreddit.</p>
+
+    <p>That page acknowledges the messy parts of Reddit language. Sarcasm, hype, complaint-as-endorsement, and benchmark tribalism can confuse lexicon sentiment and fine-tuned sentiment in different ways. The disagreement table is not a failure drawer; it is a calibration surface. It gives a maintainer a way to see where the model is struggling, which communities are harder to score, and which examples deserve review before the model is treated as a stable measurement layer.</p>
+
+    <figure class="cs-figure-wide">
+      <img src="/images/reddit-analysis/pipeline.png" alt="Pipeline runner page with seven ML pipeline steps and operational controls">
+      <figcaption>Pipeline runner: prerequisites, preprocessing, weak labels, model training, batch inference, topic modeling, and time-series forecasting behind one operations panel.</figcaption>
+    </figure>
+
+    <h2>The pipeline runner makes operations part of the product.</h2>
+    <p>The pipeline page exposes seven steps: prerequisites, preprocessing, weak labels, sentiment model training, batch inference, topic modeling, and time-series forecasting. Each step has a prerequisite relationship. Each has a status. The runner can execute one step or the whole chain, and the backend streams process output so the dashboard is not blind while the system works.</p>
+
+    <p>This is the difference between a demo and an operating tool. A demo assumes the data is ready. An operating tool admits that data freshness, model artifacts, table counts, forecast rows, topic coherence, and failed jobs all shape the trustworthiness of what the user sees. The dashboard includes the machinery because the machinery is part of the story.</p>
+
+    <h2>The dashboard is the artifact, but the loop is the point.</h2>
+    <p>The strongest part of the project is not any single model choice. VADER is simple. DistilBERT is familiar. BERTopic, UMAP, HDBSCAN, and Prophet are all known tools. The value comes from the way they are arranged around an actual collection habit and a dashboard that respects both exploration and operations.</p>
+
+    <p>Daily Reddit API pulls create the stream. Batch storage, duplicate controls, rate limits, retries, and circuit breaking make the stream reliable enough to keep. Preprocessing and embeddings turn raw text into a searchable corpus. Weak supervision and fine-tuning turn language into sentiment. Topic modeling turns posts into themes. Forecasting turns history into an expected band. Events turn anomalies into reusable objects. Briefs turn the analysis into a narrative. Model health keeps the whole thing honest.</p>
+
+    <p>That is the kind of system I like building: creative enough to find signal in a noisy public conversation, technical enough to keep the machinery inspectable, and operational enough that a leader could open it in the morning and know where to look first.</p>
+
+  </article>
+
+  <nav class="post-nav">
+    <a href="/posts/ai-powered-newsletter-generator/" class="post-nav-link">
+      <span class="nav-k">← Previous</span>
+      <span class="nav-t">AI-Powered Newsletter Generator</span>
+    </a>
+    <a href="/posts/symptom-sentry-ai/" class="post-nav-link nav-next">
+      <span class="nav-k">Next →</span>
+      <span class="nav-t">Symptom Sentry AI</span>
+    </a>
+  </nav>
+
+  <footer class="site-footer">
+    <div class="site-footer-inner">
+      <div>
+        <div class="site-footer-cta">Let's work <em>together.</em></div>
+        <div class="site-footer-email">jteerlink@gmail.com</div>
+      </div>
+      <div class="site-footer-links">
+        <a href="https://linkedin.com/in/jaredwteerlink">LinkedIn ↗</a>
+        <a href="https://github.com/jteerlink">GitHub ↗</a>
+        <a href="/contact.html">Contact →</a>
+      </div>
+      <div class="site-footer-meta">© 2026 — set in Instrument Serif &amp; Inter</div>
+    </div>
+    <div class="site-footer-copy">
+      <span>Jared Teerlink</span>
+      <span>Data Science Leader · AI / ML</span>
+    </div>
+  </footer>
+
+  <script src="/js/portfolio.js"></script>
+</body>
+</html>

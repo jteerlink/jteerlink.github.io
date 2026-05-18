@@ -3,8 +3,8 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Building an AI-Powered Newsletter Generator — Jared Teerlink</title>
-  <meta name="description" content="A custom multi-agent system that creates original, deeply researched technical newsletters with working code examples and rigorous quality validation.">
+  <title>Quality-Gated AI Newsletter Generator — Jared Teerlink</title>
+  <meta name="description" content="A custom multi-agent newsletter system that turns research, writing, code generation, validation, and export into a quality-gated publishing loop.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -29,158 +29,112 @@
   <section class="cs-hero reveal">
     <div class="cs-meta">
       <div class="eyebrow">Case Study</div>
-      <div class="cs-tags"><span class="tag">AI</span><span class="tag">Multi-Agent</span></div>
+      <div class="cs-tags"><span class="tag">AI</span><span class="tag">Multi-Agent</span><span class="tag">Systems</span></div>
       <time class="cs-date">August 2025</time>
     </div>
-    <h1>Building an AI-Powered Newsletter Generator: A Custom Multi-Agent System</h1>
-    <p class="cs-lede">A purpose-built multi-agent architecture that creates original, deeply researched technical newsletters complete with working code examples, rigorous quality validation, and mobile-first optimization — in under a minute.</p>
+    <h1>A quality-gated newsletter engine that writes with evidence and executable code.</h1>
+    <p class="cs-lede">A custom multi-agent system that compresses research, synthesis, code generation, validation, editing, and export into one controlled publishing loop — built for credible technical content instead of generic first drafts.</p>
   </section>
 
   <div class="cs-cover reveal">
     <div class="cs-cover-inner">
-      <svg viewBox="0 0 1400 700" preserveAspectRatio="xMidYMid slice" class="arch">
+      <svg viewBox="0 0 1400 700" preserveAspectRatio="xMidYMid slice" class="arch" role="img" aria-label="Quality-gated multi-agent newsletter production system">
         <defs>
-          <pattern id="hero-grid" width="40" height="40" patternUnits="userSpaceOnUse">
-            <path d="M 40 0 L 0 0 0 40" fill="none" stroke="currentColor" stroke-width="0.5" opacity="0.15"/>
+          <pattern id="nl-grid" width="40" height="40" patternUnits="userSpaceOnUse">
+            <path d="M 40 0 L 0 0 0 40" fill="none" stroke="currentColor" stroke-width="0.5" opacity="0.14"/>
           </pattern>
+          <marker id="nl-arrow" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 z" fill="var(--ink)"/></marker>
         </defs>
         <rect width="1400" height="700" fill="var(--paper-2)"/>
-        <rect width="1400" height="700" fill="url(#hero-grid)" style="color: var(--ink)"/>
-        <!-- Center node: Manager -->
-        <circle cx="700" cy="350" r="60" fill="var(--ink)"/>
-        <text x="700" y="345" text-anchor="middle" style="fill: var(--paper)" class="label">Manager</text>
-        <text x="700" y="362" text-anchor="middle" style="fill: var(--paper)" class="ko">orchestrator</text>
-        <!-- Concentric rings -->
-        <circle cx="700" cy="350" r="180" fill="none" stroke="var(--ink)" stroke-width="0.5" opacity="0.4"/>
-        <circle cx="700" cy="350" r="280" fill="none" stroke="var(--ink)" stroke-width="0.5" opacity="0.25"/>
-        <!-- Agent satellites -->
-        <g>
-          <line x1="700" y1="350" x2="430" y2="200" stroke="var(--ink)" stroke-width="0.8" opacity="0.5"/>
-          <circle cx="430" cy="200" r="36" style="fill: var(--paper)" stroke="var(--ink)" stroke-width="1.5"/>
-          <text x="430" y="196" text-anchor="middle" class="label">Research</text>
-          <text x="430" y="212" text-anchor="middle" class="ko">crawl + rag</text>
+        <rect width="1400" height="700" fill="url(#nl-grid)" style="color: var(--ink)"/>
+        <text x="54" y="72" class="ko">FIG · 01 — content system, not prompt chain</text>
+        <g transform="translate(100 155)">
+          <rect x="0" y="0" width="220" height="124" fill="var(--paper)" stroke="var(--ink)"/>
+          <text x="24" y="38" class="label">ResearchAgent</text><text x="24" y="66" class="ko">crawl4ai · chromadb · credibility</text>
+          <rect x="0" y="210" width="220" height="124" fill="var(--paper)" stroke="var(--ink)"/>
+          <text x="24" y="248" class="label">Agentic RAG</text><text x="24" y="276" class="ko">retrieval plans · source ranking</text>
         </g>
-        <g>
-          <line x1="700" y1="350" x2="970" y2="200" stroke="var(--ink)" stroke-width="0.8" opacity="0.5"/>
-          <circle cx="970" cy="200" r="36" style="fill: var(--paper)" stroke="var(--ink)" stroke-width="1.5"/>
-          <text x="970" y="196" text-anchor="middle" class="label">Writer</text>
-          <text x="970" y="212" text-anchor="middle" class="ko">narrative</text>
+        <g transform="translate(454 215)">
+          <circle cx="110" cy="110" r="90" fill="var(--ink)"/>
+          <text x="110" y="104" text-anchor="middle" class="label" style="fill: var(--paper)">ManagerAgent</text>
+          <text x="110" y="126" text-anchor="middle" class="ko" style="fill: var(--paper)">routing + blocking gates</text>
         </g>
-        <g>
-          <line x1="700" y1="350" x2="430" y2="500" stroke="var(--ink)" stroke-width="0.8" opacity="0.5"/>
-          <circle cx="430" cy="500" r="36" style="fill: var(--paper)" stroke="var(--ink)" stroke-width="1.5"/>
-          <text x="430" y="496" text-anchor="middle" class="label">Editor</text>
-          <text x="430" y="512" text-anchor="middle" class="ko">quality gate</text>
+        <g transform="translate(760 155)">
+          <rect x="0" y="0" width="220" height="124" fill="var(--paper)" stroke="var(--ink)"/>
+          <text x="24" y="38" class="label">WriterAgent</text><text x="24" y="66" class="ko">technical narrative · examples</text>
+          <rect x="0" y="210" width="220" height="124" fill="var(--paper)" stroke="var(--ink)"/>
+          <text x="24" y="248" class="label">EditorAgent</text><text x="24" y="276" class="ko">facts · readability · trim</text>
         </g>
-        <g>
-          <line x1="700" y1="350" x2="970" y2="500" stroke="var(--ink)" stroke-width="0.8" opacity="0.5"/>
-          <circle cx="970" cy="500" r="36" style="fill: var(--paper)" stroke="var(--ink)" stroke-width="1.5"/>
-          <text x="970" y="496" text-anchor="middle" class="label">Code Gen</text>
-          <text x="970" y="512" text-anchor="middle" class="ko">sandbox</text>
+        <g transform="translate(1110 210)">
+          <rect x="0" y="0" width="210" height="260" fill="var(--ink)"/>
+          <text x="24" y="42" class="label" style="fill: var(--paper)">Validated Export</text>
+          <line x1="24" y1="70" x2="186" y2="70" stroke="var(--paper)" opacity="0.28"/>
+          <text x="24" y="112" class="ko" style="fill: var(--paper)">HTML · markdown · text</text>
+          <text x="24" y="154" class="ko" style="fill: var(--paper)">code examples executed</text>
+          <text x="24" y="196" class="ko" style="fill: var(--paper)">mobile readability checked</text>
+          <text x="24" y="238" class="ko" style="fill: var(--paper)">citations preserved</text>
         </g>
-        <g>
-          <line x1="700" y1="350" x2="700" y2="100" stroke="var(--ink)" stroke-width="0.8" opacity="0.5"/>
-          <circle cx="700" cy="100" r="32" style="fill: var(--paper)" stroke="var(--ink)" stroke-width="1.5"/>
-          <text x="700" y="96" text-anchor="middle" class="label">Agentic RAG</text>
-          <text x="700" y="112" text-anchor="middle" class="ko">retrieval planner</text>
+        <g stroke="var(--ink)" stroke-width="1.3" fill="none" marker-end="url(#nl-arrow)" opacity="0.7">
+          <path d="M320 217 C390 220 415 260 454 304"/><path d="M320 427 C385 420 416 370 454 346"/>
+          <path d="M650 304 C700 260 720 220 760 217"/><path d="M650 346 C700 390 720 426 760 427"/>
+          <path d="M980 342 L1110 342"/>
         </g>
-        <g>
-          <line x1="700" y1="350" x2="700" y2="600" stroke="var(--ink)" stroke-width="0.8" opacity="0.5"/>
-          <rect x="630" y="585" width="140" height="36" style="fill: var(--paper)" stroke="var(--ink)" stroke-width="1.5"/>
-          <text x="700" y="608" text-anchor="middle" class="label">Newsletter</text>
+        <g transform="translate(454 540)">
+          <rect x="0" y="0" width="526" height="54" fill="var(--paper)" stroke="var(--ink)"/>
+          <text x="24" y="34" class="label">Quality gate: sources credible · code runs · narrative is readable · export survives mobile</text>
         </g>
-        <text x="40" y="680" class="ko" fill="var(--ink)" opacity="0.6">FIG · 01 — System architecture · five agents around a single coordinator</text>
       </svg>
     </div>
   </div>
 
   <article class="cs-body reveal">
 
-    <h2>Introduction</h2>
-    <p>Creating high-quality technical newsletters traditionally requires extensive research, skilled writing, and careful editing — often taking days to produce a single comprehensive piece. Most AI content tools prioritize speed over quality, producing generic summaries that lack the depth and accuracy required for technical audiences.</p>
-    <p>We built something different: an <strong>AI-powered newsletter generator</strong> with a custom multi-agent architecture that creates original, deeply researched technical newsletters complete with working code examples, rigorous quality validation, and mobile-first optimization. The result is a production-ready system that generates comprehensive technical content in under a minute while maintaining exceptional quality standards.</p>
+    <p>The easy version of an AI newsletter tool is a text box and a button. You type a topic, wait for a model to finish, and get a draft that looks convincing until you ask it to carry real weight: cite sources, teach a technical concept, include code, survive a phone screen, and hold together under review.</p>
+
+    <p>That was the friction this project started from. Technical publishing has a habit of exposing shortcuts. A vague source becomes a weak claim. A pretty code block becomes a broken example. A strong opening collapses when the reader scrolls into a generic middle. The first prototype could produce words quickly, but speed was not the scarce resource. Trust was.</p>
 
     <p><strong><a href="https://github.com/jteerlink/newsletter-generator">GitHub Repository ↗</a></strong></p>
 
-    <h2>The Vision: Quality-First AI Content Creation</h2>
+    <h2>The blank page was never the bottleneck.</h2>
+    <p>The system became more interesting once the goal changed from “generate a newsletter” to “run a publishing workflow.” A newsletter is the final artifact, but the work underneath looks more like a small newsroom: find credible material, decide what matters, draft an explanation, produce supporting examples, edit for clarity, check the result, and only then ship it.</p>
 
-    <h3>The Problem with Current AI Content Tools</h3>
-    <p>The AI content generation landscape suffers from a fundamental trade-off between speed and quality. Most systems either produce rapid but shallow content or require extensive human editing to be truly useful. In technical newsletters, that trade-off is amplified: the writing has to be correct, the code has to run, the layout needs to work on phones (where most people read), and the sources must be credible. Hitting all four consistently is what makes the problem interesting — and worth building for.</p>
+    <p>That shape led naturally to agents, but not in the hand-wavy sense of several models talking to each other. Each role had to own a real constraint. Research needed to care about source quality. Writing needed to carry technical context without turning into documentation sludge. Editing needed veto power. Code generation needed a runtime, not just syntax highlighting. The manager needed to coordinate the whole thing without becoming an opaque box.</p>
 
-    <h3>Our Solution: Custom Multi-Agent Architecture</h3>
-    <p>Rather than relying on a single AI model or existing frameworks like CrewAI or LangChain, we designed a <strong>custom multi-agent system</strong> specifically optimized for technical newsletter generation. This approach provides complete control over agent behavior, tool integration, and quality assurance while eliminating framework overhead and external dependencies.</p>
+    <p>The result is less like a prompt chain and more like a compact operating system for technical content. Work moves through explicit handoffs. Intermediate outputs are inspectable. The system can explain where the draft came from, which examples were generated, which checks passed, and why the final version is ready to export.</p>
 
-    <h2>System Architecture: Purpose-Built for Technical Content</h2>
-    <p>Our system is built around a <strong>custom agent framework</strong> with specialized agents working in coordinated workflows to create comprehensive, technically accurate newsletters.</p>
+    <h2>Five agents, one standard.</h2>
+    <p>The repository mirrors that operating model. The agent layer lives under <code>src/agents</code>; orchestration and code generation live under <code>src/core</code>; validation tools live under <code>src/tools</code>; templates, storage, quality checks, and the Streamlit interface wrap the workflow into something usable.</p>
 
-    <h3>Core Agent Framework</h3>
-    <figure>
-      <img src="/images/diagrams/newsletter-core-architecture.svg" alt="Core agent framework architecture diagram">
-    </figure>
+    <p>The <strong>ManagerAgent</strong> is the traffic controller. It does not need to be magical; it needs to keep the work moving and know when to stop it. The <strong>ResearchAgent</strong> and <strong>AgenticRAGAgent</strong> handle retrieval planning, Crawl4AI collection, ChromaDB-backed storage, metadata, and credibility scoring. The <strong>WriterAgent</strong> takes that context and builds an explanation people can read. The <strong>EditorAgent</strong> trims, verifies, and pushes back. The code-generation path creates examples with framework context and then runs them through validation before they become part of the newsletter.</p>
 
-    <h3>Agent Specializations</h3>
-    <p>Each agent took shape around the real bottlenecks we hit in early prototypes. The <strong>ManagerAgent</strong> coordinates work and applies quality gates without micromanaging the others. The <strong>ResearchAgent</strong> blends Crawl4AI with ChromaDB to gather sources, score credibility, and curate context we can trust. The <strong>WriterAgent</strong> turns research into narrative and stitches in framework-aware code examples that people can actually run. The <strong>EditorAgent</strong> acts as a hard stop: it checks facts, trims bloat, and tunes for mobile readability before anything ships. Finally, the <strong>AgenticRAGAgent</strong> plans retrieval like a strategist, running multi-iteration searches and ranking sources with clear attribution.</p>
+    <p>That last detail changes the feel of the product. A model can produce a plausible PyTorch snippet in seconds. A useful technical newsletter needs the snippet to run, fit the article, match the intended complexity, and teach the idea without burying the reader. The system treats code as a claim that must be tested, not decoration.</p>
 
-    <h2>Phase 3 Innovation: Intelligent Code Generation</h2>
-    <p>Our <strong>Phase 3 enhancement</strong> represents a major advancement in AI-powered technical content creation, adding sophisticated code generation capabilities that produce working, validated examples.</p>
+    <h2>The product became a set of gates.</h2>
+    <p>The most important design choice was giving quality a mechanical role. A style guide is easy to ignore. A quality gate changes the path of execution. If source quality is weak, the workflow should know. If code fails, it should not quietly ship. If the article is unreadable on mobile, the export step should not pretend the work is done.</p>
 
-    <h3>Code Generation Pipeline</h3>
-    <figure>
-      <img src="/images/diagrams/code-generation-pipeline.svg" alt="Code generation pipeline diagram">
-    </figure>
+    <p>The Streamlit interface turns that into a visible loop: topic inputs, generation controls, progress feedback, preview, export, and quality information in one place. The interface matters because the system is not only an engine; it is a tool someone can operate. A user should be able to understand what stage the work is in and where confidence came from.</p>
 
-    <h3>Framework Intelligence</h3>
-    <p>Rather than forcing a single stack, the system analyzes the topic and suggests an appropriate framework, pulling from a small library of PyTorch, TensorFlow, Hugging Face, and scikit-learn templates. It adapts complexity to the audience and, when needed, generates bespoke examples. Every example is executed in a sandbox before inclusion.</p>
+    <p>The model provider layer follows the same practical instinct. NVIDIA-hosted models are useful for speed. Ollama is useful when local execution, privacy, or cost control matters. The choice is not treated like a religion. It is a runtime decision, mapped to the job the system needs to do.</p>
 
-    <h3>Quality Assurance</h3>
-    <p>Quality control is layered: we parse code to catch syntax issues early, enforce style and best practices, and then execute in a controlled environment with timeouts. We capture outputs and verify expectations so examples aren't just syntactically valid — they're demonstrably useful.</p>
+    <h2>Why not just use a framework?</h2>
+    <p>Existing agent frameworks are useful when the orchestration problem is generic. This one was not. The early tradeoff was between faster assembly and deeper control: accept framework abstractions, or own the handoffs directly. The project chose the latter because the quality rules were the product.</p>
 
-    <h2>Technology Stack: Production-Ready Infrastructure</h2>
+    <p>Direct function calls made the workflow easier to reason about. There were fewer hidden state transitions, fewer dependency surprises, and less ceremony around simple operations. When something failed, the failure belonged to a visible step: retrieval, scoring, writing, editing, execution, export. That clarity is boring in the best way. It makes the system easier to debug and easier to extend.</p>
 
-    <h3>Custom Agent Framework</h3>
-    <p>Choosing a custom framework over CrewAI/LangChain/Autogen was pragmatic. Direct function calls gave us control over coordination logic, removed middleware overhead, and let us build only the tools we needed. It also meant fewer moving parts and fewer version headaches.</p>
+    <p>It also keeps the creative part honest. The writer can still produce a strong narrative. The retrieval layer can still widen the source pool. The code generator can still adapt examples by framework and complexity. But none of those pieces gets to bypass the standard that makes the artifact worth reading.</p>
 
-    <h3>AI Infrastructure</h3>
-    <p><strong>Flexible LLM Integration:</strong> We support both NVIDIA-hosted models for speed and an Ollama fallback for privacy and cost control. Switching providers happens at runtime, and we map specific models to different content tasks.</p>
-    <p><strong>Enhanced RAG System:</strong> On retrieval, ChromaDB handles vector storage with rich metadata. We chunk documents with content-aware rules, rank by relevance, recency, and credibility, and preserve citations end-to-end.</p>
+    <h2>The shape of the finished system.</h2>
+    <p>A strong run feels almost mundane from the outside. The user enters a technical topic. The system plans retrieval, gathers sources, drafts the piece, generates examples, validates those examples, edits for readability, and exports the result. Underneath that simple path is a set of choices about evidence, control, and failure handling.</p>
 
-    <h3>Modern User Interface</h3>
-    <p><strong>Streamlit Interface Features:</strong> The Streamlit UI exposes a live quality dashboard, lets you control code-generation knobs (framework, complexity), and stays usable on phones. Export to HTML/Markdown/plain text includes syntax highlighting.</p>
+    <ul>
+      <li>Research is stored and ranked instead of disappearing into a one-off prompt.</li>
+      <li>Code examples are generated with framework awareness and checked before publication.</li>
+      <li>Editing is a blocking stage, not a cosmetic pass.</li>
+      <li>Export is treated as part of the product, with HTML, Markdown, and plain-text outputs.</li>
+      <li>The interface exposes enough process for a user to trust the result without studying the internals.</li>
+    </ul>
 
-    <h2>Performance Results</h2>
-
-    <h3>Processing Performance</h3>
-    <p>Across many runs, core processing lands between 10 and 45 seconds depending on complexity and provider. Quality gates pass consistently, and typical newsletters include two or three working code examples. Tool execution succeeds more than 95% of the time thanks to defensive error handling.</p>
-
-    <h3>Real-World Validation</h3>
-    <pre><code>🚀 Testing Phase 3 with NVIDIA - Technical Newsletter Generation
-Topic: PyTorch Neural Network Basics
-
-✅ Newsletter generated in 45.90 seconds
-Status: Completed
-Content length: 12,140 characters
-Word count: 1,623 words
-Code examples generated: 2
-Frameworks used: ['pytorch']</code></pre>
-    <p>In that run: full technical accuracy, 92% mobile readability, 100% code validation, and sub-second core loop timings.</p>
-
-    <h2>Key Innovations and Lessons Learned</h2>
-
-    <h3>Why we built instead of adopting</h3>
-    <p>We tried existing frameworks first. They accelerated prototyping but boxed us in when we needed precise control over agent behavior, memory, and tool handoffs. Building our own took longer up front, but it removed middleware overhead, avoided version churn, and made the system easier to reason about. The biggest win was clarity — every operation is just a function call with explicit data.</p>
-
-    <h3>What changed our approach to code generation</h3>
-    <p>Early drafts sprinkled code like decoration. Readers want code they can run. That nudged us toward a pipeline that chooses a framework intelligently, assembles examples from templates when possible, and then validates by executing in a sandbox. The loop is simple: generate, lint, execute, verify, and only then publish. Confidence went up and editing time went down.</p>
-
-    <h3>What "quality-first" actually meant</h3>
-    <p>Quality only worked when it became a gate, not a guideline. We automated fact checks, enforced mobile readability before the edit step closed, and treated code validation as a blocking requirement. This created a feedback loop that improved drafts without adding process overhead.</p>
-
-    <h2>Conclusion</h2>
-    <p>This project showed that a custom multi-agent architecture, paired with an opinionated code-generation pipeline and real quality gates, can deliver technical content that stands up to scrutiny. The system is production-ready, fast in practice, and flexible enough to run with either hosted or local models. Most importantly, it consistently produces explainers with code that actually runs and teaches.</p>
-    <p>The path forward isn't "more features" — it's deeper craft: better retrieval strategies, richer templates, more robust execution sandboxes, and tighter feedback loops between research, writing, and validation. Purpose-built systems with clear constraints still win.</p>
-
-    <hr>
-    <p class="cs-footnote">Four phases of build-and-test, ~15,000 lines of documented code, a responsive UI, export tooling, and a live quality dashboard. Custom agent framework, NVIDIA Cloud and Ollama support, sandbox-validated code examples, and a learning loop that folds results back into the next draft.</p>
+    <p>The project started as a way to write faster. It became a way to make generated technical writing more accountable. That is the more durable idea: when AI systems touch knowledge work, the value is rarely in the first draft. The value is in the loop that makes the draft safe to use.</p>
 
   </article>
 

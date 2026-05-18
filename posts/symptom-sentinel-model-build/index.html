@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Symptom Sentry Model Build — Jared Teerlink</title>
-  <meta name="description" content="Training EfficientNet-based deep learning models to classify ear and throat infection images for the SymptomSentinelAI application.">
+  <meta name="description" content="A reproducible TensorFlow/Keras medical-image model workflow for ear and throat classification, built as the model factory behind Symptom Sentry AI.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -29,113 +29,83 @@
   <section class="cs-hero reveal">
     <div class="cs-meta">
       <div class="eyebrow">Case Study</div>
-      <div class="cs-tags"><span class="tag">Machine Learning</span><span class="tag">Computer Vision</span></div>
+      <div class="cs-tags"><span class="tag">Machine Learning</span><span class="tag">Computer Vision</span><span class="tag">MLOps</span></div>
       <time class="cs-date">December 2024</time>
     </div>
-    <h1>Symptom Sentry Model Build</h1>
-    <p class="cs-lede">Training deep learning models to detect ear and throat infections from medical images — EfficientNet-based binary classification built to power the SymptomSentinelAI consumer application.</p>
+    <h1>The model factory behind Symptom Sentry’s medical image classifier.</h1>
+    <p class="cs-lede">A reproducible TensorFlow/Keras training workflow for ear and throat image classification — built to turn labeled datasets, preprocessing notebooks, and validation artifacts into deployable model assets for the Symptom Sentry app.</p>
   </section>
 
   <div class="cs-cover reveal">
     <div class="cs-cover-inner">
-      <svg viewBox="0 0 1400 700" preserveAspectRatio="xMidYMid slice" class="arch">
-        <defs>
-          <pattern id="ssegrid" width="40" height="40" patternUnits="userSpaceOnUse">
-            <path d="M 40 0 L 0 0 0 40" fill="none" stroke="currentColor" stroke-width="0.5" opacity="0.13"/>
-          </pattern>
-        </defs>
-        <rect width="1400" height="700" fill="var(--paper-2)"/>
-        <rect width="1400" height="700" fill="url(#ssegrid)" style="color: var(--ink)"/>
-        <!-- EfficientNet block diagram -->
-        <g transform="translate(120, 180)">
-          <text x="0" y="-20" class="ko" fill="var(--ink)">EFFICIENTNET-B0 · BLOCK STRUCTURE</text>
-          <rect x="0" y="40" width="60" height="320" style="fill: var(--paper)" stroke="var(--ink)" stroke-width="1"/>
-          <text x="30" y="380" text-anchor="middle" class="ko" fill="var(--ink)">INPUT</text>
-          <text x="30" y="395" text-anchor="middle" class="ko" fill="var(--ink)" opacity="0.6">224×224</text>
-          <rect x="80" y="60" width="50" height="280" fill="var(--ink)" opacity="0.15"/>
-          <text x="105" y="380" text-anchor="middle" class="ko" fill="var(--ink)">B1</text>
-          <rect x="150" y="80" width="55" height="240" fill="var(--ink)" opacity="0.25"/>
-          <text x="178" y="380" text-anchor="middle" class="ko" fill="var(--ink)">B2</text>
-          <rect x="225" y="110" width="60" height="180" fill="var(--ink)" opacity="0.4"/>
-          <text x="255" y="380" text-anchor="middle" class="ko" fill="var(--ink)">B3</text>
-          <rect x="305" y="140" width="65" height="120" fill="var(--ink)" opacity="0.6"/>
-          <text x="338" y="380" text-anchor="middle" class="ko" fill="var(--ink)">B4</text>
-          <rect x="390" y="170" width="70" height="60" fill="var(--ink)" opacity="0.85"/>
-          <text x="425" y="380" text-anchor="middle" class="ko" fill="var(--ink)">B5</text>
-          <rect x="480" y="180" width="60" height="40" fill="var(--ink)"/>
-          <text x="510" y="380" text-anchor="middle" class="ko" fill="var(--ink)">HEAD</text>
-          <!-- Softmax outputs -->
-          <g transform="translate(580, 60)">
-            <text x="0" y="-10" class="ko" fill="var(--ink)">SOFTMAX</text>
-            <rect x="0" y="40" width="120" height="20" style="fill: var(--paper)" stroke="var(--ink)" stroke-width="0.8"/>
-            <rect x="0" y="40" width="100" height="20" fill="var(--ink)"/>
-            <text x="130" y="55" class="ko" fill="var(--ink)">STREP · 0.83</text>
-            <rect x="0" y="80" width="120" height="20" style="fill: var(--paper)" stroke="var(--ink)" stroke-width="0.8"/>
-            <rect x="0" y="80" width="14" height="20" fill="var(--ink)"/>
-            <text x="130" y="95" class="ko" fill="var(--ink)">VIRAL · 0.12</text>
-            <rect x="0" y="120" width="120" height="20" style="fill: var(--paper)" stroke="var(--ink)" stroke-width="0.8"/>
-            <rect x="0" y="120" width="6" height="20" fill="var(--ink)"/>
-            <text x="130" y="135" class="ko" fill="var(--ink)">HEALTHY · 0.05</text>
-          </g>
+      <svg viewBox="0 0 1400 700" preserveAspectRatio="xMidYMid slice" class="arch" role="img" aria-label="Symptom Sentinel reproducible model training pipeline">
+        <defs><pattern id="model-grid" width="40" height="40" patternUnits="userSpaceOnUse"><path d="M 40 0 L 0 0 0 40" fill="none" stroke="currentColor" stroke-width="0.5" opacity="0.13"/></pattern><marker id="model-arrow" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 z" fill="var(--ink)"/></marker></defs>
+        <rect width="1400" height="700" fill="var(--paper-2)"/><rect width="1400" height="700" fill="url(#model-grid)" style="color: var(--ink)"/>
+        <text x="54" y="72" class="ko">FIG · 01 — reproducible model factory for product inference</text>
+        <g transform="translate(80 170)">
+          <rect x="0" y="0" width="190" height="250" fill="var(--paper)" stroke="var(--ink)"/><text x="28" y="44" class="label">Labeled images</text><text x="28" y="78" class="ko">ear_dataset</text><text x="28" y="108" class="ko">throat_dataset</text>
+          <circle cx="96" cy="168" r="46" fill="none" stroke="var(--ink)"/><path d="M62 170 Q96 128 130 170 Q96 212 62 170Z" fill="none" stroke="var(--ink)"/>
         </g>
-        <!-- Validation loss curve -->
-        <g transform="translate(900, 130)">
-          <text x="0" y="-10" class="ko" fill="var(--ink)">VAL LOSS · 30 EPOCHS</text>
-          <line x1="0" y1="0" x2="0" y2="280" stroke="var(--ink)" stroke-width="0.8"/>
-          <line x1="0" y1="280" x2="380" y2="280" stroke="var(--ink)" stroke-width="0.8"/>
-          <path d="M 0 40 Q 60 60 120 110 Q 180 160 240 200 Q 300 230 380 245" fill="none" stroke="var(--ink)" stroke-width="2"/>
-          <text x="240" y="180" class="ko" fill="var(--ink)">TRAIN</text>
-          <path d="M 0 50 Q 60 80 120 130 Q 180 175 240 210 Q 300 220 380 222" fill="none" stroke="var(--ink)" stroke-width="1.5" stroke-dasharray="4,4"/>
-          <text x="280" y="210" class="ko" fill="var(--ink)" opacity="0.7">VAL</text>
-          <line x1="300" y1="0" x2="300" y2="280" stroke="var(--ink)" stroke-width="0.6" stroke-dasharray="2,3" opacity="0.5"/>
-          <text x="300" y="-10" text-anchor="middle" class="ko" fill="var(--ink)" opacity="0.7">EARLY STOP · EP 24</text>
-          <text x="-10" y="284" text-anchor="end" class="ko" fill="var(--ink)" opacity="0.6">0</text>
-          <text x="-10" y="6" text-anchor="end" class="ko" fill="var(--ink)" opacity="0.6">1</text>
-          <text x="0" y="300" class="ko" fill="var(--ink)" opacity="0.6">EPOCH 0</text>
-          <text x="380" y="300" text-anchor="end" class="ko" fill="var(--ink)" opacity="0.6">30</text>
+        <g transform="translate(360 170)">
+          <rect x="0" y="0" width="210" height="250" fill="var(--paper)" stroke="var(--ink)"/><text x="28" y="44" class="label">Notebook workflow</text><text x="28" y="78" class="ko">preprocess · resize · normalize</text><text x="28" y="108" class="ko">augment · split · evaluate</text>
+          <g transform="translate(30 148)" fill="none" stroke="var(--ink)"><rect width="148" height="52"/><line x1="0" y1="17" x2="148" y2="17"/><line x1="36" y1="0" x2="36" y2="52"/><line x1="78" y1="0" x2="78" y2="52"/></g>
         </g>
-        <text x="40" y="680" class="ko" fill="var(--ink)" opacity="0.6">FIG · 01 — Architecture and validation loss, transfer-learning run</text>
+        <g transform="translate(665 150)">
+          <rect x="0" y="0" width="260" height="290" fill="var(--ink)"/><text x="32" y="58" class="label" style="fill: var(--paper)">EfficientNet baseline</text><text x="32" y="92" class="ko" style="fill: var(--paper)">transfer learning · tensorflow / keras</text>
+          <g transform="translate(32 138)"><rect width="40" height="100" fill="var(--paper)" opacity="0.28"/><rect x="54" y="22" width="44" height="78" fill="var(--paper)" opacity="0.42"/><rect x="112" y="42" width="48" height="58" fill="var(--paper)" opacity="0.62"/><rect x="174" y="62" width="40" height="38" fill="var(--paper)"/></g>
+        </g>
+        <g transform="translate(1030 170)">
+          <rect x="0" y="0" width="250" height="250" fill="var(--paper)" stroke="var(--ink)"/><text x="28" y="44" class="label">Review + handoff</text><text x="28" y="78" class="ko">curves · confusion matrix</text><text x="28" y="108" class="ko">failure examples</text><text x="28" y="138" class="ko">converted model artifact</text>
+          <path d="M36 202 C80 150 128 180 184 120" fill="none" stroke="var(--ink)" stroke-width="2"/><path d="M36 220 C90 190 126 212 194 164" fill="none" stroke="var(--ink)" stroke-width="1.4" stroke-dasharray="4 4"/>
+        </g>
+        <g transform="translate(432 548)"><rect x="0" y="0" width="540" height="58" fill="var(--paper)" stroke="var(--ink)"/><text x="26" y="36" class="label">The point is repeatability: same data contract, same preprocessing, same validation review before app integration.</text></g>
+        <g stroke="var(--ink)" stroke-width="1.4" marker-end="url(#model-arrow)" fill="none" opacity="0.7"><path d="M270 295 L360 295"/><path d="M570 295 L665 295"/><path d="M925 295 L1030 295"/><path d="M1155 420 C1100 500 970 548 880 548"/></g>
       </svg>
     </div>
   </div>
 
   <article class="cs-body reveal">
 
-    <p>This repository supports the <strong>SymptomSentinelAI</strong> application by providing trained models to detect ear and throat infections from medical images. It serves as a learning platform for medical image classification using deep learning techniques.</p>
+    <p>The Symptom Sentry app begins before a user ever opens the app. It begins in the training repository: folders of ear and throat images, notebooks that standardize preprocessing, experiments that try to separate normal from abnormal, and the quiet work of turning an experiment into an artifact the product can use.</p>
+
+    <p>That is why this page should not read like setup instructions. Cloning the repo is not the story. The story is the model factory behind a consumer-health image product: collect labeled examples, prepare them consistently, train a practical baseline, inspect failures, and hand the result to the application without breaking the contract between model and user experience.</p>
 
     <p><strong><a href="https://github.com/jteerlink/symptom-sentinel-model">GitHub Repository ↗</a></strong></p>
 
-    <h2>Repository Structure</h2>
-    <ul>
-      <li><code>ear_dataset/</code> — labeled images for ear infection diagnosis</li>
-      <li><code>throat_dataset/</code> — labeled images for throat infection detection</li>
-      <li><code>notebooks/</code> — Jupyter notebooks covering preprocessing, model training, and evaluation workflows</li>
-      <li><code>setup/</code> — scripts and configuration files to set up the training and deployment environment</li>
-    </ul>
+    <h2>The application depends on a repeatable training loop.</h2>
+    <p>The repository is organized around the pieces that make that loop possible: <code>ear_dataset</code>, <code>throat_dataset</code>, <code>notebooks</code>, and <code>setup</code>. That structure is simple, but it gives the work a backbone. Data domains are separated. Experiments have a place to live. Environment setup is documented. The path from image folder to model artifact is visible.</p>
 
-    <h2>Purpose</h2>
-    <p>The primary objective of this project is to build and validate a machine learning model capable of classifying images of the ear and throat into healthy or infected categories. It contributes to the broader mission of integrating AI into healthcare diagnostics, particularly for use in consumer-facing mobile applications.</p>
-    <p>The model is the backbone of the SymptomSentryAI application: when a user uploads an image, this model runs the inference that determines whether the condition appears normal or infected. Getting that classification right — and knowing when it doesn't know — is the core challenge.</p>
+    <p>Medical-image classification is unforgiving in a way that many demo datasets are not. Consumer-captured images vary in lighting, framing, distance, sharpness, and angle. The model has to learn from examples that may not look like polished clinical inputs. Preprocessing choices become product choices because every resize, crop, normalization step, and augmentation strategy changes what the deployed model expects to see.</p>
 
-    <h2>Getting Started</h2>
-    <h3>1. Clone the Repository</h3>
-    <pre><code>git clone https://github.com/jteerlink/symptom-sentinel-model.git</code></pre>
+    <p>The training loop needs to make those choices repeatable. If the app sends an image through one path and the notebook trained on another, the product can fail in ways that are hard to diagnose. The model repository is where that contract gets defined.</p>
 
-    <h3>2. Set Up the Environment</h3>
-    <p>Navigate to the <code>setup/</code> folder and follow the instructions to install dependencies and configure the environment.</p>
+    <h2>EfficientNet is a practical starting point.</h2>
+    <p>The project uses TensorFlow/Keras-style deep-learning workflows and an EfficientNet-oriented transfer-learning path. That is a sensible baseline for a constrained medical image task: start from an architecture that already knows useful visual representations, then adapt it to the ear and throat domains.</p>
 
-    <h3>3. Explore the Notebooks</h3>
-    <p>Open the <code>.ipynb</code> files in <code>notebooks/</code> to view and run preprocessing, training, and evaluation code.</p>
+    <p>The point is not to make the architecture sound exotic. The point is to reduce the amount of learning the project has to do from scratch. Transfer learning lets the work focus on the dataset, preprocessing, validation, and deployment handoff instead of pretending there are enough labeled medical images to train a large model from zero.</p>
 
-    <h3>4. Train the Model</h3>
-    <p>Use the datasets provided to train a classification model. Experiment with parameters to optimize performance.</p>
+    <p>For a portfolio case study, the strongest technical material would come from the artifacts around the model: training curves, validation curves, confusion matrices, examples the model gets wrong, and notes about what changed between runs. Those are the details that make a model build credible.</p>
 
-    <h2>Future Enhancements</h2>
-    <ul>
-      <li><strong>Data Augmentation:</strong> Increase robustness by simulating more clinical scenarios.</li>
-      <li><strong>Model Optimization:</strong> Explore different CNN architectures and hyperparameters.</li>
-      <li><strong>Deployment:</strong> Package the final model for integration into mobile or web-based diagnostic applications.</li>
-    </ul>
+    <h2>Validation is where the model earns its place in the product.</h2>
+    <p>An app can show a result with confidence, but the training workflow has to explain what that confidence is worth. Accuracy alone is not enough. The project needs to know which class is harder, where false positives appear, where false negatives appear, and what kinds of images confuse the model.</p>
+
+    <p>In a health-adjacent context, failure review is part of the product design process. If dim throat images fail more often, the capture UI should guide lighting. If angled ear images confuse the classifier, the app should help users frame the image better. If a certain class has weaker recall, the result language should be more cautious. The training repository is where those product implications first become visible.</p>
+
+    <p>That connection between model behavior and product copy is easy to miss. It is also where the work becomes more than an experiment. The model does not live in a notebook forever. It shapes what the user sees, what the app asks for, and how uncertainty is communicated.</p>
+
+    <h2>The handoff matters as much as the run.</h2>
+    <p>A model artifact is only useful if the application can load it predictably. The training workflow needs versioning, conversion steps, metadata, and a clear expectation for input shape and preprocessing. Without that, every app integration becomes a guessing game.</p>
+
+    <p>The repository’s future-enhancement path points in the right direction: more augmentation, architecture exploration, optimization, and packaging for mobile or web inference. The next layer would make the handoff explicit. Each trained model should carry the data assumptions, preprocessing steps, evaluation summary, and version information that the app needs.</p>
+
+    <p>That is the quiet infrastructure behind a product like Symptom Sentry. The user sees a camera flow and a result. The app sees a model file and an API. The training repo has to preserve the chain of decisions that makes both of those things trustworthy.</p>
+
+    <h2>What the next version should surface.</h2>
+    <p>The mockup hero visual points to the right replacement for the old README-style page: datasets flow into preprocessing, preprocessing feeds transfer learning, evaluation produces review artifacts, and the final model becomes a deployable asset for the app.</p>
+
+    <p>The longer case study should include the exact training history once available: split strategy, augmentation choices, final metrics, confusion counts, false-positive and false-negative examples, and model-export notes. Those details would make the page feel less like a repository overview and more like a working model review.</p>
+
+    <p>The project is strongest when it stays grounded in that pipeline. Labeled images become a reproducible experiment. The experiment becomes a reviewed model. The reviewed model becomes an application dependency. The application dependency becomes a user-facing result that has to be clear, careful, and useful.</p>
 
   </article>
 

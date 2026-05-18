@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Predicting Cash Advance Defaults — Jared Teerlink</title>
-  <meta name="description" content="A credit risk model for identifying customers at high risk of defaulting on cash advances, using XGBoost, Optuna hyperparameter search, and decile lift analysis.">
+  <meta name="description" content="A credit risk model that converts account behavior into XGBoost default-risk scores, decile validation, and a path toward calibrated lending policy.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -29,135 +29,91 @@
   <section class="cs-hero reveal">
     <div class="cs-meta">
       <div class="eyebrow">Case Study</div>
-      <div class="cs-tags"><span class="tag">Machine Learning</span><span class="tag">Credit Risk</span></div>
+      <div class="cs-tags"><span class="tag">Machine Learning</span><span class="tag">Credit Risk</span><span class="tag">Decisioning</span></div>
       <time class="cs-date">May 2025</time>
     </div>
-    <h1>Predicting Cash Advance Defaults</h1>
-    <p class="cs-lede">A credit risk model that identifies high-default-risk customers using XGBoost, Optuna hyperparameter tuning, and decile lift analysis — tuned AUC of 0.72 and meaningful risk stratification across the full score distribution.</p>
+    <h1>A default-risk model that turns transaction behavior into lending decisions.</h1>
+    <p class="cs-lede">An XGBoost scoring pipeline for cash-advance default prediction, designed to separate high-risk applicants, expose the drivers of that risk, and support a future policy layer of calibrated tiers and cutoffs.</p>
   </section>
 
   <div class="cs-cover reveal">
     <div class="cs-cover-inner">
-      <svg viewBox="0 0 1400 700" preserveAspectRatio="xMidYMid slice" class="arch">
-        <defs>
-          <pattern id="cagrid" width="40" height="40" patternUnits="userSpaceOnUse">
-            <path d="M 40 0 L 0 0 0 40" fill="none" stroke="currentColor" stroke-width="0.5" opacity="0.13"/>
-          </pattern>
-        </defs>
-        <rect width="1400" height="700" fill="var(--paper-2)"/>
-        <rect width="1400" height="700" fill="url(#cagrid)" style="color: var(--ink)"/>
-        <!-- ROC curve -->
-        <g transform="translate(180, 100)">
-          <line x1="0" y1="500" x2="500" y2="500" stroke="var(--ink)" stroke-width="1"/>
-          <line x1="0" y1="0" x2="0" y2="500" stroke="var(--ink)" stroke-width="1"/>
-          <line x1="0" y1="500" x2="500" y2="0" stroke="var(--ink)" stroke-width="0.6" stroke-dasharray="4,5" opacity="0.4"/>
-          <text x="430" y="60" class="ko" fill="var(--ink)" opacity="0.5">RANDOM AUC = 0.50</text>
-          <path d="M 0 500 Q 80 320 200 200 Q 320 100 500 0" fill="none" stroke="var(--ink)" stroke-width="2.2"/>
-          <text x="180" y="160" class="ko" fill="var(--ink)">MODEL AUC = 0.72</text>
-          <text x="-12" y="-10" text-anchor="end" class="ko" fill="var(--ink)" opacity="0.6">TPR</text>
-          <text x="510" y="520" class="ko" fill="var(--ink)" opacity="0.6">FPR</text>
-          <line x1="0" y1="500" x2="-6" y2="500" stroke="var(--ink)" stroke-width="0.6"/>
-          <line x1="0" y1="0" x2="-6" y2="0" stroke="var(--ink)" stroke-width="0.6"/>
-          <line x1="0" y1="500" x2="0" y2="506" stroke="var(--ink)" stroke-width="0.6"/>
-          <line x1="500" y1="500" x2="500" y2="506" stroke="var(--ink)" stroke-width="0.6"/>
-          <text x="-12" y="504" text-anchor="end" class="ko" fill="var(--ink)" opacity="0.6">0</text>
-          <text x="-12" y="4" text-anchor="end" class="ko" fill="var(--ink)" opacity="0.6">1</text>
-          <text x="0" y="520" text-anchor="middle" class="ko" fill="var(--ink)" opacity="0.6">0</text>
-          <text x="500" y="520" text-anchor="middle" class="ko" fill="var(--ink)" opacity="0.6">1</text>
+      <svg viewBox="0 0 1400 700" preserveAspectRatio="xMidYMid slice" class="arch" role="img" aria-label="Cash advance risk model from transaction signals to policy decision">
+        <defs><pattern id="cash-grid" width="40" height="40" patternUnits="userSpaceOnUse"><path d="M 40 0 L 0 0 0 40" fill="none" stroke="currentColor" stroke-width="0.5" opacity="0.13"/></pattern><marker id="cash-arrow" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 z" fill="var(--ink)"/></marker></defs>
+        <rect width="1400" height="700" fill="var(--paper-2)"/><rect width="1400" height="700" fill="url(#cash-grid)" style="color: var(--ink)"/>
+        <text x="54" y="72" class="ko">FIG · 01 — transaction behavior to lending policy</text>
+        <g transform="translate(80 145)">
+          <rect x="0" y="0" width="230" height="390" fill="var(--paper)" stroke="var(--ink)"/>
+          <text x="26" y="44" class="label">Behavior signals</text>
+          <line x1="26" y1="70" x2="204" y2="70" stroke="var(--ink)" opacity="0.25"/>
+          <text x="26" y="112" class="ko">balance volatility</text><rect x="26" y="130" width="154" height="12" fill="var(--ink)"/>
+          <text x="26" y="176" class="ko">overdraft pressure</text><rect x="26" y="194" width="178" height="12" fill="var(--ink)" opacity="0.75"/>
+          <text x="26" y="240" class="ko">income regularity</text><rect x="26" y="258" width="118" height="12" fill="var(--ink)" opacity="0.55"/>
+          <text x="26" y="304" class="ko">spend / income ratio</text><rect x="26" y="322" width="166" height="12" fill="var(--ink)" opacity="0.65"/>
         </g>
-        <!-- KPI stack -->
-        <g transform="translate(870, 130)">
-          <text x="0" y="0" class="ko" fill="var(--ink)">TUNED PERFORMANCE</text>
-          <line x1="0" y1="14" x2="380" y2="14" stroke="var(--ink)" stroke-width="0.6"/>
-          <text x="0" y="80" font-family="var(--font-display)" font-size="64" fill="var(--ink)">0.72</text>
-          <text x="160" y="80" class="ko" fill="var(--ink)">AUC</text>
-          <line x1="0" y1="100" x2="380" y2="100" stroke="var(--ink)" stroke-width="0.4" opacity="0.4"/>
-          <text x="0" y="170" font-family="var(--font-display)" font-size="64" fill="var(--ink)">3.0×</text>
-          <text x="160" y="170" class="ko" fill="var(--ink)">TOP DECILE LIFT</text>
-          <line x1="0" y1="190" x2="380" y2="190" stroke="var(--ink)" stroke-width="0.4" opacity="0.4"/>
-          <text x="0" y="260" font-family="var(--font-display)" font-size="64" fill="var(--ink)">~30%</text>
-          <text x="160" y="260" class="ko" fill="var(--ink)">DEFAULTS CAPTURED</text>
-          <line x1="0" y1="280" x2="380" y2="280" stroke="var(--ink)" stroke-width="0.4" opacity="0.4"/>
-          <text x="0" y="350" font-family="var(--font-display)" font-size="64" fill="var(--ink)">+8%</text>
-          <text x="160" y="350" class="ko" fill="var(--ink)">APPROVE RATE @ FIXED LOSS</text>
+        <g transform="translate(420 150)">
+          <rect x="0" y="0" width="240" height="170" fill="var(--ink)"/>
+          <text x="30" y="54" class="label" style="fill: var(--paper)">XGBoost scorer</text><text x="30" y="88" class="ko" style="fill: var(--paper)">optuna tuned · auc 0.7201</text><text x="30" y="122" class="ko" style="fill: var(--paper)">gini 0.4401 · non-linear risk</text>
+          <rect x="0" y="248" width="240" height="110" fill="var(--paper)" stroke="var(--ink)"/>
+          <text x="30" y="292" class="label">Decile validation</text><text x="30" y="324" class="ko">rank ordering high-risk accounts</text>
         </g>
-        <text x="40" y="680" class="ko" fill="var(--ink)" opacity="0.6">FIG · 01 — ROC and headline metrics, tuned model</text>
+        <g transform="translate(760 120)">
+          <text x="0" y="28" class="label">Model lift by risk decile</text>
+          <line x1="0" y1="350" x2="400" y2="350" stroke="var(--ink)" opacity="0.4"/><line x1="0" y1="80" x2="0" y2="350" stroke="var(--ink)" opacity="0.4"/>
+          <g fill="var(--ink)"><rect x="24" y="110" width="24" height="240"/><rect x="64" y="135" width="24" height="215" opacity="0.9"/><rect x="104" y="166" width="24" height="184" opacity="0.8"/><rect x="144" y="196" width="24" height="154" opacity="0.7"/><rect x="184" y="222" width="24" height="128" opacity="0.6"/><rect x="224" y="242" width="24" height="108" opacity="0.5"/><rect x="264" y="264" width="24" height="86" opacity="0.45"/><rect x="304" y="286" width="24" height="64" opacity="0.38"/><rect x="344" y="306" width="24" height="44" opacity="0.32"/></g>
+          <text x="24" y="382" class="ko">highest risk</text><text x="322" y="382" class="ko">lowest risk</text>
+        </g>
+        <g transform="translate(440 565)">
+          <rect x="0" y="0" width="540" height="60" fill="var(--paper)" stroke="var(--ink)"/>
+          <text x="24" y="38" class="label">Next production layer: calibrated scores · risk tiers · cutoffs · monitoring · credit strategy review</text>
+        </g>
+        <g stroke="var(--ink)" stroke-width="1.4" marker-end="url(#cash-arrow)" fill="none" opacity="0.7"><path d="M310 342 L420 235"/><path d="M660 235 L760 300"/><path d="M540 508 L540 565"/></g>
       </svg>
     </div>
   </div>
 
   <article class="cs-body reveal">
 
-    <p>This project develops a predictive model to identify customers at high risk of defaulting on cash advances. The solution integrates exploratory data analysis, thoughtful feature engineering, robust feature selection, and a tuned machine learning model to support informed credit decisioning.</p>
+    <p>A credit model is rarely judged by how elegant it looks in a notebook. It is judged at the edge of a decision: approve, decline, review, price differently, ask for more information, monitor the next cohort. That is where this cash-advance default model becomes interesting.</p>
+
+    <p>The data describes financial behavior in fragments: balances, income, spend, overdrafts, account history, advance requests, missingness, outliers, repeat-customer assumptions, and the timing signals that were not fully available yet. The project starts with those fragments and asks a practical question: can they be turned into a risk ranking that is useful enough for lending operations?</p>
 
     <p><strong><a href="https://github.com/jteerlink/credit_default">GitHub Repository ↗</a></strong></p>
 
-    <h2>1. Exploratory Data Analysis</h2>
-    <p>Initial analysis focused on uncovering relationships between customer financial behavior and default risk:</p>
-    <ul>
-      <li><strong>Key risk indicators:</strong> error rates in transactions, overdraft totals, and high-frequency negative balances.</li>
-      <li><strong>Temporal insights:</strong> Introducing features over recent time frames (30/60/90 days) was identified as a high-value enhancement.</li>
-      <li><strong>Anomalies:</strong> High-income customers requesting small advances raised flags for possible fraud.</li>
-      <li><strong>Hypothesis tested:</strong> Repeat customers were assumed to be lower risk but showed nearly identical default rates to new users.</li>
-    </ul>
-    <p>Key features identified: current balance, overdraft frequency, monthly spend and income volatility, discretionary spend, and paycheck regularity. Outliers were retained due to the robustness of tree-based models like XGBoost.</p>
+    <h2>The first clues were behavioral.</h2>
+    <p>The exploratory analysis surfaced the kind of details a credit stakeholder would recognize immediately. Error rates in transactions suggested irregular payment behavior. Overdraft totals and frequent negative balances pointed toward liquidity stress. High-income customers requesting very small advances raised possible fraud questions. Repeat customers, expected to be safer, showed default rates nearly identical to new customers.</p>
 
-    <h2>2. Feature Engineering</h2>
-    <p>Feature design emphasized financial stability, liquidity, and customer behavior:</p>
-    <ul>
-      <li><strong>Ratios:</strong> advance-to-income, advance-to-balance</li>
-      <li><strong>Volatility metrics:</strong> income stability, balance fluctuation</li>
-      <li><strong>Behavioral metrics:</strong> low balance frequency, net 60-day cash flow, overdrafts per 30 days</li>
-      <li><strong>Categorical:</strong> first-time borrower indicator, hour of advance request</li>
-    </ul>
-    <p>Only a subset of engineered features were included due to limitations in unaggregated data availability.</p>
+    <p>Those findings matter because credit risk is not only a math problem. It is a behavior problem. A borrower can look safe on one aggregate and risky on another. A current balance can matter differently depending on income volatility. An overdraft count can mean something different for a long-tenured account than for a new one. The model needed features that could carry those differences without pretending the data was cleaner than it was.</p>
 
-    <h2>3. Feature Selection</h2>
-    <p>Two techniques were applied:</p>
-    <ul>
-      <li><strong>Recursive Feature Elimination (RFE)</strong> with Random Forests</li>
-      <li><strong>XGBoost feature importances</strong></li>
-    </ul>
-    <p>Findings confirmed that engineered categorical variables (e.g., paycheck models) had low predictive value. The final feature set retained only those with non-zero XGBoost importance weights.</p>
+    <p>Outliers were kept because tree-based models can handle them better than many linear approaches, and because extreme behavior is often exactly what a risk model should notice. Missing values were treated pragmatically, with imputation and missingness indicators where appropriate. The positive class rate was around 22%, higher than many production credit-default settings, which shaped the interpretation of imbalance and class-weighting decisions.</p>
 
-    <h2>4. Model Training and Hyperparameter Tuning</h2>
-    <ul>
-      <li><strong>Algorithm:</strong> XGBoost (chosen for robustness to scaling and imbalanced data)</li>
-      <li><strong>Tuning tool:</strong> Optuna for automated hyperparameter search</li>
-      <li><strong>Evaluation metrics:</strong> AUC and Gini index</li>
-    </ul>
-    <p><strong>Results:</strong></p>
-    <ul>
-      <li>Tuned AUC: <strong>0.7201</strong> (↑ 0.04 from baseline)</li>
-      <li>Tuned Gini: <strong>0.4401</strong> (↑ 0.07 from baseline)</li>
-    </ul>
-    <p>Performance was considered strong given limited data, with meaningful stratification of risk across deciles.</p>
+    <h2>Feature engineering turned account activity into pressure signals.</h2>
+    <p>The most useful features were not demographic shortcuts. They were financial pressure signals: advance-to-income, advance-to-balance, income stability, balance volatility, low-balance frequency, net cash flow, overdrafts per 30 days, first-advance indicators, and request timing.</p>
 
-    <h2>5. Model Validation and Insights</h2>
-    <p>Lift charts and decile analysis confirmed effective separation of high-risk groups. Opportunity for improvement exists in mid-risk deciles through deeper feature discovery.</p>
-    <p><strong>Enhancement suggestions:</strong></p>
-    <ul>
-      <li>Ingest raw transaction-level data</li>
-      <li>Add time-sensitive variables</li>
-      <li>Explore class weighting despite 22% positive class rate</li>
-    </ul>
+    <p>Some ideas had to stay on the shelf because the raw transaction-level data was not available. That constraint is important. With full transaction history, recent 30/60/90-day windows could weight current stress more heavily than old behavior. Without it, the project had to make the best use of aggregated fields and keep the next data ask clear.</p>
 
-    <h2>6. Deployment Considerations</h2>
-    <ul>
-      <li><strong>Model export:</strong> Saved as JSON for backward compatibility and deployment flexibility.</li>
-      <li><strong>Integration plan:</strong> Deploy as an API endpoint integrated with customer-facing platforms or decision engines.</li>
-      <li><strong>Scoring strategy:</strong> Current version uses raw predicted probabilities; production-grade systems would use calibrated scores or logit transformations with predefined risk tiers and policy cutoffs.</li>
-    </ul>
+    <p>The feature-selection process compared Recursive Feature Elimination with Random Forests against XGBoost feature importance. The findings were useful in a very practical way: some engineered categorical variables, including paycheck-model features, were less predictive than expected, while liquidity and behavior features carried more signal. The final feature set retained non-zero XGBoost importance features and kept the pipeline focused.</p>
 
-    <h2>Next Steps</h2>
-    <p>To evolve this proof-of-concept into a production-ready solution:</p>
-    <ul>
-      <li>Ingest <strong>raw transactional data</strong> for advanced feature engineering</li>
-      <li>Implement a <strong>calibrated scoring system</strong></li>
-      <li>Automate <strong>data pipeline and model retraining</strong></li>
-      <li>Collaborate with <strong>credit strategy teams</strong> for risk policy refinement</li>
-    </ul>
-    <p>This project provides a solid foundation for credit default modeling in fintech environments and demonstrates practical, scalable approaches for real-world lending applications.</p>
+    <h2>XGBoost fit the messiness of the problem.</h2>
+    <p>The final model used XGBoost because the data was noisy, partially sparse, non-linear, and full of interactions that would be difficult to specify by hand. Optuna tuning improved the model without turning the exercise into a blind algorithm contest.</p>
+
+    <p>The tuned model reached <strong>0.7201 AUC</strong> and <strong>0.4401 Gini</strong>, improving roughly 0.04 AUC and 0.07 Gini over the baseline. Those numbers are useful, but the more important readout was rank ordering. Lift charts and decile analysis showed that the model could separate risk groups, with the highest-risk deciles capturing a meaningful share of defaults.</p>
+
+    <p>That is the difference between a model metric and a lending tool. AUC tells you the model can discriminate. Deciles begin to tell you where an operating policy could intervene.</p>
+
+    <h2>The middle deciles are where the work continues.</h2>
+    <p>The model did a reasonable job at the extremes. The harder question lived in the middle of the score distribution, where defaults and non-defaults overlap and additional features could change the decision. That is where credit analysts would likely spend time: compare borderline accounts, inspect transaction patterns, look for recent stress, and decide whether a new feature would separate risk or simply add noise.</p>
+
+    <p>The next data request almost writes itself. Bring in raw transaction history. Add recent-window features. Revisit class weighting under a more production-like default rate. Test calibration. Compare raw probabilities against logit-transformed scores. Create policy tiers that a business team can understand and govern.</p>
+
+    <p>The model was saved in a JSON-compatible form so it could be loaded across environments, but deployment would require more than loading a file. A production version would need preprocessing parity, an API or decision-engine integration, monitoring, score stability checks, retraining logic, and documentation around how cutoffs are chosen.</p>
+
+    <h2>A probability is not a policy.</h2>
+    <p>The most useful version of this project is the one that keeps going after prediction. A raw probability can rank customers, but a lending business needs calibrated scores, tiers, thresholds, exception handling, and governance. The question becomes: what should happen when a customer lands in each band?</p>
+
+    <p>That final step is where model development meets leadership. The modeler has to explain the tradeoff between approval rate and loss exposure. The credit team has to decide which risks are acceptable. Operations needs a workflow for review. Monitoring needs to catch drift. The customer experience has to remain fair and understandable.</p>
+
+    <p>The notebook proves there is signal. The case study should make the decision path visible: account behavior becomes features, features become a score, the score becomes a risk tier, and the risk tier becomes an action someone can defend.</p>
 
   </article>
 

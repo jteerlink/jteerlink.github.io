@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Symptom Sentry AI — Jared Teerlink</title>
-  <meta name="description" content="An advanced AI-powered healthcare application providing intelligent medical insights through binary image classification of throat and ear conditions.">
+  <meta name="description" content="A privacy-conscious consumer-health image analysis app with TensorFlow.js inference, Node/Express APIs, secure authentication, and analysis history.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -29,167 +29,80 @@
   <section class="cs-hero reveal">
     <div class="cs-meta">
       <div class="eyebrow">Case Study</div>
-      <div class="cs-tags"><span class="tag">AI</span><span class="tag">Computer Vision</span></div>
+      <div class="cs-tags"><span class="tag">AI</span><span class="tag">Computer Vision</span><span class="tag">Product</span></div>
       <time class="cs-date">January 2025</time>
     </div>
-    <h1>Symptom Sentry AI</h1>
-    <p class="cs-lede">An AI-powered healthcare application that classifies throat and ear images as Normal or Infected — combining a TensorFlow model backend with a Node.js/Express API and browser-side TensorFlow.js for real-time medical insights.</p>
+    <h1>A consumer-health image app designed around privacy, clarity, and auditability.</h1>
+    <p class="cs-lede">Symptom Sentry AI turns throat and ear images into structured normal-vs-abnormal assessments while keeping the product judgment explicit: guided capture, understandable confidence, secure accounts, and history users can return to.</p>
   </section>
 
   <div class="cs-cover reveal">
     <div class="cs-cover-inner">
-      <svg viewBox="0 0 1400 700" preserveAspectRatio="xMidYMid slice" class="arch">
-        <defs>
-          <pattern id="ssgrid" width="40" height="40" patternUnits="userSpaceOnUse">
-            <path d="M 40 0 L 0 0 0 40" fill="none" stroke="currentColor" stroke-width="0.5" opacity="0.13"/>
-          </pattern>
-        </defs>
-        <rect width="1400" height="700" fill="var(--paper-2)"/>
-        <rect width="1400" height="700" fill="url(#ssgrid)" style="color: var(--ink)"/>
-        <!-- Phone frame on left -->
-        <g transform="translate(140, 100)">
-          <rect x="0" y="0" width="280" height="500" rx="38" style="fill: var(--paper)" stroke="var(--ink)" stroke-width="1.5"/>
-          <rect x="20" y="60" width="240" height="380" fill="var(--paper-2)" stroke="var(--ink)" stroke-width="0.5"/>
-          <text x="140" y="48" text-anchor="middle" class="ko" fill="var(--ink)">SYMPTOM SENTRY · CAMERA</text>
-          <circle cx="140" cy="220" r="80" fill="none" stroke="var(--ink)" stroke-width="1"/>
-          <circle cx="140" cy="220" r="60" fill="none" stroke="var(--ink)" stroke-width="0.5" stroke-dasharray="3,3"/>
-          <line x1="140" y1="160" x2="140" y2="280" stroke="var(--ink)" stroke-width="0.5"/>
-          <line x1="80" y1="220" x2="200" y2="220" stroke="var(--ink)" stroke-width="0.5"/>
-          <text x="140" y="320" text-anchor="middle" class="ko" fill="var(--ink)">CAPTURE THROAT</text>
-          <circle cx="140" cy="395" r="18" fill="var(--ink)"/>
-          <circle cx="140" cy="395" r="22" fill="none" stroke="var(--ink)" stroke-width="1"/>
+      <svg viewBox="0 0 1400 700" preserveAspectRatio="xMidYMid slice" class="arch" role="img" aria-label="Symptom Sentry privacy-conscious image analysis workflow">
+        <defs><pattern id="sentry-grid" width="40" height="40" patternUnits="userSpaceOnUse"><path d="M 40 0 L 0 0 0 40" fill="none" stroke="currentColor" stroke-width="0.5" opacity="0.13"/></pattern><marker id="sentry-arrow" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 z" fill="var(--ink)"/></marker></defs>
+        <rect width="1400" height="700" fill="var(--paper-2)"/><rect width="1400" height="700" fill="url(#sentry-grid)" style="color: var(--ink)"/>
+        <text x="54" y="72" class="ko">FIG · 01 — guided image analysis with privacy and auditability</text>
+        <g transform="translate(120 105)">
+          <rect width="250" height="470" rx="34" fill="var(--paper)" stroke="var(--ink)" stroke-width="1.4"/>
+          <text x="125" y="52" text-anchor="middle" class="ko">guided capture</text><rect x="35" y="82" width="180" height="250" fill="var(--paper-2)" stroke="var(--ink)" opacity="0.8"/>
+          <circle cx="125" cy="205" r="70" fill="none" stroke="var(--ink)"/><circle cx="125" cy="205" r="36" fill="none" stroke="var(--ink)" stroke-dasharray="4 4"/><text x="125" y="375" text-anchor="middle" class="label">Upload image</text><text x="125" y="404" text-anchor="middle" class="ko">throat or ear</text>
         </g>
-        <!-- Arrow: on-device -->
-        <g transform="translate(450, 320)">
-          <line x1="0" y1="30" x2="120" y2="30" stroke="var(--ink)" stroke-width="1"/>
-          <polygon points="120,25 130,30 120,35" fill="var(--ink)"/>
-          <text x="65" y="22" text-anchor="middle" class="ko" fill="var(--ink)">ON-DEVICE</text>
-          <text x="65" y="48" text-anchor="middle" class="ko" fill="var(--ink)" opacity="0.6">PRIVATE</text>
+        <g transform="translate(505 170)">
+          <rect x="0" y="0" width="260" height="170" fill="var(--ink)"/><text x="32" y="56" class="label" style="fill: var(--paper)">TensorFlow.js</text><text x="32" y="90" class="ko" style="fill: var(--paper)">browser-side inference when available</text><text x="32" y="124" class="ko" style="fill: var(--paper)">normal / abnormal + confidence</text>
+          <rect x="0" y="250" width="260" height="110" fill="var(--paper)" stroke="var(--ink)"/><text x="32" y="294" class="label">Responsible UX</text><text x="32" y="326" class="ko">plain result · clear uncertainty</text>
         </g>
-        <!-- Model node -->
-        <g transform="translate(620, 250)">
-          <rect x="0" y="0" width="220" height="180" fill="var(--ink)"/>
-          <text x="110" y="48" text-anchor="middle" class="label" style="fill: var(--paper)">EfficientNet-B0</text>
-          <text x="110" y="68" text-anchor="middle" class="ko" style="fill: var(--paper)" opacity="0.7">FINE-TUNED · TF.JS</text>
-          <text x="20" y="100" class="ko" style="fill: var(--paper)">STREP</text>
-          <rect x="20" y="106" width="180" height="6" style="fill: var(--paper)" opacity="0.2"/>
-          <rect x="20" y="106" width="156" height="6" style="fill: var(--paper)"/>
-          <text x="180" y="100" text-anchor="end" class="ko" style="fill: var(--paper)">0.87</text>
-          <text x="20" y="130" class="ko" style="fill: var(--paper)">VIRAL</text>
-          <rect x="20" y="136" width="180" height="6" style="fill: var(--paper)" opacity="0.2"/>
-          <rect x="20" y="136" width="22" height="6" style="fill: var(--paper)"/>
-          <text x="180" y="130" text-anchor="end" class="ko" style="fill: var(--paper)">0.09</text>
-          <text x="20" y="160" class="ko" style="fill: var(--paper)">HEALTHY</text>
-          <rect x="20" y="166" width="180" height="6" style="fill: var(--paper)" opacity="0.2"/>
-          <rect x="20" y="166" width="8" height="6" style="fill: var(--paper)"/>
-          <text x="180" y="160" text-anchor="end" class="ko" style="fill: var(--paper)">0.04</text>
+        <g transform="translate(900 150)">
+          <rect x="0" y="0" width="300" height="140" fill="var(--paper)" stroke="var(--ink)"/><text x="28" y="48" class="label">Node / Express API</text><text x="28" y="82" class="ko">auth · validation · secure session</text>
+          <path d="M0 245 A150 34 0 0 0 300 245 L300 370 A150 34 0 0 1 0 370Z" fill="var(--paper)" stroke="var(--ink)"/><ellipse cx="150" cy="245" rx="150" ry="34" fill="var(--paper)" stroke="var(--ink)"/><text x="150" y="254" text-anchor="middle" class="label">PostgreSQL history</text><text x="150" y="314" text-anchor="middle" class="ko">accounts · derived results · follow-up context</text>
         </g>
-        <!-- Arrow: results only -->
-        <g transform="translate(870, 320)">
-          <line x1="0" y1="30" x2="120" y2="30" stroke="var(--ink)" stroke-width="1" stroke-dasharray="4,4"/>
-          <polygon points="120,25 130,30 120,35" fill="var(--ink)"/>
-          <text x="65" y="22" text-anchor="middle" class="ko" fill="var(--ink)">RESULTS ONLY</text>
-          <text x="65" y="48" text-anchor="middle" class="ko" fill="var(--ink)" opacity="0.6">NO RAW IMAGE</text>
-        </g>
-        <!-- Backend cylinder -->
-        <g transform="translate(1040, 250)">
-          <ellipse cx="100" cy="0" rx="100" ry="20" style="fill: var(--paper)" stroke="var(--ink)" stroke-width="1.5"/>
-          <path d="M 0 0 L 0 180 A 100 20 0 0 0 200 180 L 200 0" style="fill: var(--paper)" stroke="var(--ink)" stroke-width="1.5"/>
-          <ellipse cx="100" cy="0" rx="100" ry="20" fill="none" stroke="var(--ink)" stroke-width="0.8" opacity="0.5"/>
-          <text x="100" y="100" text-anchor="middle" class="label">PostgreSQL</text>
-          <text x="100" y="120" text-anchor="middle" class="ko">analysis history</text>
-          <text x="100" y="140" text-anchor="middle" class="ko">+ user accounts</text>
-        </g>
-        <text x="40" y="680" class="ko" fill="var(--ink)" opacity="0.6">FIG · 01 — Inference happens on-device. The server only stores derived results.</text>
+        <g transform="translate(185 610)"><rect x="0" y="0" width="1030" height="48" fill="var(--paper)" stroke="var(--ink)"/><text x="24" y="30" class="label">Product judgment: make medical-adjacent output understandable, secure, and useful without overstating diagnostic certainty.</text></g>
+        <g stroke="var(--ink)" stroke-width="1.4" marker-end="url(#sentry-arrow)" fill="none" opacity="0.72"><path d="M370 330 L505 255"/><path d="M635 340 L635 420"/><path d="M765 255 L900 220"/><path d="M765 420 C850 450 910 455 1040 424"/></g>
       </svg>
     </div>
   </div>
 
   <article class="cs-body reveal">
 
-    <p>SymptomSentryAI is an advanced AI-powered healthcare application that provides intelligent medical insights through image analysis. The platform enables users to upload throat and ear images for instant analysis using state-of-the-art machine learning models.</p>
+    <p>The most delicate moment in Symptom Sentry AI is not the model prediction. It is the few seconds after a user sees the result. A person has uploaded an image of a throat or ear because something feels wrong. The software has to be useful without pretending to be a doctor, clear without being alarmist, and secure without making the experience feel heavy.</p>
+
+    <p>That tension shaped the project more than any individual framework choice. The application needed a modern computer-vision stack, but it also needed restraint. A health-adjacent product can lose trust by saying too much, hiding too much, or making uncertainty feel like failure. The interface, the backend, and the model bridge all had to support a simple promise: guide the user through an image analysis workflow and preserve the result responsibly.</p>
 
     <p><strong><a href="https://github.com/jteerlink/SymptomSentinelAI">GitHub Repository ↗</a></strong></p>
 
-    <h2>Features</h2>
+    <h2>The first decision was to narrow the answer.</h2>
+    <p>It is tempting to make a medical image app feel impressive by adding categories, explanations, and dense model language. This project moves in the opposite direction. The primary output is intentionally direct: normal or abnormal, infected or not infected, with confidence and supporting context. That simplicity gives the rest of the product room to do its job.</p>
 
-    <h3>Core Functionality</h3>
-    <ul>
-      <li><strong>Binary Medical Image Classification:</strong> Analyzes throat and ear images and classifies them as either "Normal" or "Infected/Abnormal" with confidence scores.</li>
-      <li><strong>Secure User Authentication:</strong> Complete user registration, login, and profile management with HTTP-only cookies.</li>
-      <li><strong>Analysis History:</strong> Stores and retrieves past analyses for tracking health conditions over time.</li>
-      <li><strong>Detailed Health Insights:</strong> Provides comprehensive information about potential conditions with treatment recommendations.</li>
-    </ul>
+    <p>The user journey starts with capture and upload. The UI has to make image submission feel guided rather than clinical. Once the image is analyzed, the result screen has to make the output legible: what the model saw, how confident it is, and what the user might reasonably do next. The app then gives the result continuity through history, so a user can return to past analyses instead of treating each session as disposable.</p>
 
-    <h3>Technical Features</h3>
-    <ul>
-      <li><strong>Enhanced ML Model Bridge:</strong> Connects JavaScript frontend with Python-based TensorFlow models.</li>
-      <li><strong>Animated Medical Loading Spinner:</strong> Visual feedback during analysis with medical-themed animations.</li>
-      <li><strong>Collapsible UI Components:</strong> Dynamic interface that adapts to each stage of the analysis workflow.</li>
-      <li><strong>Comprehensive Security:</strong> CSRF protection, rate limiting, and secure session management.</li>
-      <li><strong>Robust Error Handling:</strong> Detailed error messages and graceful failure recovery across all functions.</li>
-    </ul>
+    <p>None of those pieces is flashy in isolation. Together they turn a classifier into a product flow.</p>
 
-    <h2>Architecture</h2>
+    <h2>The architecture follows the user journey.</h2>
+    <p>The repository is organized like a full application, not a model demo. There is a <code>frontend</code> for interaction, a <code>backend</code> for APIs and authentication, TensorFlow/TensorFlow.js integration for image analysis, PostgreSQL-backed persistence, generated assets, test scripts, and documentation around the application surface.</p>
 
-    <h3>Frontend</h3>
-    <ul>
-      <li>JavaScript with browser-compatible TensorFlow.js for client-side processing.</li>
-      <li>Responsive design with collapsible components for optimal user experience.</li>
-      <li>Real-time visualization of analysis results with attention maps.</li>
-    </ul>
+    <p>Browser-side TensorFlow.js gives the product an important option: inference can happen close to the user when the deployment path supports it. The Node/Express backend handles the responsibilities that belong on the server: authentication, profiles, validation, API routes, session handling, and saved analysis history. PostgreSQL stores account and result context so the experience can continue across sessions.</p>
 
-    <h3>Backend</h3>
-    <ul>
-      <li>Node.js/Express server handling authentication, image processing, and API endpoints.</li>
-      <li>Advanced middleware for security, authentication, and request validation.</li>
-      <li>PostgreSQL database for user data and analysis history storage.</li>
-    </ul>
+    <p>That separation matters. Image pixels, user identity, model output, and historical records do not all have the same sensitivity or lifecycle. Treating them as separate concerns makes the system easier to reason about and safer to evolve.</p>
 
-    <h3>ML Components</h3>
-    <ul>
-      <li>Python TensorFlow models for medical image analysis.</li>
-      <li>Support for multiple model types (ensemble, custom, version-specific).</li>
-      <li>Binary classification system focusing on clear "Normal" vs "Infected" results.</li>
-    </ul>
+    <h2>Security is part of the interface.</h2>
+    <p>The security features in the repo are not just backend details. HTTP-only cookies, CSRF protection, rate limiting, password hashing, input validation, and session management are part of how the app earns permission to handle sensitive interactions.</p>
 
-    <h2>API Reference</h2>
+    <p>A user will never read the middleware. They will feel the result of it. Login should work cleanly. Errors should be specific enough to recover from without leaking unnecessary detail. A saved analysis should be available when expected and protected when it should be private. The interface should feel calm because the underlying system is doing its job.</p>
 
-    <h3>Authentication</h3>
-    <pre><code>POST /api/register       — Register a new user
-POST /api/login          — User login
-POST /api/logout         — User logout
-GET  /api/user           — Get current user profile
-POST /api/refresh-token  — Refresh authentication token</code></pre>
+    <p>The same principle applies to model feedback. A confidence score can create false certainty if it is presented like a verdict. The product language has to keep the result bounded. It can help a user notice a possible issue, organize information, and decide whether to seek care. It should not blur the line between screening support and diagnosis.</p>
 
-    <h3>Analysis</h3>
-    <pre><code>POST /analyze                — Analyze an image (throat or ear)
-GET  /api/analysis-history   — Get user's analysis history
-GET  /api/analysis/:id       — Get a specific analysis by ID
-POST /api/save-analysis      — Save analysis results
-DELETE /api/analysis/:id     — Delete a specific analysis</code></pre>
+    <h2>The model bridge is where the product becomes real.</h2>
+    <p>Connecting JavaScript product code to TensorFlow model assets is the kind of work that decides whether a prototype becomes usable. The application supports a model bridge between frontend interaction and Python/TensorFlow-trained components, with support for multiple model variants and a binary classification path designed for a straightforward user experience.</p>
 
-    <h2>Security</h2>
-    <p>SymptomSentryAI implements several layers of security:</p>
-    <ul>
-      <li><strong>HTTP-only Cookies:</strong> Authentication tokens stored in HTTP-only cookies to prevent XSS attacks.</li>
-      <li><strong>CSRF Protection:</strong> Cross-Site Request Forgery protection with CSRF tokens.</li>
-      <li><strong>Rate Limiting:</strong> API rate limiting to prevent brute force attacks.</li>
-      <li><strong>Secure Password Storage:</strong> Passwords are hashed using scrypt/bcrypt.</li>
-      <li><strong>Input Validation:</strong> Thorough validation of all user input.</li>
-      <li><strong>Session Management:</strong> Proper session handling with timeout functionality.</li>
-    </ul>
+    <p>There are many small details hidden in that bridge: file handling, preprocessing expectations, model format compatibility, response shape, error handling, and how the UI behaves while inference is running. A loading state is not cosmetic in this context. It tells the user the system is working. A graceful failure is not polish. It prevents a sensitive experience from turning into confusion.</p>
 
-    <h2>Getting Started</h2>
-    <pre><code>git clone https://github.com/jteerlink/SymptomSentinelAI.git
-cd SymptomSentinelAI
-npm install</code></pre>
-    <p>Set up your <code>.env</code> file:</p>
-    <pre><code>DATABASE_URL=postgresql://username:password@localhost:5432/symptom_sentry
-JWT_SECRET=your_jwt_secret
-SESSION_SECRET=your_session_secret</code></pre>
-    <pre><code>npm start
-# Application available at http://localhost:5000</code></pre>
+    <p>The result history adds another layer. Saving analysis results can be valuable, but it creates responsibility. The app needs to distinguish between transient analysis and durable records. It needs authentication that is strong enough for the data it stores. It needs deletion paths and profile controls. The repository’s API surface reflects that broader product shape: register, login, logout, current user, analysis, history, save, retrieve, delete, profile, password, and subscription endpoints.</p>
+
+    <h2>A careful product can still feel modern.</h2>
+    <p>The project does not need to choose between a responsible experience and a polished one. The responsive UI, collapsible components, medical-themed loading feedback, attention-map-style result visualization, and history screens all help the product feel complete. The difference is that the polish is pointed at comprehension, not spectacle.</p>
+
+    <p>The best version of this page should read like a product walkthrough: a user captures an image, the app guides the upload, inference runs with clear feedback, the result is framed carefully, and the history preserves context for later. Under that walkthrough sits the technical stack: TensorFlow.js, TensorFlow, Express, PostgreSQL, secure sessions, validation, and tests.</p>
+
+    <p>That pairing is the value of the project. The model can classify. The application can carry the classification through a real user flow. The security layer makes the flow credible. The restraint in the product language keeps the experience honest.</p>
 
   </article>
 

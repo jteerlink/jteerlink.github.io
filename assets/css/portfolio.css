@@ -602,35 +602,59 @@ img { display: block; max-width: 100%; }
   font-size: 13px;
 }
 
-.education-block { padding: 80px 48px; background: var(--ink); color: var(--paper); }
+.education-block {
+  padding: 96px 48px 112px;
+  background: linear-gradient(180deg, var(--paper) 0%, var(--paper-2) 100%);
+  color: var(--ink);
+  border-top: 1px solid var(--line-strong);
+}
 .education-grid {
   max-width: 1400px;
   margin: 0 auto;
   display: grid;
-  grid-template-columns: 1fr 2fr;
+  grid-template-columns: minmax(280px, 0.8fr) 2fr;
   gap: 64px;
+  padding: 48px;
+  border: 1px solid var(--line-strong);
+  background: rgba(250, 250, 247, 0.72);
+  box-shadow: 0 24px 70px rgba(10, 10, 10, 0.06);
 }
 .education-grid h2 {
   font-family: var(--font-display);
-  font-size: clamp(32px, 4vw, 48px);
+  font-size: clamp(36px, 4.6vw, 64px);
   font-weight: 400;
-  letter-spacing: -0.02em;
+  letter-spacing: -0.025em;
   margin: 0;
-  line-height: 1.05;
+  line-height: 0.98;
+  text-wrap: balance;
 }
-.education-list { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; }
+.education-grid .eyebrow { color: var(--accent) !important; }
+.education-list { list-style: none; padding: 0; margin: 0; display: grid; gap: 16px; }
 .education-item {
-  padding: 24px 0;
-  border-top: 1px solid rgba(244,241,234,0.18);
+  padding: 24px;
+  border: 1px solid var(--line);
+  background: var(--paper);
   display: grid;
-  grid-template-columns: 1fr 1fr auto;
+  grid-template-columns: 1.2fr 1fr auto;
   gap: 24px;
   align-items: baseline;
+  transition: transform 200ms, border-color 200ms, background 200ms;
 }
-.education-item:last-child { border-bottom: 1px solid rgba(244,241,234,0.18); }
-.education-item .deg { font-family: var(--font-display); font-size: 22px; font-style: italic; }
-.education-item .school { color: rgba(244,241,234,0.7); font-size: 14px; }
-.education-item .abbr { font-family: var(--font-mono); font-size: 12px; color: rgba(244,241,234,0.5); }
+.education-item:hover {
+  transform: translateY(-2px);
+  border-color: var(--line-strong);
+  background: var(--paper-2);
+}
+.education-item .deg { font-family: var(--font-display); font-size: 26px; font-style: italic; line-height: 1.05; min-width: 0; }
+.education-item .school { color: var(--ink-2); font-size: 15px; min-width: 0; }
+.education-item .abbr {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--muted);
+  border: 1px solid var(--line-strong);
+  border-radius: 999px;
+  padding: 5px 10px;
+}
 
 /* ========================================
    PROJECTS PAGE
@@ -1126,9 +1150,11 @@ img { display: block; max-width: 100%; }
   .xp-card { flex: 0 0 85vw; min-height: 460px; }
   .xp-progress { padding: 0 24px; }
   .skills-grid { grid-template-columns: 1fr; padding: 60px 24px; }
-  .education-block { padding: 60px 24px; }
-  .education-grid { grid-template-columns: 1fr; }
-  .education-item { grid-template-columns: 1fr auto; }
+  .education-block { padding: 60px 24px 80px; }
+  .education-grid { grid-template-columns: 1fr; padding: 28px; gap: 36px; }
+  .education-item { grid-template-columns: minmax(0, 1fr); gap: 10px; padding: 22px; }
+  .education-item .deg { font-size: 24px; }
+  .education-item .school { line-height: 1.35; }
   .education-item .abbr { display: none; }
 
   /* Projects */

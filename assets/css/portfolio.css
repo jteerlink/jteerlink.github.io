@@ -318,7 +318,7 @@ img { display: block; max-width: 100%; }
   color: inherit;
   transition: padding-left 300ms ease;
 }
-a.project-row:hover { padding-left: 12px; }
+.project-row:hover { padding-left: 12px; }
 .project-meta { display: flex; flex-direction: column; gap: 12px; }
 .project-index {
   font-family: var(--font-display);
@@ -336,6 +336,8 @@ a.project-row:hover { padding-left: 12px; }
   line-height: 1.05;
   margin: 0 0 8px;
 }
+.project-title a { transition: color 200ms ease; }
+.project-title a:hover { color: var(--accent); }
 .project-subtitle {
   font-size: 16px;
   color: var(--muted);
@@ -351,6 +353,13 @@ a.project-row:hover { padding-left: 12px; }
   color: var(--ink-2);
 }
 .project-stack { display: flex; flex-wrap: wrap; gap: 6px; }
+.project-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 18px;
+  align-items: center;
+  margin-top: 18px;
+}
 .stack-pill {
   font-family: var(--font-mono);
   font-size: 11px;
@@ -366,7 +375,7 @@ a.project-row:hover { padding-left: 12px; }
   background: var(--paper-2);
   transition: transform 400ms cubic-bezier(.2,.7,.2,1);
 }
-a.project-row:hover .project-thumb { transform: scale(1.01); }
+.project-row:hover .project-thumb { transform: scale(1.01); }
 .project-thumb svg { width: 100%; height: 100%; display: block; }
 
 /* About strip on homepage */
@@ -687,10 +696,12 @@ a.project-row:hover .project-thumb { transform: scale(1.01); }
   display: inline-flex;
   gap: 8px;
   align-items: center;
-  margin-top: 12px;
   color: var(--muted);
+  transition: color 200ms ease;
 }
 .project-cta:hover { color: var(--ink); }
+.project-cta--repo { color: var(--accent); }
+.project-cta--repo:hover { color: var(--ink); }
 
 /* ========================================
    CONTACT PAGE

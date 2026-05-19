@@ -271,7 +271,7 @@ img { display: block; max-width: 100%; }
   grid-template-columns: repeat(4, 1fr);
   border-top: 1px solid var(--line-strong);
   border-bottom: 1px solid var(--line-strong);
-  margin: 60px 48px;
+  margin: 48px 48px 24px;
 }
 .metric {
   padding: 40px 32px;
@@ -292,6 +292,7 @@ img { display: block; max-width: 100%; }
    HOME — SECTIONS + PROJECT ROWS
    ======================================== */
 .home-section { padding: 120px 48px; }
+#work.home-section { padding-top: 64px; }
 .home-section--alt { background: var(--paper-2); }
 .section-head { max-width: 1400px; margin: 0 auto 80px; }
 .section-title {
@@ -401,10 +402,10 @@ img { display: block; max-width: 100%; }
   display: grid;
   grid-template-columns: 1.4fr 1fr;
   gap: 64px;
-  padding: 80px 48px;
+  padding: 64px 48px 72px;
   max-width: 1400px;
   margin: 0 auto;
-  align-items: end;
+  align-items: center;
 }
 .about-hero h1 {
   font-family: var(--font-display);
@@ -845,11 +846,20 @@ img { display: block; max-width: 100%; }
 .channel .val { font-family: var(--font-display); font-style: italic; font-size: 22px; }
 .channel .arrow { color: var(--muted); }
 
-.availability { padding: 80px 48px; background: var(--ink); color: var(--paper); }
+.availability {
+  padding: 80px 48px 96px;
+  background: linear-gradient(180deg, var(--paper) 0%, var(--paper-2) 100%);
+  color: var(--paper);
+  border-top: 1px solid var(--line-strong);
+}
 .availability-inner {
   max-width: 1400px;
   margin: 0 auto;
   display: grid;
+  padding: 56px;
+  background: var(--ink);
+  border: 1px solid rgba(244,241,234,0.14);
+  box-shadow: 0 24px 70px rgba(10,10,10,0.14);
   grid-template-columns: 1fr 1.5fr;
   gap: 64px;
   align-items: start;
@@ -1121,12 +1131,13 @@ img { display: block; max-width: 100%; }
   .home-hero-footer { grid-template-columns: 1fr; gap: 20px; }
   .home-portrait { max-width: 380px; }
 
-  .metric-strip { grid-template-columns: repeat(2, 1fr); margin: 40px 24px; }
+  .metric-strip { grid-template-columns: repeat(2, 1fr); margin: 32px 24px 12px; }
   .metric:nth-child(2) { border-right: 0; }
   .metric { padding: 28px 20px; }
   .metric-value { font-size: 48px; }
 
   .home-section { padding: 80px 24px; }
+  #work.home-section { padding-top: 48px; }
   .section-head { margin-bottom: 48px; }
 
   .project-row { grid-template-columns: 1fr; gap: 20px; padding: 36px 0; }
@@ -1169,8 +1180,8 @@ img { display: block; max-width: 100%; }
   .contact-hero { grid-template-columns: 1fr; padding: 60px 24px 48px; }
   .contact-grid { grid-template-columns: 1fr; padding: 40px 24px; }
   .form-row { grid-template-columns: 1fr; gap: 16px; }
-  .availability { padding: 60px 24px; }
-  .availability-inner { grid-template-columns: 1fr; gap: 40px; }
+  .availability { padding: 56px 24px 72px; }
+  .availability-inner { grid-template-columns: 1fr; gap: 40px; padding: 32px 24px; }
   .av-list li { grid-template-columns: 120px 1fr; gap: 16px; }
 
   /* Post */

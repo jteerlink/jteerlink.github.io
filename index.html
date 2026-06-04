@@ -12,6 +12,9 @@
 </head>
 <body>
 
+  <!-- Aurora background (21st.dev-sourced animated waves) -->
+  <div class="aurora-layer" aria-hidden="true"><div class="aurora-wave"></div></div>
+
   <!-- Particle canvas -->
   <canvas id="particle-canvas" aria-hidden="true"></canvas>
 
@@ -41,10 +44,22 @@
   </nav>
 
   <!-- ── Hero ──────────────────────────────────────────────── -->
-  <section class="hero-section" aria-label="Introduction">
-    <div class="hero-inner">
+  <section class="hero-section hero-section--centered" aria-label="Introduction">
+    <div class="hero-bg-abstract" aria-hidden="true"></div>
 
-      <!-- Left: content -->
+    <!-- HUD corner readouts -->
+    <div class="hud-corner hud-corner--tl" aria-hidden="true">
+      <div>LAT 33.0198° N</div>
+      <div>LON 96.6989° W</div>
+      <div id="hud-time" class="hud-dim">--:--:-- UTC</div>
+    </div>
+    <div class="hud-corner hud-corner--tr" aria-hidden="true">
+      <div>PORTFOLIO · VOL.04</div>
+      <div>RENDER · HELIX/3D</div>
+      <div class="hud-dim">BUILD ACTIVE</div>
+    </div>
+
+    <div class="hero-inner">
       <div class="hero-content">
         <div class="hero-eyebrow mono reveal-up">
           ↳ PORTFOLIO · VOL.04 · 2026
@@ -76,26 +91,6 @@
           <span class="hud-btn-arrow mono">→</span>
         </a>
       </div>
-
-      <!-- Right: portrait -->
-      <div class="hero-portrait reveal-right" aria-hidden="true">
-        <div class="portrait-wrap float-anim">
-          <div class="p-ring p-ring-1"></div>
-          <div class="p-ring p-ring-2"></div>
-          <div class="p-ring p-ring-3"></div>
-          <div class="portrait-img-wrap">
-            <img src="/images/headshot.jpg" alt="Jared Teerlink">
-            <div class="portrait-overlay"></div>
-            <div class="portrait-scan"></div>
-          </div>
-          <div class="portrait-hud">
-            <div class="portrait-hud-item mono">IDENT: J.TEERLINK</div>
-            <div class="portrait-hud-item mono">SPEC: DATA·SCIENCE</div>
-            <div class="portrait-hud-item mono">STATUS: [ACTIVE]</div>
-          </div>
-        </div>
-      </div>
-
     </div>
 
     <!-- Scroll indicator -->
@@ -161,19 +156,27 @@
     </div>
   </section>
 
-  <!-- ── Selected Work ─────────────────────────────────────── -->
-  <section class="work-section" id="work" aria-label="Selected work">
-    <div class="work-inner">
+  <!-- ── Selected Work · DNA Helix Carousel ────────────────── -->
+  <section class="helix-outer" id="work" aria-label="Selected work">
+    <div class="helix-sticky">
 
-      <div class="section-header">
-        <div class="section-tag mono">§ 01 · SELECTED WORK</div>
-        <h2 class="section-title">Five projects at the intersection of <em>research</em> and <em>production.</em></h2>
+      <!-- Rendered Remotion helix (transparent WebM) -->
+      <video class="helix-video" autoplay loop muted playsinline aria-hidden="true">
+        <source src="/assets/video/helix-loop.webm" type="video/webm">
+      </video>
+
+      <div class="helix-header">
+        <div>
+          <div class="section-tag mono">§ 01 · SELECTED WORK</div>
+          <h2 class="section-title" style="margin-bottom:0;max-width:420px;">Five projects spiraling through <em>research</em> and <em>production.</em></h2>
+        </div>
+        <div class="helix-hint mono" aria-hidden="true">↕ SCROLL TO ROTATE</div>
       </div>
 
-      <div class="projects-grid">
+      <div class="helix-stage" id="helix-stage">
 
         <!-- 01 Reddit Signal Command -->
-        <article class="project-card glass-card project-card--wide reveal-up" aria-label="Project: Reddit Signal Command">
+        <article class="helix-card project-card glass-card" aria-label="Project: Reddit Signal Command">
           <div class="cc cc-tl"></div><div class="cc cc-tr"></div>
           <div class="cc cc-bl"></div><div class="cc cc-br"></div>
           <div class="project-vis-wrap">
@@ -184,15 +187,11 @@
             <div class="project-header">
               <span class="project-index mono">01</span>
               <span class="project-tag">Social intelligence</span>
-              <span class="project-tag">NLP</span>
               <span class="project-year mono">2026</span>
             </div>
             <h3 class="project-name"><a href="/posts/reddit-signal-command/">Reddit Signal Command</a></h3>
             <p class="project-subtitle">A daily Reddit API intelligence loop for AI-community signal</p>
-            <p class="project-desc">A full-stack dashboard that turns scheduled Reddit API pulls into sentiment trends, topic maps, semantic search, narrative events, model diagnostics, forecasts, and analyst briefs.</p>
-            <div class="project-pills">
-              <span>PRAW</span><span>FastAPI</span><span>Next.js</span><span>DistilBERT</span><span>BERTopic</span><span>Prophet</span>
-            </div>
+            <p class="project-desc">Scheduled Reddit pulls become sentiment trends, topic maps, semantic search, forecasts, and analyst briefs.</p>
           </div>
           <div class="project-footer">
             <a class="proj-link" href="/posts/reddit-signal-command/">Case Study →</a>
@@ -201,7 +200,7 @@
         </article>
 
         <!-- 02 AI Newsletter Generator -->
-        <article class="project-card glass-card reveal-up" aria-label="Project: AI-Powered Newsletter Generator">
+        <article class="helix-card project-card glass-card" aria-label="Project: AI-Powered Newsletter Generator">
           <div class="cc cc-tl"></div><div class="cc cc-tr"></div>
           <div class="cc cc-bl"></div><div class="cc cc-br"></div>
           <div class="project-vis-wrap">
@@ -216,10 +215,7 @@
             </div>
             <h3 class="project-name"><a href="/posts/ai-powered-newsletter-generator/">AI-Powered Newsletter Generator</a></h3>
             <p class="project-subtitle">A custom multi-agent architecture for technical content</p>
-            <p class="project-desc">Five specialized agents that research, write, and validate technical newsletters end-to-end — including code that actually executes. Sandbox-validated examples, quality dashboard.</p>
-            <div class="project-pills">
-              <span>Python</span><span>ChromaDB</span><span>Crawl4AI</span><span>PyTorch</span><span>Streamlit</span>
-            </div>
+            <p class="project-desc">Five specialized agents research, write, and validate technical newsletters end-to-end — including code that executes.</p>
           </div>
           <div class="project-footer">
             <a class="proj-link" href="/posts/ai-powered-newsletter-generator/">Case Study →</a>
@@ -228,7 +224,7 @@
         </article>
 
         <!-- 03 Symptom Sentry AI -->
-        <article class="project-card glass-card reveal-up" aria-label="Project: Symptom Sentry AI">
+        <article class="helix-card project-card glass-card" aria-label="Project: Symptom Sentry AI">
           <div class="cc cc-tl"></div><div class="cc cc-tr"></div>
           <div class="cc cc-bl"></div><div class="cc cc-br"></div>
           <div class="project-vis-wrap">
@@ -243,10 +239,7 @@
             </div>
             <h3 class="project-name"><a href="/posts/symptom-sentry-ai/">Symptom Sentry AI</a></h3>
             <p class="project-subtitle">Medical image classification for consumer healthcare</p>
-            <p class="project-desc">A production web app that classifies throat and ear images for early infection detection, with hardened auth + analysis-history backend and on-device TensorFlow.js inference.</p>
-            <div class="project-pills">
-              <span>TensorFlow</span><span>TensorFlow.js</span><span>Node.js</span><span>PostgreSQL</span>
-            </div>
+            <p class="project-desc">A production web app classifying throat and ear images for early infection detection with on-device TensorFlow.js.</p>
           </div>
           <div class="project-footer">
             <a class="proj-link" href="/posts/symptom-sentry-ai/">Case Study →</a>
@@ -255,7 +248,7 @@
         </article>
 
         <!-- 04 Credit Risk -->
-        <article class="project-card glass-card reveal-up" aria-label="Project: Predicting Cash Advance Defaults">
+        <article class="helix-card project-card glass-card" aria-label="Project: Predicting Cash Advance Defaults">
           <div class="cc cc-tl"></div><div class="cc cc-tr"></div>
           <div class="cc cc-bl"></div><div class="cc cc-br"></div>
           <div class="project-vis-wrap">
@@ -270,10 +263,7 @@
             </div>
             <h3 class="project-name"><a href="/posts/predicting-cash-advance-defaults/">Predicting Cash Advance Defaults</a></h3>
             <p class="project-subtitle">Credit risk modeling for fintech lending</p>
-            <p class="project-desc">An XGBoost-driven default prediction model with thoughtful feature engineering and an Optuna-tuned scoring pipeline ready for production. Tuned AUC of 0.72; strong decile lift.</p>
-            <div class="project-pills">
-              <span>XGBoost</span><span>Optuna</span><span>Python</span><span>scikit-learn</span>
-            </div>
+            <p class="project-desc">An XGBoost default model with thoughtful feature engineering and an Optuna-tuned pipeline. Tuned AUC 0.72; strong lift.</p>
           </div>
           <div class="project-footer">
             <a class="proj-link" href="/posts/predicting-cash-advance-defaults/">Case Study →</a>
@@ -282,7 +272,7 @@
         </article>
 
         <!-- 05 Deep Learning -->
-        <article class="project-card glass-card reveal-up" aria-label="Project: Symptom Sentinel Model Build">
+        <article class="helix-card project-card glass-card" aria-label="Project: Symptom Sentinel Model Build">
           <div class="cc cc-tl"></div><div class="cc cc-tr"></div>
           <div class="cc cc-bl"></div><div class="cc cc-br"></div>
           <div class="project-vis-wrap">
@@ -297,10 +287,7 @@
             </div>
             <h3 class="project-name"><a href="/posts/symptom-sentinel-model-build/">Symptom Sentinel: Model Build</a></h3>
             <p class="project-subtitle">EfficientNet-driven medical image classifier</p>
-            <p class="project-desc">The training repository powering Symptom Sentry — labeled datasets, EfficientNet baselines, and a reproducible setup for ear and throat infection detection.</p>
-            <div class="project-pills">
-              <span>TensorFlow</span><span>Keras</span><span>Python</span><span>Jupyter</span>
-            </div>
+            <p class="project-desc">The training repo powering Symptom Sentry — labeled datasets, EfficientNet baselines, and a reproducible setup.</p>
           </div>
           <div class="project-footer">
             <a class="proj-link" href="/posts/symptom-sentinel-model-build/">Case Study →</a>

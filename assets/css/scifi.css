@@ -1084,6 +1084,223 @@ body::before {
   opacity: 0.6;
 }
 
+/* ============================================================
+   HELIX REDESIGN ADD-ONS  (Phase 2 — 21st.dev-sourced techniques)
+   - Aurora background ............ 21st.dev "Animated Background" waves
+   - Moving border ................ 21st.dev "BorderRotate" conic + @property
+   - Glass depth .................. 21st.dev glass-card inset highlight
+   ============================================================ */
+
+/* ── Aurora background layer ────────────────────────────── */
+/* Sits behind the particle canvas; soft flowing cyan/purple/pink
+   ellipses drifting over near-black. Ported from 21st.dev. */
+.aurora-layer {
+  position: fixed;
+  inset: 0;
+  z-index: -1;            /* behind particle-canvas (z:0) */
+  overflow: hidden;
+  pointer-events: none;
+  background: var(--bg);
+}
+
+.aurora-layer::before,
+.aurora-layer::after,
+.aurora-wave {
+  content: '';
+  position: absolute;
+  inset: -20%;
+  background-repeat: no-repeat;
+  will-change: transform;
+  opacity: 0.55;
+}
+
+.aurora-layer::before {
+  background:
+    radial-gradient(ellipse 50% 38% at 28% 30%, rgba(0,212,255,0.22) 0%, transparent 60%),
+    radial-gradient(ellipse 42% 32% at 78% 22%, rgba(139,92,246,0.20) 0%, transparent 60%);
+  animation: aurora-a 26s ease-in-out infinite alternate;
+}
+
+.aurora-layer::after {
+  background:
+    radial-gradient(ellipse 46% 34% at 70% 70%, rgba(240,171,252,0.14) 0%, transparent 60%),
+    radial-gradient(ellipse 54% 40% at 22% 78%, rgba(0,212,255,0.12) 0%, transparent 62%);
+  animation: aurora-b 32s ease-in-out infinite alternate-reverse;
+  opacity: 0.42;
+}
+
+.aurora-wave {
+  background:
+    radial-gradient(ellipse 60% 26% at 50% 50%, rgba(139,92,246,0.10) 0%, transparent 60%);
+  animation: aurora-c 38s ease-in-out infinite alternate;
+  opacity: 0.3;
+}
+
+@keyframes aurora-a {
+  0%   { transform: translate3d(-6%, -3%, 0) rotate(0deg)   scale(1);    }
+  50%  { transform: translate3d( 5%,  4%, 0) rotate(8deg)   scale(1.18); }
+  100% { transform: translate3d( 7%, -2%, 0) rotate(-6deg)  scale(0.94); }
+}
+@keyframes aurora-b {
+  0%   { transform: translate3d( 5%,  3%, 0) rotate(0deg)   scale(0.9);  }
+  50%  { transform: translate3d(-4%, -3%, 0) rotate(-10deg) scale(1.2);  }
+  100% { transform: translate3d(-7%,  4%, 0) rotate(6deg)   scale(1);    }
+}
+@keyframes aurora-c {
+  0%   { transform: translate3d(-4%,  2%, 0) scale(1);    }
+  100% { transform: translate3d( 4%, -3%, 0) scale(1.25); }
+}
+
+/* ── HUD corner readouts ────────────────────────────────── */
+.hud-corner {
+  position: absolute;
+  z-index: var(--z-overlay);
+  font-family: var(--font-mono);
+  font-size: 9px;
+  letter-spacing: 0.12em;
+  line-height: 1.8;
+  color: var(--cyan);
+  text-shadow: 0 0 6px rgba(0,212,255,0.5);
+  opacity: 0.62;
+  pointer-events: none;
+}
+.hud-corner div { white-space: nowrap; }
+.hud-corner--tl { top: calc(var(--nav-h) + 22px); left: 24px; }
+.hud-corner--tr { top: calc(var(--nav-h) + 22px); right: 24px; text-align: right; }
+.hud-corner .hud-dim { color: var(--text-muted); text-shadow: none; }
+
+/* ── Hero (centered, portrait-free) variant ─────────────── */
+.hero-section--centered { text-align: center; }
+.hero-section--centered .hero-inner {
+  grid-template-columns: 1fr;
+  max-width: 860px;
+  text-align: center;
+  justify-items: center;
+}
+.hero-section--centered .hero-title { max-width: 780px; }
+.hero-section--centered .hero-status { text-align: left; }
+
+/* Abstract image backdrop replacing the headshot */
+.hero-bg-abstract {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background:
+    radial-gradient(ellipse at 50% 0%, rgba(0,212,255,0.08), transparent 55%),
+    url('https://images.unsplash.com/photo-1534796636912-3b95b3ab5986?auto=format&fit=crop&w=1600&q=70') center/cover no-repeat;
+  opacity: 0.18;
+  filter: saturate(1.1) hue-rotate(-10deg);
+  mask-image: radial-gradient(ellipse 70% 60% at 50% 40%, #000 30%, transparent 75%);
+  -webkit-mask-image: radial-gradient(ellipse 70% 60% at 50% 40%, #000 30%, transparent 75%);
+}
+
+/* ── Helix carousel section ─────────────────────────────── */
+.helix-outer {
+  position: relative;
+  z-index: var(--z-base);
+  height: 560vh;            /* scroll runway that drives rotation */
+}
+
+.helix-sticky {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Rendered Remotion helix video — transparent, composites over bg */
+.helix-video {
+  position: absolute;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  height: 108%;
+  width: auto;
+  min-width: 42%;
+  object-fit: contain;
+  opacity: 0.85;
+  z-index: 2;
+  pointer-events: none;
+  filter: drop-shadow(0 0 30px rgba(0,212,255,0.15));
+}
+
+.helix-header {
+  position: relative;
+  z-index: 4;
+  max-width: 1200px;
+  width: 100%;
+  margin: 0 auto;
+  padding: calc(var(--nav-h) + 30px) 24px 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 16px;
+}
+.helix-hint {
+  font-size: 9px;
+  letter-spacing: 0.16em;
+  color: var(--text-muted);
+  animation: scroll-fade 3s ease-in-out infinite;
+}
+
+/* Stage holds the 5 absolutely-positioned cards */
+.helix-stage {
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+}
+
+.helix-card {
+  position: absolute;
+  top: 0; left: 0;
+  width: 320px;
+  transform-origin: center center;
+  will-change: transform, opacity;
+  /* JS sets transform/opacity each frame — no CSS transition on those */
+}
+
+/* Compact card chrome (slimmer than the old grid card) */
+.helix-card .project-vis { height: 140px; }
+.helix-card .project-body { padding: 16px 18px 14px; }
+.helix-card .project-desc { font-size: 12px; -webkit-line-clamp: 3; }
+.helix-card .project-footer { padding: 12px 18px; }
+
+/* Front-most card: animated moving border (21st.dev BorderRotate) */
+@property --ga {
+  syntax: '<angle>';
+  initial-value: 0deg;
+  inherits: false;
+}
+
+.helix-card.helix-front::before {
+  content: '';
+  position: absolute;
+  inset: -2px;
+  border-radius: var(--radius-lg);
+  z-index: -1;
+  background: conic-gradient(
+    from var(--ga),
+    var(--cyan) 0%,
+    var(--purple) 30%,
+    var(--pink) 50%,
+    var(--purple) 70%,
+    var(--cyan) 100%
+  );
+  filter: blur(7px);
+  opacity: 0.85;
+  animation: ga-spin 4.5s linear infinite;
+}
+
+.helix-card.helix-front {
+  box-shadow:
+    0 24px 60px rgba(0,0,0,0.6),
+    inset 0 1px 0 rgba(255,255,255,0.12);   /* 21st.dev glass top highlight */
+}
+
+@keyframes ga-spin { to { --ga: 360deg; } }
+
 /* ── prefers-reduced-motion ─────────────────────────────── */
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {
@@ -1110,6 +1327,32 @@ body::before {
   .footer-links { align-items: flex-start; }
   .nav-status { display: none; }
   .portrait-hud { display: none; }
+  .hud-corner { display: none; }
+}
+
+/* Helix → vertical stack fallback (set by JS on small / reduced-motion) */
+.helix-outer.helix-stacked { height: auto; }
+.helix-outer.helix-stacked .helix-sticky {
+  position: static;
+  height: auto;
+  overflow: visible;
+  padding-bottom: 64px;
+}
+.helix-outer.helix-stacked .helix-video { display: none; }
+.helix-outer.helix-stacked .helix-stage {
+  position: static;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 24px;
+  padding: 24px;
+}
+.helix-outer.helix-stacked .helix-card {
+  position: static;
+  transform: none !important;
+  opacity: 1 !important;
+  width: 100%;
+  max-width: 360px;
 }
 
 @media (max-width: 480px) {

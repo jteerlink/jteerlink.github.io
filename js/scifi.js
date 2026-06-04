@@ -250,8 +250,8 @@
 
   document.querySelectorAll('[data-count]').forEach(el => countObs.observe(el));
 
-  /* ── Card 3D tilt ───────────────────────────────────────── */
-  document.querySelectorAll('.project-card').forEach(card => {
+  /* ── Card 3D tilt (grid cards only — helix cards are JS-positioned) ── */
+  document.querySelectorAll('.project-card:not(.helix-card)').forEach(card => {
     card.addEventListener('mousemove', e => {
       const rect = card.getBoundingClientRect();
       const cx = rect.left + rect.width  / 2;
@@ -612,5 +612,103 @@
     clearTimeout(resizeTimer);
     resizeTimer = setTimeout(initProjectCanvases, 300);
   });
+
+  /* ── HUD live UTC clock ─────────────────────────────────── */
+  const hudTime = document.getElementById('hud-time');
+  if (hudTime) {
+    const pad = n => String(n).padStart(2, '0');
+    const tickClock = () => {
+      const d = new Date();
+      hudTime.textContent =
+        `${pad(d.getUTCHours())}:${pad(d.getUTCMinutes())}:${pad(d.getUTCSeconds())} UTC`;
+    };
+    tickClock();
+    setInterval(tickClock, 1000);
+  }
+
+  /* ── DNA helix carousel (scroll-driven) ─────────────────── */
+  (function initHelix() {
+    const outer = document.querySelector('.helix-outer');
+    const stage = document.getElementById('helix-stage');
+    if (!outer || !stage) return;
+
+    const cards = Array.from(stage.querySelectorAll('.helix-card'));
+    if (!cards.length) return;
+
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    /* Small screens / reduced-motion → static vertical stack */
+    function stackedMode() {
+      return window.innerWidth <= 768 || reduceMotion;
+    }
+
+    function clearInline() {
+      cards.forEach(c => { c.style.transform = ''; c.style.opacity = ''; c.style.zIndex = ''; c.classList.remove('helix-front'); });
+    }
+
+    const TURNS = 1.7;        // how many rotations across the full scroll
+    const n = cards.length;
+
+    function position(progress) {
+      const W = stage.clientWidth;
+      const H = stage.clientHeight;
+      const cx = W / 2;
+      const amp = Math.min(W * 0.26, 320);   // horizontal swing of the helix
+      const topPad = H * 0.20;
+      const usableH = H * 0.60;
+      const phase = progress * Math.PI * 2 * TURNS;
+
+      cards.forEach((card, i) => {
+        const frac = n > 1 ? i / (n - 1) : 0.5;     // 0 (top) .. 1 (bottom)
+        const theta = frac * Math.PI * 2 + phase;   // one helix turn across column
+        const depth = (Math.cos(theta) + 1) / 2;    // 0 back .. 1 front
+
+        const scale = 0.55 + depth * 0.45;
+        const opacity = 0.22 + depth * 0.78;
+        const cw = card.offsetWidth || 320;
+        const ch = card.offsetHeight || 320;
+        const x = cx + Math.sin(theta) * amp - cw / 2;
+        const y = topPad + frac * usableH - ch / 2;
+
+        card.style.transform = `translate(${x.toFixed(1)}px, ${y.toFixed(1)}px) scale(${scale.toFixed(3)})`;
+        card.style.opacity = opacity.toFixed(3);
+        card.style.zIndex = String(Math.round(depth * 100));
+        card.classList.toggle('helix-front', depth > 0.82);
+      });
+    }
+
+    let ticking = false;
+    function onScroll() {
+      if (ticking) return;
+      ticking = true;
+      requestAnimationFrame(() => {
+        ticking = false;
+        if (stackedMode()) return;
+        const rect = outer.getBoundingClientRect();
+        const total = outer.offsetHeight - window.innerHeight;
+        const scrolled = Math.min(Math.max(-rect.top, 0), total);
+        const progress = total > 0 ? scrolled / total : 0;
+        position(progress);
+      });
+    }
+
+    function setup() {
+      if (stackedMode()) {
+        outer.classList.add('helix-stacked');
+        clearInline();
+      } else {
+        outer.classList.remove('helix-stacked');
+        onScroll();
+      }
+    }
+
+    window.addEventListener('scroll', onScroll, { passive: true });
+    let helixResizeTimer;
+    window.addEventListener('resize', () => {
+      clearTimeout(helixResizeTimer);
+      helixResizeTimer = setTimeout(setup, 200);
+    });
+    setup();
+  })();
 
 })();

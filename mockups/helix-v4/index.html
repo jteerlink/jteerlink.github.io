@@ -1,0 +1,335 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Helix v4 — Design Mockup (static)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:ital,wght@0,400;0,500;0,600;0,700;1,500&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#03080a; --bg2:#061116;
+    --aqua:#38e1ff; --emerald:#43e0a0; --amber:#ffd27a; --white:#eaf6ff; --mint:#bfe6e0;
+    --line:rgba(120,200,210,0.14);
+    --mono:'JetBrains Mono',monospace; --sans:'Inter',system-ui,sans-serif; --disp:'Chakra Petch',sans-serif;
+    --txt:#dcecef; --muted:rgba(150,195,205,0.5);
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{background:var(--bg);color:var(--txt);font-family:var(--sans);line-height:1.6;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:1180px;margin:0 auto;padding:40px 24px 120px}
+  h1.page{font-family:var(--disp);font-weight:700;font-size:26px;letter-spacing:.02em;color:var(--white)}
+  .sub{font-family:var(--mono);font-size:11px;color:var(--muted);letter-spacing:.12em;margin-top:6px;margin-bottom:6px}
+  .banner{font-family:var(--mono);font-size:10px;color:var(--amber);letter-spacing:.16em;border:1px solid rgba(255,210,122,.3);background:rgba(255,210,122,.05);padding:8px 12px;border-radius:5px;display:inline-block;margin-top:14px}
+  section{margin-top:54px}
+  h2.sec{font-family:var(--disp);font-weight:600;font-size:13px;letter-spacing:.18em;color:var(--aqua);text-transform:uppercase;margin-bottom:6px}
+  h2.sec::before{content:'§ ';color:var(--muted)}
+  .note{font-size:12px;color:var(--muted);margin-bottom:18px;max-width:780px}
+  .frame{position:relative;border:1px solid var(--line);border-radius:10px;overflow:hidden;background:#020608}
+  .label{position:absolute;top:10px;left:12px;z-index:6;font-family:var(--mono);font-size:9px;letter-spacing:.14em;color:var(--muted);background:rgba(2,6,10,.6);padding:3px 7px;border-radius:4px}
+
+  /* palette */
+  .swatches{display:flex;gap:14px;flex-wrap:wrap}
+  .sw{width:120px}
+  .sw .chip{height:70px;border-radius:8px;border:1px solid rgba(255,255,255,.08)}
+  .sw .meta{font-family:var(--mono);font-size:10px;color:var(--muted);margin-top:7px;letter-spacing:.06em}
+  .sw .name{color:var(--txt)}
+  .type-row{margin-top:24px;display:flex;flex-direction:column;gap:8px}
+  .t-disp{font-family:var(--disp);font-size:30px;font-weight:600;color:var(--white)}
+  .t-disp em{font-style:italic;background:linear-gradient(120deg,var(--aqua),var(--emerald) 70%,var(--white));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+  .t-mono{font-family:var(--mono);font-size:11px;letter-spacing:.16em;color:var(--aqua)}
+  .t-body{font-size:14px;color:var(--txt);max-width:620px}
+
+  /* swarm variants */
+  .two{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+  .two canvas{display:block;width:100%;height:auto}
+
+  /* hero mock */
+  .hero{position:relative;height:440px}
+  .hero canvas{position:absolute;inset:0;width:100%;height:100%}
+  .hero .corner{position:absolute;font-family:var(--mono);font-size:9px;letter-spacing:.12em;color:var(--aqua);opacity:.6;z-index:4}
+  .hero .tl{top:14px;left:16px} .hero .tr{top:14px;right:16px;text-align:right}
+  .hero .center{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;z-index:3;padding:0 30px}
+  .hero .eyebrow{font-family:var(--mono);font-size:10px;letter-spacing:.16em;color:var(--aqua);margin-bottom:14px}
+  .hero h1{font-family:var(--disp);font-weight:600;font-size:34px;line-height:1.2;max-width:640px;
+    background:linear-gradient(180deg,#f4fbff,#bcdfe4 45%,#7fa7ad 55%,#e0f1f3 75%);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;
+    filter:drop-shadow(0 2px 16px rgba(56,225,255,.16))}
+  .hero h1 em{font-style:italic;-webkit-text-fill-color:transparent;background:linear-gradient(120deg,var(--aqua),var(--emerald));-webkit-background-clip:text;background-clip:text}
+  .hero .term{position:absolute;left:22px;bottom:22px;z-index:4;font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-align:left}
+  .hero .term .h{color:var(--aqua);font-size:9px;opacity:.85;margin-bottom:8px}
+  .hero .term a{display:block;color:var(--muted);text-decoration:none;margin:4px 0}
+  .hero .term .ask{color:var(--emerald)}
+  .hero .term .ask b{color:var(--aqua);animation:blink 1.1s steps(1) infinite;font-weight:400}
+  @keyframes blink{0%,50%{opacity:1}50.01%,100%{opacity:0}}
+
+  /* card stage */
+  .stage{position:relative;height:560px;perspective:1500px}
+  .stage canvas.bg{position:absolute;inset:0;width:100%;height:100%;opacity:.6}
+  .card{position:absolute;width:268px;transform-origin:center center;backface-visibility:hidden;
+    border-radius:11px;overflow:hidden;border:1px solid rgba(140,205,210,.18);
+    background:linear-gradient(155deg,rgba(150,220,225,.05) 0%,transparent 42%),linear-gradient(160deg,rgba(7,17,21,.9),rgba(3,9,13,.94));
+    backdrop-filter:blur(20px) saturate(150%);box-shadow:0 22px 50px rgba(0,0,0,.55),inset 0 1px 0 rgba(255,255,255,.12)}
+  .card .vis{height:118px;border-bottom:1px solid rgba(120,200,210,.14);position:relative;
+    background:radial-gradient(circle at 30% 40%,rgba(56,225,255,.18),transparent 60%),radial-gradient(circle at 70% 70%,rgba(67,224,160,.14),transparent 55%),#040c10}
+  .card .vis .vl{position:absolute;bottom:7px;left:11px;font-family:var(--mono);font-size:8px;letter-spacing:.12em;color:var(--muted)}
+  .card .vis .dots{position:absolute;inset:0;background-image:radial-gradient(rgba(56,225,255,.5) 1px,transparent 1px);background-size:18px 18px;opacity:.35}
+  .card .body{padding:14px 16px}
+  .card .row{display:flex;align-items:center;gap:8px;margin-bottom:9px}
+  .card .ix{font-family:var(--mono);font-size:10px;color:var(--muted)}
+  .card .tag{font-family:var(--mono);font-size:8px;letter-spacing:.06em;padding:2px 7px;border-radius:3px;background:rgba(56,225,255,.1);border:1px solid rgba(56,225,255,.22);color:var(--aqua)}
+  .card .tag.em{background:rgba(67,224,160,.1);border-color:rgba(67,224,160,.24);color:var(--emerald)}
+  .card .yr{margin-left:auto;font-family:var(--mono);font-size:9px;color:var(--muted)}
+  .card h3{font-family:var(--disp);font-weight:600;font-size:16px;color:var(--white);margin-bottom:5px}
+  .card .st{font-size:11px;color:var(--aqua);font-style:italic;opacity:.85;margin-bottom:7px}
+  .card .ds{font-size:11px;color:var(--muted);line-height:1.55}
+  .card .ft{padding:11px 16px;border-top:1px solid rgba(120,200,210,.14);display:flex;gap:10px}
+  .card .ln{font-family:var(--mono);font-size:9px;letter-spacing:.1em;color:var(--aqua);border:1px solid rgba(56,225,255,.22);padding:5px 10px;border-radius:5px}
+  .card .ln.g{color:var(--muted);border-color:rgba(255,255,255,.1)}
+
+  /* facing card moving-border accent — gradient RING (masked), glow via box-shadow */
+  .card.facing{box-shadow:0 26px 60px rgba(0,0,0,.6),inset 0 1px 0 rgba(255,255,255,.14),0 0 34px rgba(56,225,255,.20)}
+  .card.facing::before{content:'';position:absolute;inset:0;border-radius:11px;padding:1.5px;z-index:6;pointer-events:none;
+    background:conic-gradient(from 0deg,var(--aqua),var(--emerald) 35%,var(--white) 50%,var(--emerald) 65%,var(--aqua));
+    -webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask-composite:exclude}
+
+  /* hover demo */
+  .hover-row{display:grid;grid-template-columns:1fr 1fr;gap:40px;max-width:760px}
+  .hover-cell{display:flex;flex-direction:column;align-items:center;gap:12px}
+  .hover-cell .cap{font-family:var(--mono);font-size:10px;letter-spacing:.12em;color:var(--muted)}
+  .static-card{position:relative}
+  /* hovered treatment */
+  .card.hovered{transform:scale(1.05);box-shadow:0 30px 70px rgba(0,0,0,.65),inset 0 1px 0 rgba(255,255,255,.16),0 0 46px rgba(56,225,255,.28),0 0 80px rgba(67,224,160,.14)}
+  .card.hovered::before{content:'';position:absolute;inset:0;border-radius:11px;padding:1.8px;z-index:6;pointer-events:none;
+    background:conic-gradient(from 0deg,var(--aqua),var(--emerald) 30%,var(--amber) 50%,var(--emerald) 70%,var(--aqua));
+    -webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask-composite:exclude}
+  .card.hovered h3{color:var(--aqua)}
+  .legend{font-family:var(--mono);font-size:10px;color:var(--muted);margin-top:10px;line-height:1.8}
+  .legend b{color:var(--emerald)}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1 class="page">HELIX v4 — Design Mockup</h1>
+  <div class="sub">STATIC · FOR APPROVAL · NOTHING ANIMATES (swarm frames are frozen one-shot renders)</div>
+  <div class="banner">Approve the look here → then I build it into the live site</div>
+
+  <!-- 1 · palette + type -->
+  <section>
+    <h2 class="sec">01 · Bioluminal palette &amp; type</h2>
+    <div class="note">Cool aqua + emerald base, sparse warm amber for accents only, white-ice highlight, near-black ground. Display = Chakra Petch, labels = JetBrains Mono.</div>
+    <div class="swatches">
+      <div class="sw"><div class="chip" style="background:#03080a"></div><div class="meta"><span class="name">bg</span> #03080a</div></div>
+      <div class="sw"><div class="chip" style="background:#38e1ff"></div><div class="meta"><span class="name">aqua</span> #38e1ff</div></div>
+      <div class="sw"><div class="chip" style="background:#43e0a0"></div><div class="meta"><span class="name">emerald</span> #43e0a0</div></div>
+      <div class="sw"><div class="chip" style="background:#ffd27a"></div><div class="meta"><span class="name">amber·sparse</span> #ffd27a</div></div>
+      <div class="sw"><div class="chip" style="background:#eaf6ff"></div><div class="meta"><span class="name">white-ice</span> #eaf6ff</div></div>
+    </div>
+    <div class="type-row">
+      <div class="t-disp">Building <em>AI powered</em> systems</div>
+      <div class="t-mono">↳ § 01 · SELECTED WORK · 2026</div>
+      <div class="t-body">Body copy in Inter — the readable layer beneath the HUD chrome.</div>
+    </div>
+  </section>
+
+  <!-- 2 · swarm variants -->
+  <section>
+    <h2 class="sec">02 · Swarm background — single vs. several</h2>
+    <div class="note">Fine-grained particles, no individual tails — each swarm has a dense core that <b style="color:var(--emerald)">thins and tapers</b> at its edges (Gaussian density). Swarms spread all over the field; some orbit and swirl around the central helix. Amber appears only as rare warm motes. Pick a density: one large swarm, or several. (Frozen frames — live version drifts continuously.)</div>
+    <div class="two">
+      <div class="frame"><div class="label">VARIANT A · SINGLE SWARM</div><canvas id="swarmA" width="560" height="380"></canvas></div>
+      <div class="frame"><div class="label">VARIANT B · 4 SWARMS (some orbit helix)</div><canvas id="swarmB" width="560" height="380"></canvas></div>
+    </div>
+  </section>
+
+  <!-- 3 · hero -->
+  <section>
+    <h2 class="sec">03 · Hero</h2>
+    <div class="note">Chrome title + decrypt eyebrow + terminal command menu, over the swarm field. HUD corners with live clock (static here).</div>
+    <div class="frame hero">
+      <canvas id="heroBg" width="1120" height="440"></canvas>
+      <div class="corner tl">LAT 33.0198° N<br>LON 96.6989° W<br><span style="opacity:.6">14:32:07 UTC</span></div>
+      <div class="corner tr">PORTFOLIO · VOL.04<br>RENDER · HELIX/3D<br><span style="opacity:.6">BUILD ACTIVE</span></div>
+      <div class="center">
+        <div class="eyebrow">↳ PORTFOLIO · VOL.04 · 2026</div>
+        <h1>Building <em>AI powered</em> systems that compound — in revenue, in clarity, in the people I work with.</h1>
+      </div>
+      <div class="term">
+        <div class="h">WHAT ARE YOU LOOKING FOR?</div>
+        <a href="#">&gt; WORK</a><a href="#">&gt; ABOUT</a><a href="#">&gt; WRITING</a><a href="#">&gt; CONTACT</a>
+        <div class="ask">&gt; ASK ME ANYTHING<b>_</b></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 4 · card layout, two facing states -->
+  <section>
+    <h2 class="sec">04 · Spin-in-place cards — spaced, pinned</h2>
+    <div class="note">All 5 cards <b style="color:var(--emerald)">spiral around the central column</b> — as they descend, each sits a step further around the helix (front/back depth included), not a flat zigzag. Each also spins about its own axis; the card the scroll "lines up with" faces forward (bright, moving-border) — the rest are edge-on &amp; dim. The facing card stays where it's pinned (off-center is fine). Two frozen states below show how the facing card changes as you scroll.</div>
+
+    <div class="frame stage" style="margin-bottom:18px">
+      <div class="label">SCROLL ≈ 25% → CARD 02 FACING (upper-right)</div>
+      <canvas class="bg" id="stageBgA" width="1120" height="560"></canvas>
+      <div id="stageA"></div>
+    </div>
+
+    <div class="frame stage">
+      <div class="label">SCROLL ≈ 80% → CARD 04 FACING (lower)</div>
+      <canvas class="bg" id="stageBgB" width="1120" height="560"></canvas>
+      <div id="stageB"></div>
+    </div>
+  </section>
+
+  <!-- 5 · hover -->
+  <section>
+    <h2 class="sec">05 · Card hover treatment</h2>
+    <div class="note">On hover, a card snaps to face forward, freezes its spin, and lights up: brighter moving border (with a single amber spark in the gradient), scale-up, and a glow halo. No scanner sweep. Same treatment for metric/experience cards.</div>
+    <div class="hover-row">
+      <div class="hover-cell">
+        <div class="cap">DEFAULT</div>
+        <div class="static-card" id="hoverNormal"></div>
+      </div>
+      <div class="hover-cell">
+        <div class="cap" style="color:var(--aqua)">HOVERED</div>
+        <div class="static-card" id="hoverHot"></div>
+      </div>
+    </div>
+    <div class="legend">
+      <b>Hover effects:</b> face-forward + spin freeze · intensified moving border (aqua→emerald→amber spark) · scale 1.05 · aqua/emerald glow halo
+    </div>
+  </section>
+</div>
+
+<script>
+// ---- card template ----
+const CARDS = [
+  {ix:'01', tag:'Social intelligence', em:false, yr:'2026', name:'Reddit Signal Command', st:'Daily Reddit API intelligence loop', ds:'Scheduled pulls become sentiment trends, topic maps, forecasts, and analyst briefs.', vl:'SENTIMENT · TOPICS · SIGNALS'},
+  {ix:'02', tag:'Multi-agent AI', em:true, yr:'2025', name:'AI Newsletter Generator', st:'Custom multi-agent architecture', ds:'Five agents research, write, and validate technical newsletters — including code that executes.', vl:'MULTI-AGENT · ORCHESTRATION'},
+  {ix:'03', tag:'Computer vision', em:false, yr:'2025', name:'Symptom Sentry AI', st:'Medical image classification', ds:'Classifies throat & ear images for early infection detection with on-device TF.js.', vl:'CNN · BINARY CLASSIFIER'},
+  {ix:'04', tag:'Credit risk · XGBoost', em:false, yr:'2025', name:'Cash Advance Defaults', st:'Credit risk modeling for fintech', ds:'XGBoost default model, Optuna-tuned pipeline. AUC 0.72; strong decile lift.', vl:'XGB · DECILE LIFT · AUC 0.72'},
+  {ix:'05', tag:'Deep learning', em:true, yr:'2024', name:'Symptom Sentinel: Model', st:'EfficientNet image classifier', ds:'Training repo — labeled datasets, EfficientNet baselines, reproducible setup.', vl:'EFFICIENTNET · FEATURE MAP'}
+];
+function cardHTML(c, extraClass, scan){
+  return `<article class="card ${extraClass||''}">
+    ${scan?'<div class="scan"></div>':''}
+    <div class="vis"><div class="dots"></div><div class="vl">${c.vl}</div></div>
+    <div class="body">
+      <div class="row"><span class="ix">${c.ix}</span><span class="tag ${c.em?'em':''}">${c.tag}</span><span class="yr">${c.yr}</span></div>
+      <h3>${c.name}</h3><div class="st">${c.st}</div><div class="ds">${c.ds}</div>
+    </div>
+    <div class="ft"><span class="ln">Case Study →</span><span class="ln g">GitHub ↗</span></div>
+  </article>`;
+}
+
+// ---- spin-in-place + spiral-around-the-column layout ----
+// Cards are PINNED to a helix: as y descends, the x weaves AROUND the central
+// column (angle = base + i*TURN), and cos(angle) gives front/back depth so the
+// stack reads as a spiral wrapping the spine — not a flat zigzag. Scroll then
+// drives only the in-place spin (rotateY) + which card faces forward.
+function layoutStage(elId, activePos){
+  const W=1120,H=560, cx=W/2, ampX=W*0.20, topPad=64, usableH=H*0.78, SPIN=46, YAWCAP=60, n=5;
+  const TURN=1.35, base=-0.7;                 // ~3/4 turn across the 5 cards
+  const host=document.getElementById(elId);
+  let html='';
+  for(let i=0;i<n;i++){
+    const frac=i/(n-1);
+    const ang=base+i*TURN;                     // position around the column
+    const x=cx+Math.sin(ang)*ampX, y=topPad+frac*usableH;
+    const depth=(Math.cos(ang)+1)/2;           // 0 = behind column, 1 = in front
+    const offset=i-activePos;
+    const rotateY=Math.max(-YAWCAP,Math.min(YAWCAP,offset*SPIN));
+    const d=Math.max(0,1-Math.abs(offset));    // scroll emphasis (1 at alignment)
+    const scale=(0.6+depth*0.16)+d*0.26;       // spiral depth + facing boost
+    const opacity=Math.min(1,0.3+depth*0.22+d*0.42).toFixed(2);
+    const z=Math.round(depth*70+d*120);
+    const facing=d>0.8?'facing':'';
+    html+=`<div style="position:absolute;left:${(x-134).toFixed(0)}px;top:${(y-150).toFixed(0)}px;
+      transform:rotateY(${rotateY}deg) scale(${scale.toFixed(3)});opacity:${opacity};z-index:${z};transform-origin:center center">
+      ${cardHTML(CARDS[i],facing)}</div>`;
+  }
+  host.innerHTML=html;
+}
+layoutStage('stageA',1);   // card 02 facing
+layoutStage('stageB',3);   // card 04 facing
+
+// hover demo
+document.getElementById('hoverNormal').innerHTML=cardHTML(CARDS[1],'');
+document.getElementById('hoverHot').innerHTML=cardHTML(CARDS[1],'hovered');
+
+// ---- swarm one-shot render (frozen frame, no rAF) ----
+// No per-particle trails. Each swarm is seeded with a GAUSSIAN density
+// falloff (dense core → sparse, tapering edges), then nudged by a flow
+// field; only the FINAL positions are drawn as fine additive dots.
+const HUES=['#38e1ff','#38e1ff','#43e0a0','#43e0a0','#9be9ff','#7ad6ff']; // amber handled separately, very rare
+function gauss(){ // standard normal (Box–Muller)
+  let u=0,v=0; while(u===0)u=Math.random(); while(v===0)v=Math.random();
+  return Math.sqrt(-2*Math.log(u))*Math.cos(2*Math.PI*v);
+}
+function renderSwarm(canvas, swarmCount, opts){
+  opts=opts||{};
+  const ctx=canvas.getContext('2d'), W=canvas.width, H=canvas.height, cx=W*0.5, cy=H*0.5;
+  ctx.fillStyle='#03080a'; ctx.fillRect(0,0,W,H);
+  const N=Math.floor(W*H/150);                 // very dense — large groups of fine particles
+  const helixR=Math.min(W,H)*0.22;             // band the column occupies
+
+  // swarm clusters: spread ALL OVER; ~half ORBIT (arc-wrap) the central helix axis
+  const clusters=[];
+  for(let s=0;s<swarmCount;s++){
+    const orbit = swarmCount>1 ? (s%2===0) : (Math.random()<0.5);
+    if(orbit){
+      const a=Math.random()*Math.PI*2;
+      clusters.push({orbit:true, ang:a, rad:helixR*(0.75+0.7*Math.random()),
+        arc:0.6+Math.random()*0.7, thick:18+Math.random()*16});
+    }else{
+      clusters.push({orbit:false, x:W*(0.07+0.86*Math.random()), y:H*(0.10+0.80*Math.random()),
+        rx:46+Math.random()*70, ry:40+Math.random()*60, rot:Math.random()*Math.PI});
+    }
+  }
+
+  // Seed particles with a Gaussian density falloff → DENSE CORE that thins/tapers
+  // at the edges. Orbit clusters are seeded as an ARC band wrapping the column.
+  const ps=[];
+  for(let i=0;i<N;i++){
+    const ci=i%swarmCount, c=clusters[ci];
+    let x,y;
+    if(c.orbit){
+      const ang=c.ang+gauss()*c.arc*0.5;           // spread along the arc (swirl)
+      const rad=c.rad+gauss()*c.thick;             // thin radial band
+      x=cx+Math.cos(ang)*rad; y=cy+Math.sin(ang)*rad;
+    }else{
+      const gx=gauss()*c.rx, gy=gauss()*c.ry;      // elliptical blob, dense core
+      x=c.x+gx*Math.cos(c.rot)-gy*Math.sin(c.rot);
+      y=c.y+gx*Math.sin(c.rot)+gy*Math.cos(c.rot);
+    }
+    ps.push({x, y, vx:0, vy:0,
+      hue: Math.random()<0.012 ? '#ffd27a' : HUES[(Math.random()*HUES.length)|0],   // amber VERY sparse
+      r: 0.5+Math.random()*0.55});
+  }
+
+  // Gentle flow-field WARP only (few steps, strong damping) so the dense cores
+  // keep their taper instead of dispersing into strands. No per-particle trails.
+  const STEPS=opts.steps||10;
+  for(let step=0;step<STEPS;step++){
+    for(const p of ps){
+      const ang=(Math.sin(p.x*0.011+step*0.06)+Math.cos(p.y*0.013-step*0.05))*Math.PI;
+      p.vx+=Math.cos(ang)*0.35; p.vy+=Math.sin(ang)*0.35;
+      p.vx*=0.72; p.vy*=0.72;
+      p.x+=p.vx; p.y+=p.vy;
+    }
+  }
+
+  // draw final frame only — fine, soft, additive
+  ctx.globalCompositeOperation='lighter';
+  for(const p of ps){
+    ctx.globalAlpha=0.45+Math.random()*0.45;
+    ctx.beginPath(); ctx.arc(p.x,p.y,p.r,0,6.283); ctx.fillStyle=p.hue; ctx.fill();
+  }
+  ctx.globalAlpha=1; ctx.globalCompositeOperation='source-over';
+}
+renderSwarm(document.getElementById('swarmA'),1,10);
+renderSwarm(document.getElementById('swarmB'),4,10);
+renderSwarm(document.getElementById('heroBg'),5,9);
+renderSwarm(document.getElementById('stageBgA'),5,8);
+renderSwarm(document.getElementById('stageBgB'),3,8);
+</script>
+</body>
+</html>

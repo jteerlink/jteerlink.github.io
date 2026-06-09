@@ -7,7 +7,7 @@
   <meta name="description" content="Portfolio of Jared Teerlink — Manager, Data Science specializing in intelligent systems, applied AI/ML, and team leadership.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:ital,wght@0,400;0,500;0,600;0,700;1,500&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="/assets/css/scifi.css">
 </head>
 <body>
@@ -61,11 +61,11 @@
 
     <div class="hero-inner">
       <div class="hero-content">
-        <div class="hero-eyebrow mono reveal-up">
+        <div class="hero-eyebrow mono reveal-up" data-scramble>
           ↳ PORTFOLIO · VOL.04 · 2026
         </div>
 
-        <h1 class="hero-title reveal-up">
+        <h1 class="hero-title hero-title--chrome reveal-up">
           Building <em>AI powered</em> systems that compound — in revenue, in clarity, in the people I work with.
         </h1>
 
@@ -92,6 +92,18 @@
         </a>
       </div>
     </div>
+
+    <!-- Terminal command menu (reference: "WHAT ARE YOU LOOKING FOR?") -->
+    <nav class="terminal-panel mono" aria-label="Quick navigation">
+      <div class="terminal-head" data-scramble>WHAT ARE YOU LOOKING FOR?</div>
+      <ul class="terminal-list">
+        <li><a href="#work">&gt; WORK</a></li>
+        <li><a href="/about.html">&gt; ABOUT</a></li>
+        <li><a href="/posts/">&gt; WRITING</a></li>
+        <li><a href="/contact.html">&gt; CONTACT</a></li>
+        <li class="terminal-ask">&gt; ASK ME ANYTHING<span class="terminal-caret">_</span></li>
+      </ul>
+    </nav>
 
     <!-- Scroll indicator -->
     <div class="hero-scroll" aria-hidden="true">
@@ -160,17 +172,15 @@
   <section class="helix-outer" id="work" aria-label="Selected work">
     <div class="helix-sticky">
 
-      <!-- Rendered Remotion helix (transparent WebM) -->
-      <video class="helix-video" autoplay loop muted playsinline aria-hidden="true">
-        <source src="/assets/video/helix-loop.webm" type="video/webm">
-      </video>
+      <!-- Live WebGL ephemeral particle helix (scroll-driven) -->
+      <canvas id="helix-spine" class="helix-spine" aria-hidden="true"></canvas>
 
       <div class="helix-header">
         <div>
-          <div class="section-tag mono">§ 01 · SELECTED WORK</div>
+          <div class="section-tag mono" data-scramble>§ 01 · SELECTED WORK</div>
           <h2 class="section-title" style="margin-bottom:0;max-width:420px;">Five projects spiraling through <em>research</em> and <em>production.</em></h2>
         </div>
-        <div class="helix-hint mono" aria-hidden="true">↕ SCROLL TO ROTATE</div>
+        <div class="helix-hint mono" aria-hidden="true" data-scramble>↕ SCROLL TO ROTATE</div>
       </div>
 
       <div class="helix-stage" id="helix-stage">
@@ -305,7 +315,7 @@
       <div class="about-grid">
 
         <div class="reveal-up">
-          <div class="section-tag mono">§ 02 · ABOUT</div>
+          <div class="section-tag mono" data-scramble>§ 02 · ABOUT</div>
           <h2 class="about-title">
             I'm Jared. I build <em>AI powered systems</em> and the people who ship them.
           </h2>
@@ -352,5 +362,6 @@
   </footer>
 
   <script src="/js/scifi.js"></script>
+  <script type="module" src="/js/helix-spine.js"></script>
 </body>
 </html>

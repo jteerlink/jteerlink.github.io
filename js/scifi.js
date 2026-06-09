@@ -32,152 +32,185 @@
 
   window.addEventListener('mouseleave', () => { mouse.x = -999; mouse.y = -999; });
 
-  /* ── Particle class ─────────────────────────────────────── */
+  /* ── Background swarm (Bioluminal) ──────────────────────────
+     Dense, fine particles grouped into a few swarms. Each swarm is a
+     Gaussian blob (dense core → tapering edges); ~half ORBIT the screen
+     centre so they swirl around the helix column. No per-particle trails —
+     the swarm's accumulation is what tapers. Swarm homes stay fairly central
+     (limited dispersion) rather than spreading across the whole screen. */
   function rand(a, b) { return a + Math.random() * (b - a); }
+  function gauss() {
+    let u = 0, v = 0;
+    while (u === 0) u = Math.random();
+    while (v === 0) v = Math.random();
+    return Math.sqrt(-2 * Math.log(u)) * Math.cos(2 * Math.PI * v);
+  }
 
-  class Particle {
-    constructor(type) {
-      this.type = type;   // 'star' | 'drift' | 'bright'
-      this.reset(true);
+  const SWARM_HUES = ['#38e1ff', '#38e1ff', '#43e0a0', '#43e0a0', '#9be9ff', '#7ad6ff'];
+  let clusters = [];
+
+  // ── Billowing fog / steam (eerie volumetric haze behind the swarm) ──
+  // A handful of large, soft, low-alpha blobs that slowly rise, drift and
+  // pulse — overlapping radial gradients read as morphing cloud banks.
+  const FOG_TONES = [
+    'rgba(46, 92, 96, ALPHA)',   // cold teal-grey
+    'rgba(70, 96, 84, ALPHA)',   // sickly green-grey
+    'rgba(40, 66, 88, ALPHA)',   // cold blue-grey
+    'rgba(58, 80, 92, ALPHA)'    // pale steel haze
+  ];
+  let fog = [];
+
+  function buildFog() {
+    fog = [];
+    const COUNT = W < 760 ? 6 : 10;
+    const big = Math.max(W, H);
+    for (let i = 0; i < COUNT; i++) {
+      fog.push({
+        x: Math.random() * W,
+        y: Math.random() * H,
+        r: (0.26 + Math.random() * 0.32) * big,            // large, soft masses
+        rise: 0.10 + Math.random() * 0.22,                  // slow upward billow (steam)
+        swayAmp: W * (0.03 + Math.random() * 0.05),
+        swayPhase: Math.random() * Math.PI * 2,
+        swaySpeed: 0.003 + Math.random() * 0.004,
+        pulsePhase: Math.random() * Math.PI * 2,
+        alpha: 0.055 + Math.random() * 0.06,                // faint but perceptible
+        tone: FOG_TONES[i % FOG_TONES.length]
+      });
     }
+  }
 
-    reset(init) {
-      this.x  = rand(0, W);
-      this.y  = init ? rand(0, H) : (Math.random() > 0.5 ? -10 : H + 10);
-      this.vx = rand(-0.08, 0.08);
-      this.vy = rand(-0.06, 0.12);
+  function updateFog() {
+    for (const f of fog) {
+      f.y -= f.rise;                                         // rise like steam
+      if (f.y < -f.r * 0.6) { f.y = H + f.r * 0.6; f.x = Math.random() * W; }
+    }
+  }
 
-      if (this.type === 'star') {
-        this.r = rand(0.5, 1.2);
-        this.alpha = rand(0.3, 0.8);
-        this.twinkle = rand(0.005, 0.018);
-        this.twinkleDir = 1;
-      } else if (this.type === 'drift') {
-        this.r = rand(1.2, 2.2);
-        this.alpha = rand(0.25, 0.55);
-        this.vx = rand(-0.12, 0.12);
-        this.vy = rand(-0.08, 0.08);
+  function drawFog() {
+    const t = tick;
+    ctx.globalCompositeOperation = 'screen';
+    for (const f of fog) {
+      const x = f.x + Math.sin(t * f.swaySpeed + f.swayPhase) * f.swayAmp;
+      const r = f.r * (0.82 + 0.18 * Math.sin(t * 0.006 + f.pulsePhase));
+      const a = f.alpha * (0.7 + 0.3 * Math.sin(t * 0.004 + f.swayPhase));
+      const g = ctx.createRadialGradient(x, f.y, 0, x, f.y, r);
+      g.addColorStop(0, f.tone.replace('ALPHA', a.toFixed(3)));
+      g.addColorStop(0.5, f.tone.replace('ALPHA', (a * 0.55).toFixed(3)));
+      g.addColorStop(1, 'transparent');
+      ctx.fillStyle = g;
+      ctx.fillRect(0, 0, W, H);
+    }
+    ctx.globalCompositeOperation = 'source-over';
+  }
+
+  function updateClusters() {
+    const cx = W / 2, cy = H / 2, t = tick * 0.013;
+    clusters.forEach(c => {
+      if (c.orbit) {
+        c.ang += c.angVel * 0.024;                          // faster swirl
+        c.x = cx + Math.cos(c.ang) * c.rad;
+        c.y = cy + Math.sin(c.ang) * c.rad * 0.72;        // elliptical swirl around the column
       } else {
-        this.r = rand(2, 4);
-        this.alpha = rand(0.4, 0.7);
-        this.vx = rand(-0.06, 0.06);
-        this.vy = rand(-0.04, 0.04);
-        this.pulseSpeed = rand(0.012, 0.025);
-        this.pulsePhase = rand(0, Math.PI * 2);
+        c.x = c.bx + Math.sin(t * 0.7 + c.wpx) * W * 0.10; // quicker, wider wander across the screen
+        c.y = c.by + Math.cos(t * 0.6 + c.wpy) * H * 0.10;
       }
-    }
-
-    update(i) {
-      /* Repel from mouse */
-      const dx = this.x - mouse.x;
-      const dy = this.y - mouse.y;
-      const dist = Math.sqrt(dx * dx + dy * dy);
-      const repelR = this.type === 'star' ? 60 : 90;
-      if (dist < repelR && dist > 0) {
-        const force = (repelR - dist) / repelR;
-        this.x += (dx / dist) * force * 1.2;
-        this.y += (dy / dist) * force * 1.2;
-      }
-
-      this.x += this.vx;
-      this.y += this.vy;
-
-      /* Twinkle for stars */
-      if (this.type === 'star') {
-        this.alpha += this.twinkle * this.twinkleDir;
-        if (this.alpha > 0.8 || this.alpha < 0.2) this.twinkleDir *= -1;
-      }
-
-      /* Wrap / reset */
-      if (this.x < -10) this.x = W + 10;
-      if (this.x > W + 10) this.x = -10;
-      if (this.y < -10) this.y = H + 10;
-      if (this.y > H + 10) this.y = -10;
-    }
-
-    draw() {
-      ctx.save();
-      ctx.globalAlpha = this.alpha;
-
-      if (this.type === 'star') {
-        ctx.beginPath();
-        ctx.arc(this.x, this.y, this.r, 0, Math.PI * 2);
-        ctx.fillStyle = '#c8e8ff';
-        ctx.fill();
-      } else if (this.type === 'drift') {
-        ctx.beginPath();
-        ctx.arc(this.x, this.y, this.r, 0, Math.PI * 2);
-        ctx.fillStyle = '#00d4ff';
-        ctx.shadowBlur = 8;
-        ctx.shadowColor = '#00d4ff';
-        ctx.fill();
-      } else {
-        const pulse = 0.7 + 0.3 * Math.sin(tick * this.pulseSpeed + this.pulsePhase);
-        ctx.beginPath();
-        ctx.arc(this.x, this.y, this.r * pulse, 0, Math.PI * 2);
-        ctx.fillStyle = '#8b5cf6';
-        ctx.shadowBlur = 16;
-        ctx.shadowColor = '#8b5cf6';
-        ctx.fill();
-      }
-
-      ctx.restore();
-    }
+    });
   }
 
   function buildParticles() {
+    clusters = [];
     particles = [];
-    const starCount   = Math.min(140, Math.floor(W * H / 12000));
-    const driftCount  = Math.min(50,  Math.floor(W * H / 20000));
-    const brightCount = Math.min(20,  Math.floor(W * H / 40000));
+    const cx = W / 2, cy = H / 2, minWH = Math.min(W, H);
+    const SWARMS = W < 760 ? 5 : 7;
 
-    for (let i = 0; i < starCount;   i++) particles.push(new Particle('star'));
-    for (let i = 0; i < driftCount;  i++) particles.push(new Particle('drift'));
-    for (let i = 0; i < brightCount; i++) particles.push(new Particle('bright'));
+    for (let s = 0; s < SWARMS; s++) {
+      const orbit = s % 3 === 0;                            // a few orbit the column; the rest roam
+      clusters.push({
+        orbit,
+        bx: W * (0.06 + 0.88 * Math.random()),              // home bases spread across the WHOLE screen
+        by: H * (0.08 + 0.84 * Math.random()),
+        ang: Math.random() * Math.PI * 2,
+        rad: minWH * (0.18 + Math.random() * 0.34),         // wide swirl — reaches toward the edges
+        angVel: (0.10 + Math.random() * 0.06) * (Math.random() > 0.5 ? 1 : -1),
+        wpx: Math.random() * Math.PI * 2,
+        wpy: Math.random() * Math.PI * 2,
+        x: cx, y: cy
+      });
+    }
+
+    const N = Math.min(1500, Math.floor(W * H / 1400));     // very dense, fine, perf-bounded
+    for (let i = 0; i < N; i++) {
+      const ci = i % clusters.length;
+      const tight = clusters[ci].orbit ? 30 : 64;           // Gaussian blob spread
+      particles.push({
+        ci,
+        ox: gauss() * tight,
+        oy: gauss() * tight * (clusters[ci].orbit ? 0.7 : 1),
+        x: 0, y: 0, vx: 0, vy: 0,
+        hue: Math.random() < 0.012 ? '#ffd27a' : SWARM_HUES[(Math.random() * SWARM_HUES.length) | 0],
+        r: 0.5 + Math.random() * 0.7,
+        tw: Math.random() * Math.PI * 2
+      });
+    }
+
+    updateClusters();   // seed homes so particles don't fly in from origin
+    particles.forEach(p => { const c = clusters[p.ci]; p.x = c.x + p.ox; p.y = c.y + p.oy; });
+    buildFog();
   }
 
-  function drawConnections() {
-    const driftAndBright = particles.filter(p => p.type !== 'star');
-    for (let i = 0; i < driftAndBright.length; i++) {
-      for (let j = i + 1; j < driftAndBright.length; j++) {
-        const a = driftAndBright[i], b = driftAndBright[j];
-        const dx = a.x - b.x, dy = a.y - b.y;
-        const dist = Math.sqrt(dx * dx + dy * dy);
-        const maxD = 110;
-        if (dist < maxD) {
-          const alpha = (1 - dist / maxD) * 0.25;
-          ctx.save();
-          ctx.globalAlpha = alpha;
-          ctx.beginPath();
-          ctx.moveTo(a.x, a.y);
-          ctx.lineTo(b.x, b.y);
-          ctx.strokeStyle = '#00d4ff';
-          ctx.lineWidth = 0.6;
-          ctx.stroke();
-          ctx.restore();
-        }
+  function updateSwarm() {
+    const t = tick * 0.014;
+    updateClusters();
+    for (const p of particles) {
+      const c = clusters[p.ci];
+      const homeX = c.x + p.ox, homeY = c.y + p.oy;
+      const a = (Math.sin(p.x * 0.011 + t) + Math.cos(p.y * 0.013 - t * 0.8)) * Math.PI;
+      p.vx += Math.cos(a) * 0.085;                           // organic flow jitter (faster)
+      p.vy += Math.sin(a) * 0.085;
+      p.vx += (homeX - p.x) * 0.014;                         // cohesion keeps the taper as the blob drifts
+      p.vy += (homeY - p.y) * 0.014;
+      const dx = p.x - mouse.x, dy = p.y - mouse.y, d2 = dx * dx + dy * dy;
+      if (d2 < 9000 && d2 > 1) {                             // light mouse repulsion
+        const dist = Math.sqrt(d2), f = (1 - dist / 95) * 1.1;
+        p.vx += (dx / dist) * f; p.vy += (dy / dist) * f;
       }
+      p.vx *= 0.90; p.vy *= 0.90;                            // a touch less damping → livelier motion
+      p.x += p.vx; p.y += p.vy;
     }
   }
 
   function drawNebula() {
-    const cx = W * 0.72, cy = H * 0.35;
-    const g = ctx.createRadialGradient(cx, cy, 0, cx, cy, W * 0.28);
-    g.addColorStop(0,   'rgba(139,92,246,0.04)');
-    g.addColorStop(0.5, 'rgba(0,212,255,0.02)');
+    const cx = W * 0.62, cy = H * 0.4;
+    const g = ctx.createRadialGradient(cx, cy, 0, cx, cy, W * 0.3);
+    g.addColorStop(0,   'rgba(56,225,255,0.035)');
+    g.addColorStop(0.5, 'rgba(67,224,160,0.02)');
     g.addColorStop(1,   'transparent');
-    ctx.save();
     ctx.fillStyle = g;
     ctx.fillRect(0, 0, W, H);
-    ctx.restore();
+  }
+
+  function drawSwarm() {
+    ctx.globalCompositeOperation = 'lighter';
+    for (const p of particles) {
+      ctx.globalAlpha = 0.4 + 0.35 * (0.5 + 0.5 * Math.sin(tick * 0.05 + p.tw));
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, p.r, 0, 6.283);
+      ctx.fillStyle = p.hue;
+      ctx.fill();
+    }
+    ctx.globalAlpha = 1;
+    ctx.globalCompositeOperation = 'source-over';
   }
 
   function animate() {
     tick++;
-    ctx.clearRect(0, 0, W, H);
+    ctx.clearRect(0, 0, W, H);          // full clear → no trails
     drawNebula();
-    drawConnections();
-    particles.forEach((p, i) => { p.update(i); p.draw(); });
+    updateFog();
+    drawFog();                          // eerie billowing haze behind the swarm
+    updateSwarm();
+    drawSwarm();
     rafId = requestAnimationFrame(animate);
   }
 
@@ -289,7 +322,7 @@
 
   /* Network graph (Reddit Signal) */
   function animNetwork(c, W, H) {
-    const CYAN = '#00d4ff';
+    const CYAN = '#38e1ff';
     const nodes = Array.from({ length: 14 }, () => ({
       x: 20 + Math.random() * (W - 40),
       y: 10 + Math.random() * (H - 20),
@@ -310,7 +343,7 @@
     function frame() {
       t += 0.016;
       c.clearRect(0, 0, W, H);
-      c.fillStyle = 'rgba(2,6,22,0.9)';
+      c.fillStyle = 'rgba(4,12,16,0.9)';
       c.fillRect(0, 0, W, H);
 
       /* edges */
@@ -320,7 +353,7 @@
         c.beginPath();
         c.moveTo(a.x, a.y);
         c.lineTo(b.x, b.y);
-        c.strokeStyle = `rgba(0,212,255,${alpha})`;
+        c.strokeStyle = `rgba(56,225,255,${alpha})`;
         c.lineWidth = 0.7;
         c.stroke();
       });
@@ -361,7 +394,7 @@
   function animAgents(c, W, H) {
     const cx = W / 2, cy = H / 2, hubR = 14, agentR = 7, orbitR = Math.min(W, H) * 0.34;
     const N = 5;
-    const PURPLE = '#8b5cf6', CYAN = '#00d4ff';
+    const PURPLE = '#43e0a0', CYAN = '#38e1ff';
     const packets = [];
     let t = 0;
 
@@ -376,7 +409,7 @@
     function frame() {
       t += 0.018;
       c.clearRect(0, 0, W, H);
-      c.fillStyle = 'rgba(2,6,22,0.9)';
+      c.fillStyle = 'rgba(4,12,16,0.9)';
       c.fillRect(0, 0, W, H);
 
       /* orbit lines */
@@ -384,7 +417,7 @@
         const angle = (i / N) * Math.PI * 2;
         const ax = cx + orbitR * Math.cos(angle), ay = cy + orbitR * Math.sin(angle);
         c.beginPath(); c.moveTo(cx, cy); c.lineTo(ax, ay);
-        c.strokeStyle = 'rgba(139,92,246,0.15)'; c.lineWidth = 0.8; c.stroke();
+        c.strokeStyle = 'rgba(67,224,160,0.15)'; c.lineWidth = 0.8; c.stroke();
       }
 
       /* packets */
@@ -404,7 +437,7 @@
         const angle = (i / N) * Math.PI * 2 + t * 0.08;
         const ax = cx + orbitR * Math.cos(angle), ay = cy + orbitR * Math.sin(angle);
         c.beginPath(); c.arc(ax, ay, agentR, 0, Math.PI * 2);
-        c.fillStyle = 'rgba(139,92,246,0.25)';
+        c.fillStyle = 'rgba(67,224,160,0.25)';
         c.strokeStyle = PURPLE; c.lineWidth = 1.2;
         c.shadowBlur = 10; c.shadowColor = PURPLE;
         c.fill(); c.stroke(); c.shadowBlur = 0;
@@ -413,7 +446,7 @@
       /* hub */
       const hubPulse = 1 + 0.12 * Math.sin(t * 2.5);
       c.beginPath(); c.arc(cx, cy, hubR * hubPulse, 0, Math.PI * 2);
-      c.fillStyle = 'rgba(0,212,255,0.18)'; c.strokeStyle = CYAN;
+      c.fillStyle = 'rgba(56,225,255,0.18)'; c.strokeStyle = CYAN;
       c.lineWidth = 1.5; c.shadowBlur = 20; c.shadowColor = CYAN;
       c.fill(); c.stroke(); c.shadowBlur = 0;
 
@@ -430,13 +463,13 @@
     function frame() {
       t += 0.022;
       c.clearRect(0, 0, W, H);
-      c.fillStyle = 'rgba(2,6,22,0.9)';
+      c.fillStyle = 'rgba(4,12,16,0.9)';
       c.fillRect(0, 0, W, H);
 
       /* concentric rings */
       [0.33, 0.66, 1].forEach(f => {
         c.beginPath(); c.arc(cx, cy, maxR * f, 0, Math.PI * 2);
-        c.strokeStyle = `rgba(0,212,255,${0.06 + f * 0.06})`; c.lineWidth = 0.8; c.stroke();
+        c.strokeStyle = `rgba(56,225,255,${0.06 + f * 0.06})`; c.lineWidth = 0.8; c.stroke();
       });
 
       /* rotating sweep */
@@ -448,8 +481,8 @@
       c.translate(cx, cy);
       c.rotate(sweepAngle);
       const g = c.createLinearGradient(0, 0, maxR, 0);
-      g.addColorStop(0,   'rgba(0,212,255,0.55)');
-      g.addColorStop(0.4, 'rgba(0,212,255,0.12)');
+      g.addColorStop(0,   'rgba(56,225,255,0.55)');
+      g.addColorStop(0.4, 'rgba(56,225,255,0.12)');
       g.addColorStop(1,   'transparent');
       c.beginPath(); c.moveTo(0, 0); c.arc(0, 0, maxR, -0.4, 0); c.closePath();
       c.fillStyle = g; c.fill();
@@ -459,14 +492,14 @@
       const lw = 0.6, la = 0.15;
       [[cx, cy - maxR, cx, cy + maxR], [cx - maxR, cy, cx + maxR, cy]].forEach(([x1,y1,x2,y2]) => {
         c.beginPath(); c.moveTo(x1, y1); c.lineTo(x2, y2);
-        c.strokeStyle = `rgba(0,212,255,${la})`; c.lineWidth = lw; c.stroke();
+        c.strokeStyle = `rgba(56,225,255,${la})`; c.lineWidth = lw; c.stroke();
       });
 
       /* scanning dot on sweep edge */
       const dotX = cx + maxR * Math.cos(sweepAngle);
       const dotY = cy + maxR * Math.sin(sweepAngle);
       c.beginPath(); c.arc(dotX, dotY, 3, 0, Math.PI * 2);
-      c.fillStyle = '#00d4ff'; c.shadowBlur = 12; c.shadowColor = '#00d4ff';
+      c.fillStyle = '#38e1ff'; c.shadowBlur = 12; c.shadowColor = '#38e1ff';
       c.fill(); c.shadowBlur = 0;
 
       /* heartbeat line at bottom */
@@ -477,7 +510,7 @@
         const spike = Math.exp(-Math.pow(((xr - ((t * 0.3) % 1)) * 3), 2) * 20) * 18;
         c.lineTo(lx0 + x, lineY - spike);
       }
-      c.strokeStyle = 'rgba(240,171,252,0.5)'; c.lineWidth = 1.2; c.stroke();
+      c.strokeStyle = 'rgba(158,199,224,0.5)'; c.lineWidth = 1.2; c.stroke();
 
       requestAnimationFrame(frame);
     }
@@ -486,7 +519,7 @@
 
   /* Bar chart (Credit Risk) */
   function animBars(c, W, H) {
-    const AMBER = '#fbbf24', CYAN = '#00d4ff';
+    const AMBER = '#ffd27a', CYAN = '#38e1ff';
     const heights = [0.88, 0.76, 0.65, 0.55, 0.45, 0.36, 0.28, 0.21, 0.15, 0.10];
     const n = heights.length;
     const barW = Math.floor((W - 48) / n) - 4;
@@ -496,7 +529,7 @@
       t += 0.018;
       progress = Math.min(progress + 0.016, 1);
       c.clearRect(0, 0, W, H);
-      c.fillStyle = 'rgba(2,6,22,0.9)';
+      c.fillStyle = 'rgba(4,12,16,0.9)';
       c.fillRect(0, 0, W, H);
 
       const baseY = H - 20;
@@ -509,7 +542,7 @@
         const y = baseY - h * maxBarH * progress;
         i === 0 ? c.moveTo(x, y) : c.lineTo(x, y);
       });
-      c.strokeStyle = 'rgba(0,212,255,0.3)'; c.lineWidth = 1; c.setLineDash([3,4]); c.stroke(); c.setLineDash([]);
+      c.strokeStyle = 'rgba(56,225,255,0.3)'; c.lineWidth = 1; c.setLineDash([3,4]); c.stroke(); c.setLineDash([]);
 
       /* bars */
       heights.forEach((h, i) => {
@@ -519,7 +552,7 @@
 
         const g = c.createLinearGradient(x, y, x, baseY);
         g.addColorStop(0, AMBER);
-        g.addColorStop(1, 'rgba(251,191,36,0.15)');
+        g.addColorStop(1, 'rgba(255,210,122,0.15)');
         c.fillStyle = g;
         c.shadowBlur = i < 3 ? 12 : 0;
         c.shadowColor = AMBER;
@@ -549,7 +582,7 @@
 
   /* Activation grid (Deep Learning) */
   function animGrid(c, W, H) {
-    const CYAN = '#00d4ff', PURPLE = '#8b5cf6';
+    const CYAN = '#38e1ff', PURPLE = '#43e0a0';
     const cols = 7, rows = 5;
     const cw = (W - 24) / cols, ch = (H - 16) / rows;
     let t = 0;
@@ -558,7 +591,7 @@
     function frame() {
       t += 0.025;
       c.clearRect(0, 0, W, H);
-      c.fillStyle = 'rgba(2,6,22,0.9)';
+      c.fillStyle = 'rgba(4,12,16,0.9)';
       c.fillRect(0, 0, W, H);
 
       for (let row = 0; row < rows; row++) {
@@ -626,6 +659,45 @@
     setInterval(tickClock, 1000);
   }
 
+  /* ── Decrypt / scramble text (21st.dev-inspired) ────────── */
+  (function initScramble() {
+    const GLYPHS = '!<>-_\\/[]{}=+*^?#·:0123456789ABCDEFGHJKLMNPQRSTUVWXYZ';
+    const els = document.querySelectorAll('[data-scramble]');
+    if (!els.length) return;
+
+    function scramble(el) {
+      const target = el.getAttribute('data-scramble-text');
+      const len = target.length;
+      const dur = 240 + len * 24;
+      const start = performance.now();
+      function frame(now) {
+        const p = Math.min((now - start) / dur, 1);
+        const reveal = p * len;
+        let out = '';
+        for (let i = 0; i < len; i++) {
+          const ch = target[i];
+          if (ch === ' ' || i < reveal) out += ch;
+          else out += GLYPHS[(Math.random() * GLYPHS.length) | 0];
+        }
+        el.textContent = out;
+        if (p < 1) requestAnimationFrame(frame);
+        else el.textContent = target;
+      }
+      requestAnimationFrame(frame);
+    }
+
+    const obs = new IntersectionObserver((entries) => {
+      entries.forEach((e) => {
+        if (e.isIntersecting) { scramble(e.target); obs.unobserve(e.target); }
+      });
+    }, { threshold: 0.6 });
+
+    els.forEach((el) => {
+      el.setAttribute('data-scramble-text', el.textContent.trim());
+      obs.observe(el);
+    });
+  })();
+
   /* ── DNA helix carousel (scroll-driven) ─────────────────── */
   (function initHelix() {
     const outer = document.querySelector('.helix-outer');
@@ -646,36 +718,88 @@
       cards.forEach(c => { c.style.transform = ''; c.style.opacity = ''; c.style.zIndex = ''; c.classList.remove('helix-front'); });
     }
 
-    const TURNS = 1.7;        // how many rotations across the full scroll
     const n = cards.length;
+    const ANG_STEP = 1.5;      // azimuth (rad) between consecutive cards — loose → gaps between focuses
+    const RAD_FRAC = 0.38;     // tower radius as a fraction of stage width — WIDE orbit around the pillar
+    const PITCH_FRAC = 0.28;   // vertical descent per card-step as a fraction of stage height
+    const SPIN_MAX = 200;      // cap (deg) on each card's independent entry/exit self-spin
+    let lastProgress = 0;
+    let hoveredCard = null;
+
+    /* TOWER CAROUSEL geometry. The cards are windows on a cylindrical tower,
+       set along the spiral staircase (the WebGL spine). As `progress` advances
+       the tower ROTATES about its vertical axis while the view DESCENDS, so each
+       card rises into frame, swings to face the viewer at centre, then winds
+       around and sinks away. `f` = signed distance (in card-steps) from this
+       card's focus: f=0 → facing & vertically centred. */
+    function place(i, progress) {
+      const W = stage.clientWidth, H = stage.clientHeight;
+      const cx = W / 2, cy = H / 2;
+      const radX = Math.min(W * RAD_FRAC, 560);
+      const pitch = H * PITCH_FRAC;
+      const cw = cards[i].offsetWidth || 300;
+      const ch = cards[i].offsetHeight || 340;
+
+      const f = (n - 1) * progress - i;            // 0 at this card's focus moment
+      const angle = f * ANG_STEP;                  // azimuth around the tower (position)
+      const depth = (Math.cos(angle) + 1) / 2;     // 1 = near/front, 0 = far/back of tower
+      // Each card spins about its OWN vertical axis as it transits the central
+      // view: rotateY = 0 (facing) at focus, ±180° by the time it has wound a
+      // full step away — an independent flip on entry/exit (backface-hidden →
+      // the card flips edge-on → face → edge-on as it passes through centre).
+      const spin = Math.max(-SPIN_MAX, Math.min(SPIN_MAX, f * 180));
+      return {
+        f, depth, spin,
+        x: cx + Math.sin(angle) * radX - cw / 2,
+        y: cy + f * pitch - ch / 2,               // VERTICAL DESCENT with scroll
+        scale: 0.5 + depth * 0.45,                // far cards small, focus card large
+        opacity: Math.max(0.18, Math.min(1, 0.18 + depth * 0.82))  // floor → far side faintly visible
+      };
+    }
 
     function position(progress) {
-      const W = stage.clientWidth;
-      const H = stage.clientHeight;
-      const cx = W / 2;
-      const amp = Math.min(W * 0.26, 320);   // horizontal swing of the helix
-      const topPad = H * 0.20;
-      const usableH = H * 0.60;
-      const phase = progress * Math.PI * 2 * TURNS;
-
+      lastProgress = progress;
       cards.forEach((card, i) => {
-        const frac = n > 1 ? i / (n - 1) : 0.5;     // 0 (top) .. 1 (bottom)
-        const theta = frac * Math.PI * 2 + phase;   // one helix turn across column
-        const depth = (Math.cos(theta) + 1) / 2;    // 0 back .. 1 front
-
-        const scale = 0.55 + depth * 0.45;
-        const opacity = 0.22 + depth * 0.78;
-        const cw = card.offsetWidth || 320;
-        const ch = card.offsetHeight || 320;
-        const x = cx + Math.sin(theta) * amp - cw / 2;
-        const y = topPad + frac * usableH - ch / 2;
-
-        card.style.transform = `translate(${x.toFixed(1)}px, ${y.toFixed(1)}px) scale(${scale.toFixed(3)})`;
-        card.style.opacity = opacity.toFixed(3);
-        card.style.zIndex = String(Math.round(depth * 100));
-        card.classList.toggle('helix-front', depth > 0.82);
+        if (card === hoveredCard) return;          // hover owns this card until mouseleave
+        const p = place(i, progress);
+        card.style.transform =
+          `translate(${p.x.toFixed(1)}px, ${p.y.toFixed(1)}px) ` +
+          `rotateY(${p.spin.toFixed(2)}deg) scale(${p.scale.toFixed(3)})`;
+        card.style.opacity = p.opacity.toFixed(3);
+        card.style.zIndex = String(Math.round(p.depth * 100));
+        card.style.pointerEvents = Math.abs(p.f) < 0.5 ? 'auto' : 'none';
+        card.classList.toggle('helix-front', Math.abs(p.f) < 0.3);
       });
     }
+
+    /* Hover: snap the focused window flat to face the viewer (freeze the wind)
+       at its current tower position until mouseleave. */
+    function applyHover(card) {
+      const i = cards.indexOf(card);
+      const p = place(i, lastProgress);
+      card.style.transition = 'transform .4s cubic-bezier(.16,1,.3,1), opacity .3s ease';
+      card.style.transform =
+        `translate(${p.x.toFixed(1)}px, ${p.y.toFixed(1)}px) rotateY(0deg) scale(1.0)`;
+      card.style.opacity = '1';
+      card.style.zIndex = '200';
+      card.style.pointerEvents = 'auto';
+      card.classList.add('helix-front', 'helix-hover');
+    }
+
+    cards.forEach(card => {
+      card.addEventListener('mouseenter', () => {
+        if (stackedMode()) return;
+        hoveredCard = card;
+        applyHover(card);
+      });
+      card.addEventListener('mouseleave', () => {
+        if (stackedMode()) return;
+        if (hoveredCard === card) hoveredCard = null;
+        card.classList.remove('helix-hover');
+        setTimeout(() => { if (card !== hoveredCard) card.style.transition = ''; }, 400);
+        position(lastProgress);
+      });
+    });
 
     let ticking = false;
     function onScroll() {

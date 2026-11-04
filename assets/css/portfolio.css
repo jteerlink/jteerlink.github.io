@@ -214,7 +214,7 @@ img { display: block; max-width: 100%; }
   gap: 64px;
   max-width: 1400px;
   margin: 0 auto;
-  align-items: start;
+  align-items: stretch;
 }
 .home-hero-eyebrow { margin-bottom: 32px; }
 .home-hero-title {
@@ -1273,10 +1273,47 @@ img { display: block; max-width: 100%; }
   align-items: center;
 }
 
+.hero-left {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 40px;
+}
+.hero-pillars {
+  padding-top: 28px;
+  border-top: 1px solid var(--line-strong);
+}
+.hero-pillars-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+.hero-pillar {
+  padding: 16px 18px;
+  background: var(--paper-2);
+  border: 1px solid var(--line);
+}
+.hero-pillar-k {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--accent);
+  font-weight: 500;
+  margin-bottom: 8px;
+}
+.hero-pillar-t {
+  font-size: 13.5px;
+  line-height: 1.5;
+  color: var(--ink-2);
+}
+
 .exec-card {
   background: var(--paper-2);
   border: 1px solid var(--line-strong);
   overflow: hidden;
+  display: flex;
+  flex-direction: column;
 }
 .exec-portrait {
   aspect-ratio: 4/4.2;
@@ -1459,6 +1496,7 @@ img { display: block; max-width: 100%; }
 .proj-thumb-mini svg { width: 100%; height: 100%; display: block; }
 
 @media (max-width: 900px) {
+  .hero-pillars-grid { grid-template-columns: 1fr; }
   .role-row { grid-template-columns: 1fr; gap: 20px; padding: 24px; }
   .role-outcomes { grid-template-columns: 1fr; }
   .projects-grid { grid-template-columns: 1fr; }

@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Work — Jared Teerlink</title>
-  <meta name="description" content="Selected projects — production ML systems, research, and applied AI across financial services, healthcare, and more.">
+  <meta name="description" content="Open-source architecture case studies and enterprise AI/ML systems by Jared Teerlink.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -26,19 +26,19 @@
   </nav>
 
   <section class="page-header">
-    <div class="eyebrow">Work · 5 projects · 2024–2026</div>
-    <h1>Selected projects.</h1>
-    <p>A small set of recent work — production systems, research, and the occasional weekend rabbit-hole. Each links to a full write-up.</p>
+    <div class="eyebrow">Open-Source Proof · 4 Architecture Case Studies · 2024–2026</div>
+    <h1>Public systems &amp; <em>case studies.</em></h1>
+    <p>Because my enterprise production work at Ryan LLC, Capital One, Group 1, and Daikin is proprietary, I build and document end-to-end open-source systems you can inspect directly — from data ingestion and model training to deployment and monitoring.</p>
   </section>
 
   <div class="filters">
     <div class="filter-group">
-      <button class="filter-pill is-active" data-filter="all">All</button>
-      <button class="filter-pill" data-filter="ai">AI / Multi-agent</button>
-      <button class="filter-pill" data-filter="cv">Computer vision</button>
-      <button class="filter-pill" data-filter="ml">Classical ML</button>
+      <button class="filter-pill is-active" data-filter="all">All systems</button>
+      <button class="filter-pill" data-filter="ai">AI / NLP / Agents</button>
+      <button class="filter-pill" data-filter="ml">Credit Risk / Tabular ML</button>
+      <button class="filter-pill" data-filter="cv">Computer Vision</button>
     </div>
-    <div class="filter-meta"><span id="filter-count">05</span> projects shown</div>
+    <div class="filter-meta"><span id="filter-count">04</span> systems shown</div>
   </div>
 
   <div class="projects-list">
@@ -47,12 +47,12 @@
       <div class="project-num">01</div>
       <div class="project-body">
         <div class="project-meta" style="flex-direction:row;gap:16px;align-items:center;margin-bottom:12px;">
-          <span class="eyebrow">Social intelligence · NLP</span>
+          <span class="eyebrow">Social intelligence · NLP · Full-Stack MLOps</span>
           <span class="eyebrow num-tabular">2026</span>
         </div>
         <h2 class="project-title"><a href="/posts/reddit-signal-command/">Reddit Signal Command</a></h2>
         <p class="project-subtitle">A daily Reddit API intelligence loop for AI-community signal</p>
-        <p class="project-summary">A full-stack dashboard that turns scheduled Reddit API pulls into sentiment trends, topic maps, semantic search, narrative events, model diagnostics, forecasts, and analyst briefs.</p>
+        <p class="project-summary">A full-stack dashboard that turns scheduled PRAW API pulls into weak-supervised DistilBERT sentiment trends, BERTopic maps, MiniLM semantic search, Prophet forecasts, and model-health diagnostics.</p>
         <div class="project-stack">
           <span class="stack-pill">PRAW</span><span class="stack-pill">FastAPI</span><span class="stack-pill">Next.js</span><span class="stack-pill">DistilBERT</span><span class="stack-pill">BERTopic</span><span class="stack-pill">Prophet</span>
         </div>
@@ -85,7 +85,7 @@
         </div>
         <h2 class="project-title"><a href="/posts/ai-powered-newsletter-generator/">AI-Powered Newsletter Generator</a></h2>
         <p class="project-subtitle">A custom multi-agent architecture for technical content</p>
-        <p class="project-summary">A purpose-built agent framework that researches, writes, and validates technical newsletters end-to-end — including code that actually executes. Five specialized agents, sandbox-validated examples, a quality dashboard.</p>
+        <p class="project-summary">A purpose-built agent framework that researches, writes, and validates technical newsletters end-to-end — including code that actually executes inside a sandbox. Five specialized agents, sandbox-validated examples, and a quality dashboard.</p>
         <div class="project-stack">
           <span class="stack-pill">Python</span><span class="stack-pill">ChromaDB</span><span class="stack-pill">Crawl4AI</span><span class="stack-pill">PyTorch</span><span class="stack-pill">Streamlit</span><span class="stack-pill">NVIDIA NIM</span>
         </div>
@@ -111,44 +111,8 @@
       </div>
     </article>
 
-    <article class="project-row reveal" data-cat="cv">
-      <div class="project-num">03</div>
-      <div class="project-body">
-        <div class="project-meta" style="flex-direction:row;gap:16px;align-items:center;margin-bottom:12px;">
-          <span class="eyebrow">Computer vision</span>
-          <span class="eyebrow num-tabular">2025</span>
-        </div>
-        <h2 class="project-title"><a href="/posts/symptom-sentry-ai/">Symptom Sentry AI</a></h2>
-        <p class="project-subtitle">Medical image classification for consumer healthcare</p>
-        <p class="project-summary">A production web app that classifies throat and ear images for early infection detection, with a hardened auth + analysis-history backend and on-device TensorFlow.js inference.</p>
-        <div class="project-stack">
-          <span class="stack-pill">TensorFlow</span><span class="stack-pill">TensorFlow.js</span><span class="stack-pill">Node.js</span><span class="stack-pill">PostgreSQL</span><span class="stack-pill">Express</span>
-        </div>
-        <div class="project-actions">
-          <a class="project-cta" href="/posts/symptom-sentry-ai/">Read case study <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M3 8h10M9 4l4 4-4 4"/></svg></a>
-          <a class="project-cta project-cta--repo" href="https://github.com/jteerlink/SymptomSentinelAI" target="_blank" rel="noopener noreferrer">View repo <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M5 11L11 5M7 5h4v4"/><path d="M5 5H3.8A1.8 1.8 0 0 0 2 6.8v5.4A1.8 1.8 0 0 0 3.8 14h5.4a1.8 1.8 0 0 0 1.8-1.8V11"/></svg></a>
-        </div>
-      </div>
-      <div class="project-thumb">
-        <svg viewBox="0 0 400 250" preserveAspectRatio="xMidYMid slice">
-          <rect width="400" height="250" fill="#F2EEE5"/>
-          <g transform="translate(50,68) skewY(-15)"><rect width="60" height="120" fill="#0A0A0A" opacity="0.08" stroke="#0A0A0A" stroke-width="0.5"/></g>
-          <g transform="translate(78,64) skewY(-15)"><rect width="54" height="128" fill="#0A0A0A" opacity="0.14" stroke="#0A0A0A" stroke-width="0.5"/></g>
-          <g transform="translate(106,60) skewY(-15)"><rect width="48" height="136" fill="#0A0A0A" opacity="0.20" stroke="#0A0A0A" stroke-width="0.5"/></g>
-          <g transform="translate(162,52) skewY(-15)"><rect width="36" height="152" fill="#0A0A0A" opacity="0.26" stroke="#0A0A0A" stroke-width="0.5"/></g>
-          <g transform="translate(260,70)">
-            <rect x="0" y="0" width="100" height="20" fill="none" stroke="#0A0A0A" stroke-width="0.8"/><rect x="0" y="0" width="80" height="20" fill="#0A0A0A"/>
-            <text x="105" y="14" font-family="monospace" font-size="9" fill="#0A0A0A">0.91</text>
-            <rect x="0" y="40" width="100" height="20" fill="none" stroke="#0A0A0A" stroke-width="0.8"/><rect x="0" y="40" width="35" height="20" fill="#0A0A0A" opacity="0.3"/>
-            <text x="105" y="54" font-family="monospace" font-size="9" fill="#0A0A0A">0.09</text>
-          </g>
-          <text x="20" y="232" font-family="monospace" font-size="9" fill="#0A0A0A" opacity="0.55" letter-spacing="2">CNN · BINARY CLASSIFIER</text>
-        </svg>
-      </div>
-    </article>
-
     <article class="project-row reveal" data-cat="ml">
-      <div class="project-num">04</div>
+      <div class="project-num">03</div>
       <div class="project-body">
         <div class="project-meta" style="flex-direction:row;gap:16px;align-items:center;margin-bottom:12px;">
           <span class="eyebrow">Credit risk · XGBoost</span>
@@ -156,7 +120,7 @@
         </div>
         <h2 class="project-title"><a href="/posts/predicting-cash-advance-defaults/">Predicting Cash Advance Defaults</a></h2>
         <p class="project-subtitle">Credit risk modeling for fintech lending</p>
-        <p class="project-summary">An XGBoost-driven default prediction model with thoughtful feature engineering and an Optuna-tuned scoring pipeline ready for production. Tuned AUC of 0.72; strong decile lift.</p>
+        <p class="project-summary">An XGBoost-driven default prediction model with behavioral feature engineering and an Optuna-tuned scoring pipeline ready for production. Tuned AUC of 0.72 and strong top-decile lift.</p>
         <div class="project-stack">
           <span class="stack-pill">XGBoost</span><span class="stack-pill">Optuna</span><span class="stack-pill">Python</span><span class="stack-pill">scikit-learn</span>
         </div>
@@ -187,39 +151,39 @@
     </article>
 
     <article class="project-row reveal" data-cat="cv">
-      <div class="project-num">05</div>
+      <div class="project-num">04</div>
       <div class="project-body">
         <div class="project-meta" style="flex-direction:row;gap:16px;align-items:center;margin-bottom:12px;">
-          <span class="eyebrow">Deep learning</span>
-          <span class="eyebrow num-tabular">2024</span>
+          <span class="eyebrow">Computer vision · Edge inference</span>
+          <span class="eyebrow num-tabular">2024–2025</span>
         </div>
-        <h2 class="project-title"><a href="/posts/symptom-sentinel-model-build/">Symptom Sentinel: Model Build</a></h2>
-        <p class="project-subtitle">EfficientNet-driven medical image classifier</p>
-        <p class="project-summary">The training repository powering Symptom Sentry — labeled datasets, EfficientNet baselines, and a reproducible setup for ear and throat infection detection.</p>
+        <h2 class="project-title"><a href="/posts/symptom-sentry-ai/">Symptom Sentry AI (App + EfficientNet Pipeline)</a></h2>
+        <p class="project-subtitle">End-to-end medical image classification &amp; on-device web deployment</p>
+        <p class="project-summary">A unified showcase pairing the reproducible EfficientNet training pipeline with a production web application that classifies throat and ear images using on-device TensorFlow.js inference and a hardened Node.js/PostgreSQL backend.</p>
         <div class="project-stack">
-          <span class="stack-pill">TensorFlow</span><span class="stack-pill">Keras</span><span class="stack-pill">Python</span><span class="stack-pill">Jupyter</span>
+          <span class="stack-pill">TensorFlow / Keras</span><span class="stack-pill">EfficientNet</span><span class="stack-pill">TensorFlow.js</span><span class="stack-pill">Node.js</span><span class="stack-pill">PostgreSQL</span>
         </div>
         <div class="project-actions">
-          <a class="project-cta" href="/posts/symptom-sentinel-model-build/">Read case study <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M3 8h10M9 4l4 4-4 4"/></svg></a>
-          <a class="project-cta project-cta--repo" href="https://github.com/jteerlink/symptom-sentinel-model" target="_blank" rel="noopener noreferrer">View repo <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M5 11L11 5M7 5h4v4"/><path d="M5 5H3.8A1.8 1.8 0 0 0 2 6.8v5.4A1.8 1.8 0 0 0 3.8 14h5.4a1.8 1.8 0 0 0 1.8-1.8V11"/></svg></a>
+          <a class="project-cta" href="/posts/symptom-sentry-ai/">App case study <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M3 8h10M9 4l4 4-4 4"/></svg></a>
+          <a class="project-cta" href="/posts/symptom-sentinel-model-build/">Model training study <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M3 8h10M9 4l4 4-4 4"/></svg></a>
+          <a class="project-cta project-cta--repo" href="https://github.com/jteerlink/SymptomSentinelAI" target="_blank" rel="noopener noreferrer">App repo ↗</a>
+          <a class="project-cta project-cta--repo" href="https://github.com/jteerlink/symptom-sentinel-model" target="_blank" rel="noopener noreferrer">Model repo ↗</a>
         </div>
       </div>
       <div class="project-thumb">
         <svg viewBox="0 0 400 250" preserveAspectRatio="xMidYMid slice">
           <rect width="400" height="250" fill="#F2EEE5"/>
-          <line x1="40"  y1="40" x2="40"  y2="210" stroke="#0A0A0A" stroke-width="1.2" opacity="0.7"/>
-          <line x1="64"  y1="40" x2="64"  y2="210" stroke="#0A0A0A" stroke-width="0.4" opacity="0.3"/>
-          <line x1="112" y1="40" x2="112" y2="210" stroke="#0A0A0A" stroke-width="1.2" opacity="0.7"/>
-          <line x1="136" y1="40" x2="136" y2="210" stroke="#0A0A0A" stroke-width="0.4" opacity="0.3"/>
-          <line x1="184" y1="40" x2="184" y2="210" stroke="#0A0A0A" stroke-width="1.2" opacity="0.7"/>
-          <line x1="208" y1="40" x2="208" y2="210" stroke="#0A0A0A" stroke-width="0.4" opacity="0.3"/>
-          <line x1="256" y1="40" x2="256" y2="210" stroke="#0A0A0A" stroke-width="1.2" opacity="0.7"/>
-          <line x1="280" y1="40" x2="280" y2="210" stroke="#0A0A0A" stroke-width="0.4" opacity="0.3"/>
-          <line x1="328" y1="40" x2="328" y2="210" stroke="#0A0A0A" stroke-width="1.2" opacity="0.7"/>
-          <rect x="120" y="60" width="80" height="160" fill="none" stroke="#0A0A0A" stroke-width="1.5"/>
-          <circle cx="160" cy="140" r="28" fill="#0A0A0A" opacity="0.92"/>
-          <circle cx="160" cy="140" r="44" fill="none" stroke="#0A0A0A" stroke-width="0.5" opacity="0.35"/>
-          <text x="20" y="232" font-family="monospace" font-size="9" fill="#0A0A0A" opacity="0.55" letter-spacing="2">EFFICIENTNET · FEATURE MAP</text>
+          <g transform="translate(50,68) skewY(-15)"><rect width="60" height="120" fill="#0A0A0A" opacity="0.08" stroke="#0A0A0A" stroke-width="0.5"/></g>
+          <g transform="translate(78,64) skewY(-15)"><rect width="54" height="128" fill="#0A0A0A" opacity="0.14" stroke="#0A0A0A" stroke-width="0.5"/></g>
+          <g transform="translate(106,60) skewY(-15)"><rect width="48" height="136" fill="#0A0A0A" opacity="0.20" stroke="#0A0A0A" stroke-width="0.5"/></g>
+          <g transform="translate(162,52) skewY(-15)"><rect width="36" height="152" fill="#0A0A0A" opacity="0.26" stroke="#0A0A0A" stroke-width="0.5"/></g>
+          <g transform="translate(260,70)">
+            <rect x="0" y="0" width="100" height="20" fill="none" stroke="#0A0A0A" stroke-width="0.8"/><rect x="0" y="0" width="80" height="20" fill="#0A0A0A"/>
+            <text x="105" y="14" font-family="monospace" font-size="9" fill="#0A0A0A">0.91</text>
+            <rect x="0" y="40" width="100" height="20" fill="none" stroke="#0A0A0A" stroke-width="0.8"/><rect x="0" y="40" width="35" height="20" fill="#0A0A0A" opacity="0.3"/>
+            <text x="105" y="54" font-family="monospace" font-size="9" fill="#0A0A0A">0.09</text>
+          </g>
+          <text x="20" y="232" font-family="monospace" font-size="9" fill="#0A0A0A" opacity="0.55" letter-spacing="2">EFFICIENTNET · TF.JS EDGE INFERENCE</text>
         </svg>
       </div>
     </article>

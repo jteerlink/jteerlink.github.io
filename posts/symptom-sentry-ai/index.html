@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Symptom Sentry AI — Jared Teerlink</title>
-  <meta name="description" content="A privacy-conscious consumer-health image analysis app with TensorFlow.js inference, Node/Express APIs, secure authentication, and analysis history.">
+  <meta name="description" content="An educational image-classification prototype for throat and ear photos, with TensorFlow.js inference, Node/Express APIs, account authentication, and analysis history. Not a medical device.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -31,8 +31,8 @@
       <div class="cs-tags"><span class="tag">AI</span><span class="tag">Computer Vision</span><span class="tag">Product</span></div>
       <time class="cs-date">January 2025</time>
     </div>
-    <h1>A consumer-health image app designed around privacy, clarity, and auditability.</h1>
-    <p class="cs-lede">Symptom Sentry AI turns throat and ear images into structured normal-vs-abnormal assessments while keeping the product judgment explicit: guided capture, understandable confidence, secure accounts, and history users can return to.</p>
+    <h1>An educational image-classification prototype designed around privacy, clarity, and auditability.</h1>
+    <p class="cs-lede">Symptom Sentry AI is an educational prototype that runs an image classifier on throat and ear photos — not a medical device or diagnostic tool. The product judgment is explicit: guided capture, clearly bounded model output, account controls, and history users can return to.</p>
   </section>
 
   <div class="cs-cover reveal">
@@ -47,14 +47,14 @@
           <circle cx="125" cy="205" r="70" fill="none" stroke="var(--ink)"/><circle cx="125" cy="205" r="36" fill="none" stroke="var(--ink)" stroke-dasharray="4 4"/><text x="125" y="375" text-anchor="middle" class="label">Upload image</text><text x="125" y="404" text-anchor="middle" class="ko">throat or ear</text>
         </g>
         <g transform="translate(505 170)">
-          <rect x="0" y="0" width="260" height="170" fill="var(--ink)"/><text x="32" y="56" class="label" style="fill: var(--paper)">TensorFlow.js</text><text x="32" y="90" class="ko" style="fill: var(--paper)">browser-side inference when available</text><text x="32" y="124" class="ko" style="fill: var(--paper)">normal / abnormal + confidence</text>
+          <rect x="0" y="0" width="260" height="170" fill="var(--ink)"/><text x="32" y="56" class="label" style="fill: var(--paper)">TensorFlow.js</text><text x="32" y="90" class="ko" style="fill: var(--paper)">browser-side inference when available</text><text x="32" y="124" class="ko" style="fill: var(--paper)">model label + uncalibrated score</text>
           <rect x="0" y="250" width="260" height="110" fill="var(--paper)" stroke="var(--ink)"/><text x="32" y="294" class="label">Responsible UX</text><text x="32" y="326" class="ko">plain result · clear uncertainty</text>
         </g>
         <g transform="translate(900 150)">
-          <rect x="0" y="0" width="300" height="140" fill="var(--paper)" stroke="var(--ink)"/><text x="28" y="48" class="label">Node / Express API</text><text x="28" y="82" class="ko">auth · validation · secure session</text>
+          <rect x="0" y="0" width="300" height="140" fill="var(--paper)" stroke="var(--ink)"/><text x="28" y="48" class="label">Node / Express API</text><text x="28" y="82" class="ko">auth · validation · sessions</text>
           <path d="M0 245 A150 34 0 0 0 300 245 L300 370 A150 34 0 0 1 0 370Z" fill="var(--paper)" stroke="var(--ink)"/><ellipse cx="150" cy="245" rx="150" ry="34" fill="var(--paper)" stroke="var(--ink)"/><text x="150" y="254" text-anchor="middle" class="label">PostgreSQL history</text><text x="150" y="314" text-anchor="middle" class="ko">accounts · derived results · follow-up context</text>
         </g>
-        <g transform="translate(185 610)"><rect x="0" y="0" width="1030" height="48" fill="var(--paper)" stroke="var(--ink)"/><text x="24" y="30" class="label">Product judgment: make medical-adjacent output understandable, secure, and useful without overstating diagnostic certainty.</text></g>
+        <g transform="translate(185 610)"><rect x="0" y="0" width="1030" height="48" fill="var(--paper)" stroke="var(--ink)"/><text x="24" y="30" class="label">Product judgment: make medical-adjacent output understandable, secure, and useful without implying a diagnosis.</text></g>
         <g stroke="var(--ink)" stroke-width="1.4" marker-end="url(#sentry-arrow)" fill="none" opacity="0.72"><path d="M370 330 L505 255"/><path d="M635 340 L635 420"/><path d="M765 255 L900 220"/><path d="M765 420 C850 450 910 455 1040 424"/></g>
       </svg>
     </div>
@@ -68,8 +68,10 @@
 
     <p><strong><a href="https://github.com/jteerlink/SymptomSentinelAI">GitHub Repository ↗</a></strong></p>
 
+    <p><strong>Scope and limitations.</strong> This is an educational prototype, not a medical device, and it does not diagnose any condition. No clinical validation has been established here, and the training data provenance, split, and evaluation results are not documented on this page, so no clinical accuracy or efficacy is claimed. Anyone with symptoms should consult a clinician.</p>
+
     <h2>The first decision was to narrow the answer.</h2>
-    <p>It is tempting to make a medical image app feel impressive by adding categories, explanations, and dense model language. This project moves in the opposite direction. The primary output is intentionally direct: normal or abnormal, infected or not infected, with confidence and supporting context. That simplicity gives the rest of the product room to do its job.</p>
+    <p>It is tempting to make a medical image app feel impressive by adding categories, explanations, and dense model language. This project moves in the opposite direction. The primary output is intentionally direct: a model-predicted label with a confidence score and supporting context. The label describes how the classifier sorted an image; it does not establish whether a person is healthy, and the score is not a calibrated clinical probability. That simplicity gives the rest of the product room to do its job.</p>
 
     <p>The user journey starts with capture and upload. The UI has to make image submission feel guided rather than clinical. Once the image is analyzed, the result screen has to make the output legible: what the model saw, how confident it is, and what the user might reasonably do next. The app then gives the result continuity through history, so a user can return to past analyses instead of treating each session as disposable.</p>
 
@@ -83,25 +85,25 @@
     <p>That separation matters. Image pixels, user identity, model output, and historical records do not all have the same sensitivity or lifecycle. Treating them as separate concerns makes the system easier to reason about and safer to evolve.</p>
 
     <h2>Security is part of the interface.</h2>
-    <p>The security features in the repo are not just backend details. HTTP-only cookies, CSRF protection, rate limiting, password hashing, input validation, and session management are part of how the app earns permission to handle sensitive interactions.</p>
+    <p>The security features described in the repo are not just backend details. HTTP-only cookies, CSRF protection, rate limiting, password hashing, input validation, and session management are part of how the app earns permission to handle sensitive interactions.</p>
 
     <p>A user will never read the middleware. They will feel the result of it. Login should work cleanly. Errors should be specific enough to recover from without leaking unnecessary detail. A saved analysis should be available when expected and protected when it should be private. The interface should feel calm because the underlying system is doing its job.</p>
 
-    <p>The same principle applies to model feedback. A confidence score can create false certainty if it is presented like a verdict. The product language has to keep the result bounded. It can help a user notice a possible issue, organize information, and decide whether to seek care. It should not blur the line between screening support and diagnosis.</p>
+    <p>The same principle applies to model feedback. A confidence score can create false certainty if it is presented like a verdict. The product language has to keep the result bounded: it is educational output from a classifier without clinical validation, not screening or diagnosis.</p>
 
     <h2>The model bridge is where the product becomes real.</h2>
-    <p>Connecting JavaScript product code to TensorFlow model assets is the kind of work that decides whether a prototype becomes usable. The application supports a model bridge between frontend interaction and Python/TensorFlow-trained components, with support for multiple model variants and a binary classification path designed for a straightforward user experience.</p>
+    <p>Connecting JavaScript product code to TensorFlow model assets is the kind of work that decides whether a prototype becomes usable. As described in the repository, the application supports a model bridge between frontend interaction and Python/TensorFlow-trained components, with support for multiple model variants and a binary classification path designed for a straightforward user experience.</p>
 
     <p>There are many small details hidden in that bridge: file handling, preprocessing expectations, model format compatibility, response shape, error handling, and how the UI behaves while inference is running. A loading state is not cosmetic in this context. It tells the user the system is working. A graceful failure is not polish. It prevents a sensitive experience from turning into confusion.</p>
 
-    <p>The result history adds another layer. Saving analysis results can be valuable, but it creates responsibility. The app needs to distinguish between transient analysis and durable records. It needs authentication that is strong enough for the data it stores. It needs deletion paths and profile controls. The repository’s API surface reflects that broader product shape: register, login, logout, current user, analysis, history, save, retrieve, delete, profile, password, and subscription endpoints.</p>
+    <p>The result history adds another layer. Saving analysis results can be valuable, but it creates responsibility. The app needs to distinguish between transient analysis and durable records. It needs authentication that is strong enough for the data it stores. It needs deletion paths and profile controls. The repository’s API surface reflects that broader product shape: register, login, logout, current user, analysis, history, save, retrieve, delete, profile, and password endpoints.</p>
 
     <h2>A careful product can still feel modern.</h2>
     <p>The project does not need to choose between a responsible experience and a polished one. The responsive UI, collapsible components, medical-themed loading feedback, attention-map-style result visualization, and history screens all help the product feel complete. The difference is that the polish is pointed at comprehension, not spectacle.</p>
 
-    <p>The best version of this page should read like a product walkthrough: a user captures an image, the app guides the upload, inference runs with clear feedback, the result is framed carefully, and the history preserves context for later. Under that walkthrough sits the technical stack: TensorFlow.js, TensorFlow, Express, PostgreSQL, secure sessions, validation, and tests.</p>
+    <p>As a walkthrough: a user captures an image, the app guides the upload, inference runs with clear feedback, the result is framed with its limits, and the history preserves context for later. Under that walkthrough sits the technical stack: TensorFlow.js, TensorFlow, Express, PostgreSQL, session handling, validation, and tests.</p>
 
-    <p>That pairing is the value of the project. The model can classify. The application can carry the classification through a real user flow. The security layer makes the flow credible. The restraint in the product language keeps the experience honest.</p>
+    <p>That pairing is the value of the project. The model can classify. The application can carry the classification through a real user flow. The security layer is designed to protect the flow. The restraint in the product language keeps the experience honest.</p>
 
   </article>
 

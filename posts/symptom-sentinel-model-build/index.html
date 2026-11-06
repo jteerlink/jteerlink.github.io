@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Symptom Sentry Model Build — Jared Teerlink</title>
-  <meta name="description" content="A reproducible TensorFlow/Keras medical-image model workflow for ear and throat classification, built as the model factory behind Symptom Sentry AI.">
+  <meta name="description" content="An educational TensorFlow/Keras image-classification prototype for ear and throat images, built as the training workflow behind the Symptom Sentry AI prototype. Not a medical device.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -31,8 +31,8 @@
       <div class="cs-tags"><span class="tag">Machine Learning</span><span class="tag">Computer Vision</span><span class="tag">MLOps</span></div>
       <time class="cs-date">December 2024</time>
     </div>
-    <h1>The model factory behind Symptom Sentry’s medical image classifier.</h1>
-    <p class="cs-lede">A reproducible TensorFlow/Keras training workflow for ear and throat image classification — built to turn labeled datasets, preprocessing notebooks, and validation artifacts into deployable model assets for the Symptom Sentry app.</p>
+    <h1>The training workflow behind the Symptom Sentry image-classification prototype.</h1>
+    <p class="cs-lede">An educational TensorFlow/Keras workflow for ear and throat image classification — organizing labeled image folders, preprocessing notebooks, and evaluation steps into model assets for the Symptom Sentry prototype. It is not a medical device and does not provide diagnoses.</p>
   </section>
 
   <div class="cs-cover reveal">
@@ -40,7 +40,7 @@
       <svg viewBox="0 0 1400 700" preserveAspectRatio="xMidYMid slice" class="arch" role="img" aria-label="Symptom Sentinel reproducible model training pipeline">
         <defs><pattern id="model-grid" width="40" height="40" patternUnits="userSpaceOnUse"><path d="M 40 0 L 0 0 0 40" fill="none" stroke="currentColor" stroke-width="0.5" opacity="0.13"/></pattern><marker id="model-arrow" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 z" fill="var(--ink)"/></marker></defs>
         <rect width="1400" height="700" fill="var(--paper-2)"/><rect width="1400" height="700" fill="url(#model-grid)" style="color: var(--ink)"/>
-        <text x="54" y="72" class="ko">FIG · 01 — reproducible model factory for product inference</text>
+        <text x="54" y="72" class="ko">FIG · 01 — prototype training workflow (illustration)</text>
         <g transform="translate(80 170)">
           <rect x="0" y="0" width="190" height="250" fill="var(--paper)" stroke="var(--ink)"/><text x="28" y="44" class="label">Labeled images</text><text x="28" y="78" class="ko">ear_dataset</text><text x="28" y="108" class="ko">throat_dataset</text>
           <circle cx="96" cy="168" r="46" fill="none" stroke="var(--ink)"/><path d="M62 170 Q96 128 130 170 Q96 212 62 170Z" fill="none" stroke="var(--ink)"/>
@@ -54,7 +54,7 @@
           <g transform="translate(32 138)"><rect width="40" height="100" fill="var(--paper)" opacity="0.28"/><rect x="54" y="22" width="44" height="78" fill="var(--paper)" opacity="0.42"/><rect x="112" y="42" width="48" height="58" fill="var(--paper)" opacity="0.62"/><rect x="174" y="62" width="40" height="38" fill="var(--paper)"/></g>
         </g>
         <g transform="translate(1030 170)">
-          <rect x="0" y="0" width="250" height="250" fill="var(--paper)" stroke="var(--ink)"/><text x="28" y="44" class="label">Review + handoff</text><text x="28" y="78" class="ko">curves · confusion matrix</text><text x="28" y="108" class="ko">failure examples</text><text x="28" y="138" class="ko">converted model artifact</text>
+          <rect x="0" y="0" width="250" height="250" fill="var(--paper)" stroke="var(--ink)"/><text x="28" y="44" class="label">Review + handoff (planned)</text><text x="28" y="78" class="ko">curves · confusion matrix</text><text x="28" y="108" class="ko">failure examples</text><text x="28" y="138" class="ko">converted model artifact</text>
           <path d="M36 202 C80 150 128 180 184 120" fill="none" stroke="var(--ink)" stroke-width="2"/><path d="M36 220 C90 190 126 212 194 164" fill="none" stroke="var(--ink)" stroke-width="1.4" stroke-dasharray="4 4"/>
         </g>
         <g transform="translate(432 548)"><rect x="0" y="0" width="540" height="58" fill="var(--paper)" stroke="var(--ink)"/><text x="26" y="36" class="label">The point is repeatability: same data contract, same preprocessing, same validation review before app integration.</text></g>
@@ -65,9 +65,9 @@
 
   <article class="cs-body reveal">
 
-    <p>The Symptom Sentry app begins before a user ever opens the app. It begins in the training repository: folders of ear and throat images, notebooks that standardize preprocessing, experiments that try to separate normal from abnormal, and the quiet work of turning an experiment into an artifact the product can use.</p>
+    <p>The Symptom Sentry prototype begins in the training repository: folders of ear and throat images, notebooks that standardize preprocessing, experiments that train a classifier to sort images into labeled categories, and the work of turning an experiment into an artifact the app can load.</p>
 
-    <p>That is why this page should not read like setup instructions. Cloning the repo is not the story. The story is the model factory behind a consumer-health image product: collect labeled examples, prepare them consistently, train a practical baseline, inspect failures, and hand the result to the application without breaking the contract between model and user experience.</p>
+    <p><strong>Scope and limitations.</strong> This is an educational image-classification prototype, not a medical device or diagnostic tool, and no clinical validation has been established here. Dataset provenance, the train/validation/test split, and evaluation artifacts are not documented on this page, so it makes no claims about accuracy or clinical efficacy. A predicted label describes how the model sorted an image, not whether a person is healthy, and model confidence is not a calibrated clinical probability.</p>
 
     <p><strong><a href="https://github.com/jteerlink/symptom-sentinel-model">GitHub Repository ↗</a></strong></p>
 
@@ -79,14 +79,14 @@
     <p>The training loop needs to make those choices repeatable. If the app sends an image through one path and the notebook trained on another, the product can fail in ways that are hard to diagnose. The model repository is where that contract gets defined.</p>
 
     <h2>EfficientNet is a practical starting point.</h2>
-    <p>The project uses TensorFlow/Keras-style deep-learning workflows and an EfficientNet-oriented transfer-learning path. That is a sensible baseline for a constrained medical image task: start from an architecture that already knows useful visual representations, then adapt it to the ear and throat domains.</p>
+    <p>As described in the repository, the project uses TensorFlow/Keras-style deep-learning workflows and an EfficientNet-oriented transfer-learning path. That is a sensible baseline for a constrained medical image task: start from an architecture that already knows useful visual representations, then adapt it to the ear and throat domains.</p>
 
     <p>The point is not to make the architecture sound exotic. The point is to reduce the amount of learning the project has to do from scratch. Transfer learning lets the work focus on the dataset, preprocessing, validation, and deployment handoff instead of pretending there are enough labeled medical images to train a large model from zero.</p>
 
-    <p>For a portfolio case study, the strongest technical material would come from the artifacts around the model: training curves, validation curves, confusion matrices, examples the model gets wrong, and notes about what changed between runs. Those are the details that make a model build credible.</p>
+    <p>Training curves, confusion matrices, failure examples, and run-to-run notes are not published here, so this page reports no performance figures.</p>
 
     <h2>Validation is where the model earns its place in the product.</h2>
-    <p>An app can show a result with confidence, but the training workflow has to explain what that confidence is worth. Accuracy alone is not enough. The project needs to know which class is harder, where false positives appear, where false negatives appear, and what kinds of images confuse the model.</p>
+    <p>An app can show a result with confidence, but the training workflow has to establish what that score does and does not mean. Accuracy alone is not enough. The project needs to know which class is harder, where false positives appear, where false negatives appear, and what kinds of images confuse the model.</p>
 
     <p>In a health-adjacent context, failure review is part of the product design process. If dim throat images fail more often, the capture UI should guide lighting. If angled ear images confuse the classifier, the app should help users frame the image better. If a certain class has weaker recall, the result language should be more cautious. The training repository is where those product implications first become visible.</p>
 
@@ -97,14 +97,12 @@
 
     <p>The repository’s future-enhancement path points in the right direction: more augmentation, architecture exploration, optimization, and packaging for mobile or web inference. The next layer would make the handoff explicit. Each trained model should carry the data assumptions, preprocessing steps, evaluation summary, and version information that the app needs.</p>
 
-    <p>That is the quiet infrastructure behind a product like Symptom Sentry. The user sees a camera flow and a result. The app sees a model file and an API. The training repo has to preserve the chain of decisions that makes both of those things trustworthy.</p>
+    <p>That is the quiet infrastructure behind a product like Symptom Sentry. The user sees a camera flow and a result. The app sees a model file and an API. The training repo has to preserve the chain of decisions behind both of those things.</p>
 
-    <h2>What the next version should surface.</h2>
-    <p>The mockup hero visual points to the right replacement for the old README-style page: datasets flow into preprocessing, preprocessing feeds transfer learning, evaluation produces review artifacts, and the final model becomes a deployable asset for the app.</p>
+    <h2>Not yet documented.</h2>
+    <p>Dataset sources and licensing, split strategy, augmentation choices, evaluation metrics, confusion counts, false-positive and false-negative examples, and model-export notes are not recorded here. Until they are, the workflow should be read as a prototype pipeline rather than an evaluated model.</p>
 
-    <p>The longer case study should include the exact training history once available: split strategy, augmentation choices, final metrics, confusion counts, false-positive and false-negative examples, and model-export notes. Those details would make the page feel less like a repository overview and more like a working model review.</p>
-
-    <p>The project is strongest when it stays grounded in that pipeline. Labeled images become a reproducible experiment. The experiment becomes a reviewed model. The reviewed model becomes an application dependency. The application dependency becomes a user-facing result that has to be clear, careful, and useful.</p>
+    <p>The project is strongest when it stays grounded in that pipeline. Labeled images become a reproducible experiment. The experiment becomes a reviewed model. The reviewed model becomes an application dependency. The application dependency becomes a user-facing result that has to be clear about its limits.</p>
 
   </article>
 

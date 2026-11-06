@@ -31,7 +31,7 @@
       <div class="cs-tags"><span class="tag">Machine Learning</span><span class="tag">Credit Risk</span><span class="tag">Decisioning</span></div>
       <time class="cs-date">May 2025</time>
     </div>
-    <h1>A default-risk model that turns transaction behavior into lending decisions.</h1>
+    <h1>A default-risk model that turns account behavior into a risk ranking for lending decisions.</h1>
     <p class="cs-lede">An XGBoost scoring pipeline for cash-advance default prediction, designed to separate high-risk applicants, expose the drivers of that risk, and support a future policy layer of calibrated tiers and cutoffs.</p>
   </section>
 
@@ -40,7 +40,7 @@
       <svg viewBox="0 0 1400 700" preserveAspectRatio="xMidYMid slice" class="arch" role="img" aria-label="Cash advance risk model from transaction signals to policy decision">
         <defs><pattern id="cash-grid" width="40" height="40" patternUnits="userSpaceOnUse"><path d="M 40 0 L 0 0 0 40" fill="none" stroke="currentColor" stroke-width="0.5" opacity="0.13"/></pattern><marker id="cash-arrow" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 z" fill="var(--ink)"/></marker></defs>
         <rect width="1400" height="700" fill="var(--paper-2)"/><rect width="1400" height="700" fill="url(#cash-grid)" style="color: var(--ink)"/>
-        <text x="54" y="72" class="ko">FIG · 01 — transaction behavior to lending policy</text>
+        <text x="54" y="72" class="ko">FIG · 01 — behavior to lending policy (illustration; feature and decile bars are not measured values)</text>
         <g transform="translate(80 145)">
           <rect x="0" y="0" width="230" height="390" fill="var(--paper)" stroke="var(--ink)"/>
           <text x="26" y="44" class="label">Behavior signals</text>
@@ -57,14 +57,14 @@
           <text x="30" y="292" class="label">Decile validation</text><text x="30" y="324" class="ko">rank ordering high-risk accounts</text>
         </g>
         <g transform="translate(760 120)">
-          <text x="0" y="28" class="label">Model lift by risk decile</text>
+          <text x="0" y="28" class="label">Lift by risk decile (illustrative)</text>
           <line x1="0" y1="350" x2="400" y2="350" stroke="var(--ink)" opacity="0.4"/><line x1="0" y1="80" x2="0" y2="350" stroke="var(--ink)" opacity="0.4"/>
           <g fill="var(--ink)"><rect x="24" y="110" width="24" height="240"/><rect x="64" y="135" width="24" height="215" opacity="0.9"/><rect x="104" y="166" width="24" height="184" opacity="0.8"/><rect x="144" y="196" width="24" height="154" opacity="0.7"/><rect x="184" y="222" width="24" height="128" opacity="0.6"/><rect x="224" y="242" width="24" height="108" opacity="0.5"/><rect x="264" y="264" width="24" height="86" opacity="0.45"/><rect x="304" y="286" width="24" height="64" opacity="0.38"/><rect x="344" y="306" width="24" height="44" opacity="0.32"/></g>
           <text x="24" y="382" class="ko">highest risk</text><text x="322" y="382" class="ko">lowest risk</text>
         </g>
         <g transform="translate(440 565)">
           <rect x="0" y="0" width="540" height="60" fill="var(--paper)" stroke="var(--ink)"/>
-          <text x="24" y="38" class="label">Next production layer: calibrated scores · risk tiers · cutoffs · monitoring · credit strategy review</text>
+          <text x="24" y="38" class="label">Planned, not built: calibrated scores · risk tiers · cutoffs · monitoring · credit strategy review</text>
         </g>
         <g stroke="var(--ink)" stroke-width="1.4" marker-end="url(#cash-arrow)" fill="none" opacity="0.7"><path d="M310 342 L420 235"/><path d="M660 235 L760 300"/><path d="M540 508 L540 565"/></g>
       </svg>
@@ -96,7 +96,7 @@
     <h2>XGBoost fit the messiness of the problem.</h2>
     <p>The final model used XGBoost because the data was noisy, partially sparse, non-linear, and full of interactions that would be difficult to specify by hand. Optuna tuning improved the model without turning the exercise into a blind algorithm contest.</p>
 
-    <p>The tuned model reached <strong>0.7201 AUC</strong> and <strong>0.4401 Gini</strong>, improving roughly 0.04 AUC and 0.07 Gini over the baseline. Those numbers are useful, but the more important readout was rank ordering. Lift charts and decile analysis showed that the model could separate risk groups, with the highest-risk deciles capturing a meaningful share of defaults.</p>
+    <p>In the project notebook, the tuned model reached <strong>0.7201 AUC</strong> and <strong>0.4401 Gini</strong>, improving roughly 0.04 AUC and 0.07 Gini over the baseline. Those numbers are useful, but the more important readout was rank ordering. Lift charts and decile analysis showed that the model could separate risk groups, with the highest-risk deciles capturing a meaningful share of defaults.</p>
 
     <p>That is the difference between a model metric and a lending tool. AUC tells you the model can discriminate. Deciles begin to tell you where an operating policy could intervene.</p>
 
@@ -112,7 +112,7 @@
 
     <p>That final step is where model development meets leadership. The modeler has to explain the tradeoff between approval rate and loss exposure. The credit team has to decide which risks are acceptable. Operations needs a workflow for review. Monitoring needs to catch drift. The customer experience has to remain fair and understandable.</p>
 
-    <p>The notebook proves there is signal. The case study should make the decision path visible: account behavior becomes features, features become a score, the score becomes a risk tier, and the risk tier becomes an action someone can defend.</p>
+    <p>The notebook shows there is signal; the AUC, Gini, and decile results above are measured there. The policy layer — calibrated scores, risk tiers, cutoffs, monitoring — is planned production work and has not been built or measured. The intended decision path: account behavior becomes features, features become a score, the score becomes a risk tier, and the risk tier becomes an action someone can defend.</p>
 
   </article>
 

@@ -6,3 +6,4 @@ Gemfile.lock
 .omx
 .codex
 .claude
+.playwright-mcp

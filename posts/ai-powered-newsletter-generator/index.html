@@ -69,8 +69,8 @@
           <text x="24" y="42" class="label" style="fill: var(--paper)">Validated Export</text>
           <line x1="24" y1="70" x2="186" y2="70" stroke="var(--paper)" opacity="0.28"/>
           <text x="24" y="112" class="ko" style="fill: var(--paper)">HTML · markdown · text</text>
-          <text x="24" y="154" class="ko" style="fill: var(--paper)">code examples executed</text>
-          <text x="24" y="196" class="ko" style="fill: var(--paper)">mobile readability checked</text>
+          <text x="24" y="154" class="ko" style="fill: var(--paper)">code examples validated</text>
+          <text x="24" y="196" class="ko" style="fill: var(--paper)">editor review pass</text>
           <text x="24" y="238" class="ko" style="fill: var(--paper)">citations preserved</text>
         </g>
         <g stroke="var(--ink)" stroke-width="1.3" fill="none" marker-end="url(#nl-arrow)" opacity="0.7">
@@ -80,7 +80,7 @@
         </g>
         <g transform="translate(454 540)">
           <rect x="0" y="0" width="526" height="54" fill="var(--paper)" stroke="var(--ink)"/>
-          <text x="24" y="34" class="label">Quality gate: sources credible · code runs · narrative is readable · export survives mobile</text>
+          <text x="24" y="34" class="label">Quality gates: source scoring · code validation · editor review · export</text>
         </g>
       </svg>
     </div>
@@ -99,7 +99,7 @@
 
     <p>That shape led naturally to agents, but not in the hand-wavy sense of several models talking to each other. Each role had to own a real constraint. Research needed to care about source quality. Writing needed to carry technical context without turning into documentation sludge. Editing needed veto power. Code generation needed a runtime, not just syntax highlighting. The manager needed to coordinate the whole thing without becoming an opaque box.</p>
 
-    <p>The result is less like a prompt chain and more like a compact operating system for technical content. Work moves through explicit handoffs. Intermediate outputs are inspectable. The system can explain where the draft came from, which examples were generated, which checks passed, and why the final version is ready to export.</p>
+    <p>The result is less like a prompt chain and more like a compact operating system for technical content. Work moves through explicit handoffs. Intermediate outputs are inspectable. The workflow is designed to show where the draft came from, which examples were generated, and which checks ran before export.</p>
 
     <h2>Five agents, one standard.</h2>
     <p>The repository mirrors that operating model. The agent layer lives under <code>src/agents</code>; orchestration and code generation live under <code>src/core</code>; validation tools live under <code>src/tools</code>; templates, storage, quality checks, and the Streamlit interface wrap the workflow into something usable.</p>
@@ -109,7 +109,7 @@
     <p>That last detail changes the feel of the product. A model can produce a plausible PyTorch snippet in seconds. A useful technical newsletter needs the snippet to run, fit the article, match the intended complexity, and teach the idea without burying the reader. The system treats code as a claim that must be tested, not decoration.</p>
 
     <h2>The product became a set of gates.</h2>
-    <p>The most important design choice was giving quality a mechanical role. A style guide is easy to ignore. A quality gate changes the path of execution. If source quality is weak, the workflow should know. If code fails, it should not quietly ship. If the article is unreadable on mobile, the export step should not pretend the work is done.</p>
+    <p>The most important design choice was giving quality a mechanical role. A style guide is easy to ignore. A quality gate changes the path of execution. If source quality is weak, the workflow should know. If code fails validation, it should not quietly ship.</p>
 
     <p>The Streamlit interface turns that into a visible loop: topic inputs, generation controls, progress feedback, preview, export, and quality information in one place. The interface matters because the system is not only an engine; it is a tool someone can operate. A user should be able to understand what stage the work is in and where confidence came from.</p>
 
@@ -130,10 +130,12 @@
       <li>Code examples are generated with framework awareness and checked before publication.</li>
       <li>Editing is a blocking stage, not a cosmetic pass.</li>
       <li>Export is treated as part of the product, with HTML, Markdown, and plain-text outputs.</li>
-      <li>The interface exposes enough process for a user to trust the result without studying the internals.</li>
+      <li>The interface exposes process state so a user can see what ran without studying the internals.</li>
     </ul>
 
-    <p>The project started as a way to write faster. It became a way to make generated technical writing more accountable. That is the more durable idea: when AI systems touch knowledge work, the value is rarely in the first draft. The value is in the loop that makes the draft safe to use.</p>
+    <p>These checks reduce errors but do not eliminate them: source scoring is a heuristic, code validation is not a security sandbox or correctness guarantee, and generated drafts still need human review before publication.</p>
+
+    <p>The project started as a way to write faster. It became a way to make generated technical writing more accountable. That is the more durable idea: when AI systems touch knowledge work, the value is rarely in the first draft. The value is in the loop that makes the draft easier to check before use.</p>
 
   </article>
 

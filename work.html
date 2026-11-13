@@ -26,9 +26,9 @@
   </nav>
 
   <section class="page-header">
-    <div class="eyebrow">Open-Source Proof · 4 Architecture Case Studies · 2024–2026</div>
+    <div class="eyebrow">Open-Source Proof · 6 Public Projects · 2024–2026</div>
     <h1>Public systems &amp; <em>case studies.</em></h1>
-    <p>My enterprise production work at Ryan LLC, Capital One, Group 1, and Daikin is proprietary. These four public projects show my approach to data pipelines, model development, and application design. Each case study distinguishes the current build from remaining evaluation and deployment work.</p>
+    <p>My enterprise production work at Ryan LLC, Capital One, Group 1, and Daikin is proprietary. These six public projects show my approach to data pipelines, model development, and application design. Each case study distinguishes the current build from remaining evaluation and deployment work.</p>
   </section>
 
   <div class="filters">
@@ -38,13 +38,52 @@
       <button class="filter-pill" data-filter="ml">Credit Risk / Tabular ML</button>
       <button class="filter-pill" data-filter="cv">Computer Vision</button>
     </div>
-    <div class="filter-meta"><span id="filter-count">04</span> systems shown</div>
+    <div class="filter-meta"><span id="filter-count">06</span> systems shown</div>
   </div>
 
   <div class="projects-list">
 
     <article class="project-row reveal" data-cat="ai">
       <div class="project-num">01</div>
+      <div class="project-body">
+        <div class="project-meta" style="flex-direction:row;gap:16px;align-items:center;margin-bottom:12px;">
+          <span class="eyebrow">Agentic engineering · Developer tooling</span>
+          <span class="eyebrow num-tabular">2026</span>
+        </div>
+        <h2 class="project-title"><a href="https://github.com/jteerlink/agentic-engineering" target="_blank" rel="noopener noreferrer">Agentic Engineering Harness</a></h2>
+        <p class="project-subtitle">A skill that writes a repository's agent harness for Claude Code and Codex</p>
+        <p class="project-summary">A reusable skill that inspects a repository and writes its agent harness: a root AGENTS.md, an architecture map, a delivery workflow, reusable skills, and a fresh-context verifier agent. An offline test suite keeps the templates single-sourced and free of leftover markers.</p>
+        <div class="project-stack">
+          <span class="stack-pill">Claude Code</span><span class="stack-pill">Codex</span><span class="stack-pill">Agent Skills</span><span class="stack-pill">Markdown</span>
+        </div>
+        <div class="project-actions">
+          <a class="project-cta project-cta--repo" href="https://github.com/jteerlink/agentic-engineering" target="_blank" rel="noopener noreferrer">View repo <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M5 11L11 5M7 5h4v4"/><path d="M5 5H3.8A1.8 1.8 0 0 0 2 6.8v5.4A1.8 1.8 0 0 0 3.8 14h5.4a1.8 1.8 0 0 0 1.8-1.8V11"/></svg></a>
+        </div>
+      </div>
+      <div class="project-thumb">
+        <svg viewBox="0 0 400 250" preserveAspectRatio="xMidYMid slice">
+          <rect width="400" height="250" fill="#F2EEE5"/>
+          <g font-family="monospace" font-size="10" fill="#0A0A0A">
+            <rect x="40" y="40" width="140" height="34" fill="none" stroke="#0A0A0A" stroke-width="0.8"/><text x="52" y="61">AGENTS.md</text>
+            <rect x="40" y="90" width="140" height="34" fill="none" stroke="#0A0A0A" stroke-width="0.8"/><text x="52" y="111">ARCHITECTURE.md</text>
+            <rect x="40" y="140" width="140" height="34" fill="none" stroke="#0A0A0A" stroke-width="0.8"/><text x="52" y="161">skills/ (7 + verifier)</text>
+            <rect x="40" y="190" width="140" height="34" fill="none" stroke="#0A0A0A" stroke-width="0.8"/><text x="52" y="211">workflow.md</text>
+          </g>
+          <path d="M180 57H220M180 107H220M180 157H220M180 207H220" stroke="#0A0A0A" stroke-width="0.8" fill="none"/>
+          <rect x="220" y="40" width="140" height="184" fill="#0A0A0A" opacity="0.08" stroke="#0A0A0A" stroke-width="0.6"/>
+          <g font-family="monospace" font-size="10" fill="#0A0A0A">
+            <text x="234" y="92">.claude/  →  .codex/</text>
+            <text x="234" y="112" opacity="0.7">one source, symlinked</text>
+            <text x="234" y="152">tests: unittest</text>
+            <text x="234" y="172" opacity="0.7">offline, stdlib only</text>
+          </g>
+          <text x="20" y="240" font-family="monospace" font-size="9" fill="#0A0A0A" opacity="0.55" letter-spacing="2">HARNESS TEMPLATES · REPO-LEVEL ARTIFACTS</text>
+        </svg>
+      </div>
+    </article>
+
+    <article class="project-row reveal" data-cat="ai">
+      <div class="project-num">02</div>
       <div class="project-body">
         <div class="project-meta" style="flex-direction:row;gap:16px;align-items:center;margin-bottom:12px;">
           <span class="eyebrow">Social intelligence · NLP · Full-Stack MLOps</span>
@@ -77,7 +116,29 @@
     </article>
 
     <article class="project-row reveal" data-cat="ai">
-      <div class="project-num">02</div>
+      <div class="project-num">03</div>
+      <div class="project-body">
+        <div class="project-meta" style="flex-direction:row;gap:16px;align-items:center;margin-bottom:12px;">
+          <span class="eyebrow">Team platform · Built with the agentic harness</span>
+          <span class="eyebrow num-tabular">2026</span>
+        </div>
+        <h2 class="project-title"><a href="https://github.com/jteerlink/platform-dev" target="_blank" rel="noopener noreferrer">Wake</a></h2>
+        <p class="project-subtitle">A shared record of completed work for engineering and data teams</p>
+        <p class="project-summary">Members log finished work as short entries, which feed team and organization views, a weekly digest email, dashboards and reports. The 34-feature product spans six modules across five phases. The first full build was done in about an afternoon with the agentic engineering harness.</p>
+        <div class="project-stack">
+          <span class="stack-pill">FastAPI</span><span class="stack-pill">Postgres</span><span class="stack-pill">React</span><span class="stack-pill">Vite</span><span class="stack-pill">Playwright</span><span class="stack-pill">Docker</span>
+        </div>
+        <div class="project-actions">
+          <a class="project-cta project-cta--repo" href="https://github.com/jteerlink/platform-dev" target="_blank" rel="noopener noreferrer">View repo <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M5 11L11 5M7 5h4v4"/><path d="M5 5H3.8A1.8 1.8 0 0 0 2 6.8v5.4A1.8 1.8 0 0 0 3.8 14h5.4a1.8 1.8 0 0 0 1.8-1.8V11"/></svg></a>
+        </div>
+      </div>
+      <div class="project-thumb">
+        <img src="/images/wake-ui.png" alt="Wake team feed mockup with sample data: sidebar navigation, post composer, entries with kudos and comments, and today's standups and blockers">
+      </div>
+    </article>
+
+    <article class="project-row reveal" data-cat="ai">
+      <div class="project-num">04</div>
       <div class="project-body">
         <div class="project-meta" style="flex-direction:row;gap:16px;align-items:center;margin-bottom:12px;">
           <span class="eyebrow">Multi-agent AI</span>
@@ -112,7 +173,7 @@
     </article>
 
     <article class="project-row reveal" data-cat="ml">
-      <div class="project-num">03</div>
+      <div class="project-num">05</div>
       <div class="project-body">
         <div class="project-meta" style="flex-direction:row;gap:16px;align-items:center;margin-bottom:12px;">
           <span class="eyebrow">Credit risk · XGBoost</span>
@@ -151,7 +212,7 @@
     </article>
 
     <article class="project-row reveal" data-cat="cv">
-      <div class="project-num">04</div>
+      <div class="project-num">06</div>
       <div class="project-body">
         <div class="project-meta" style="flex-direction:row;gap:16px;align-items:center;margin-bottom:12px;">
           <span class="eyebrow">Computer vision · Educational prototype</span>

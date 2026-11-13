@@ -378,7 +378,6 @@ img { display: block; max-width: 100%; }
 }
 .project-row:hover .project-thumb { transform: scale(1.01); }
 .project-thumb svg { width: 100%; height: 100%; display: block; }
-.project-thumb img { width: 100%; height: 100%; object-fit: contain; display: block; }
 
 /* About strip on homepage */
 .about-grid {
@@ -1495,7 +1494,6 @@ img { display: block; max-width: 100%; }
   margin-bottom: 20px;
 }
 .proj-thumb-mini svg { width: 100%; height: 100%; display: block; }
-.proj-thumb-mini img { width: 100%; height: 100%; object-fit: contain; display: block; }
 
 @media (max-width: 900px) {
   .hero-pillars-grid { grid-template-columns: 1fr; }

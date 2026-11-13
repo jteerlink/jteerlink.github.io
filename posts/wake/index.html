@@ -1,0 +1,141 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Wake — Jared Teerlink</title>
+  <meta name="description" content="A multi-tenant team platform built on a shared record of finished work, specified and built phase by phase with the agentic engineering harness.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/assets/css/portfolio.css">
+</head>
+<body class="grain">
+
+  <nav class="site-nav">
+    <div class="site-nav-inner">
+      <a href="/" class="site-nav-mark">Jared Teerlink</a>
+      <div class="site-nav-links">
+        <a href="/">Home</a>
+        <a href="/work.html">Work</a>
+        <a href="/about.html">About</a>
+        <a href="/contact.html">Contact</a>
+      </div>
+      <button class="site-nav-hamburger" aria-label="Open menu"><span></span><span></span><span></span></button>
+    </div>
+  </nav>
+
+  <section class="cs-hero reveal">
+    <div class="cs-meta">
+      <div class="eyebrow">Case Study</div>
+      <div class="cs-tags"><span class="tag">Full-Stack</span><span class="tag">Multi-Tenant SaaS</span><span class="tag">Built With Agents</span></div>
+      <time class="cs-date">Nov 2026</time>
+    </div>
+    <h1>A team platform built on a shared record of finished work, specified and shipped in a day.</h1>
+    <p class="cs-lede">Wake turns short "done" entries into team feeds, a weekly digest, dashboards and reports. The 34-feature proposal was built phase by phase with the agentic engineering harness: a spec with failing proofs, test-first implementation, and a fresh verifier for each phase.</p>
+  </section>
+
+  <div class="cs-cover reveal">
+    <div class="cs-cover-inner">
+      <svg viewBox="0 0 1400 700" preserveAspectRatio="xMidYMid slice" class="arch" role="img" aria-label="Wake data flow from entries to feeds, digest, dashboards and reports inside an organization tenant">
+        <defs><pattern id="wk-grid" width="40" height="40" patternUnits="userSpaceOnUse"><path d="M 40 0 L 0 0 0 40" fill="none" stroke="currentColor" stroke-width="0.5" opacity="0.13"/></pattern><marker id="wk-arrow" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 z" fill="var(--ink)"/></marker></defs>
+        <rect width="1400" height="700" fill="var(--paper-2)"/><rect width="1400" height="700" fill="url(#wk-grid)" style="color: var(--ink)"/>
+        <text x="54" y="72" class="ko">FIG · 01 — one record of finished work, many views (illustration; sample entries)</text>
+        <rect x="60" y="110" width="1280" height="520" fill="none" stroke="var(--ink)" stroke-dasharray="6,6" opacity="0.5"/>
+        <text x="80" y="140" class="ko">organization = tenant · billing owner · teams one level deep</text>
+        <g transform="translate(100 180)">
+          <text x="0" y="0" class="label">Entries</text>
+          <rect x="0" y="24" width="330" height="62" fill="var(--paper)" stroke="var(--ink)"/><text x="20" y="52">Shipped checkout v2</text><text x="20" y="72" class="ko">#payments · goal: p95 &lt; 300 ms</text>
+          <rect x="0" y="100" width="330" height="62" fill="var(--paper)" stroke="var(--ink)"/><text x="20" y="128">Fixed ingest lag</text><text x="20" y="148" class="ko">#data · github pr</text>
+          <rect x="0" y="176" width="330" height="62" fill="var(--paper)" stroke="var(--ink)"/><text x="20" y="204">Rotated staging certs</text><text x="20" y="224" class="ko">#ops · kudos 3</text>
+          <rect x="0" y="252" width="330" height="62" fill="var(--paper)" stroke="var(--ink)" opacity="0.6"/><text x="20" y="280" opacity="0.7">Drafts from Slack · GitHub · Linear</text><text x="20" y="300" class="ko">confirmed by the member</text>
+        </g>
+        <g transform="translate(560 250)">
+          <rect x="0" y="0" width="230" height="170" fill="var(--ink)"/>
+          <text x="26" y="50" class="label" style="fill: var(--paper)">FastAPI + Postgres</text>
+          <text x="26" y="86" class="ko" style="fill: var(--paper)">one module · sql via psycopg</text>
+          <text x="26" y="112" class="ko" style="fill: var(--paper)">numbered migrations</text>
+          <text x="26" y="138" class="ko" style="fill: var(--paper)">roles · audit log · retention</text>
+        </g>
+        <g transform="translate(920 170)">
+          <rect x="0" y="0" width="360" height="70" fill="var(--paper)" stroke="var(--ink)"/><text x="22" y="32" class="label">Team &amp; org feeds</text><text x="22" y="54" class="ko">search · saved filters · kudos · comments</text>
+          <rect x="0" y="94" width="360" height="70" fill="var(--paper)" stroke="var(--ink)"/><text x="22" y="126" class="label">Weekly digest</text><text x="22" y="148" class="ko">per-team schedule · leadership rollup</text>
+          <rect x="0" y="188" width="360" height="70" fill="var(--paper)" stroke="var(--ink)"/><text x="22" y="220" class="label">Dashboards &amp; reports</text><text x="22" y="242" class="ko">goals · blockers · csv / pdf</text>
+          <rect x="0" y="282" width="360" height="70" fill="var(--paper)" stroke="var(--ink)"/><text x="22" y="314" class="label">Planning &amp; team health</text><text x="22" y="336" class="ko">projects · tasks · retros · pulse</text>
+        </g>
+        <g stroke="var(--ink)" stroke-width="1.4" marker-end="url(#wk-arrow)" fill="none" opacity="0.7"><path d="M430 335 L560 335"/><path d="M790 300 L920 205"/><path d="M790 320 L920 299"/><path d="M790 350 L920 393"/><path d="M790 380 L920 487"/></g>
+      </svg>
+    </div>
+  </div>
+
+  <article class="cs-body reveal">
+
+    <p>Most teams lose track of what they actually finished. The work happened. It is scattered across pull requests, tickets, chat threads and someone's memory of a Tuesday standup. When the weekly update or the quarterly review comes around, people reconstruct it from fragments.</p>
+
+    <p>Wake starts from a simple premise: if finishing something takes ten seconds to log, the log becomes the source everything else reads from. Members post one-line "done" entries with tags, links and an optional goal or project. Feeds, digests, dashboards, reports and planning tools are all views over that record.</p>
+
+    <p><strong><a href="https://github.com/jteerlink/platform-dev">GitHub Repository ↗</a></strong></p>
+
+    <figure class="cs-figure-wide">
+      <img src="/images/wake-ui.png" alt="Wake team feed mockup with sample data: sidebar navigation, post composer, entries with kudos and comments, and today's standups and blockers">
+      <figcaption>The sidebar "workbench" direction the app's layout was built from, shown with sample data: teams and views on the left, the composer and feed in the middle, today's standups, open blockers and the week's totals on the right.</figcaption>
+    </figure>
+
+    <h2>The proposal was 34 features in five phases.</h2>
+    <p>The product proposal laid out six modules: work log, planning, people and team health, insights, integrations, and platform and admin. Their 34 features were split into five release phases: core, visibility, planning, team health and enterprise. Phase 1 alone needed magic-link sign-in, organizations and teams, roles, entries, feeds, profiles, a scheduled weekly digest and per-seat billing.</p>
+
+    <p>That is not a weekend demo. It is the scope that usually gets a quarter of planning and a small team. The interesting question was whether a disciplined agent workflow could carry it without the codebase dissolving into untested features.</p>
+
+    <h2>Each phase started as a spec with failing proofs.</h2>
+    <p>The repository was set up with the <a href="/posts/agentic-engineering-harness/">agentic engineering harness</a> first. Every phase then went through the same loop. A spec in <code>.scratch/</code> stated the problem and the solution, and listed each "Done when" item with a pytest command marked <em>fails today</em>. "Must not change" proofs protected what earlier phases had built. Implementation went red-first, and a fresh <code>harness-verifier</code> ran every proof and reviewed the diff for spec gaps and standards issues before the phase was marked done.</p>
+
+    <p>Fourteen specs carried the build: three early slices (teams and entries, weekly digest, seat billing), then Phase 1 and the sub-phases 2a–2c, 3a–3c, 4a–4c and 5a–5b. Phases 1 through 5 were specified, built and verified between late morning and the 16:42 baseline commit on 11 November 2026. Each spec's log records the verdict, the local proof results, and anything deliberately left unbuilt.</p>
+
+    <h2>The tenant boundary moved first.</h2>
+    <p>The earliest version made the team the tenant. The Wake proposal needed organization-wide billing, feeds and roles, so the first architectural decision recorded was that the organization is the tenant, with teams exactly one level deep. It was changed before anything else was built, because every later feature would otherwise have been written against the wrong boundary. An isolation test suite fails if any route that takes an organization or team id can be reached from outside it.</p>
+
+    <p>Two more decisions became ADRs because they are hard to reverse. Pulse survey answers are stored with no person attached, so anonymity holds even against a database query, and results show only for weeks with at least three answers. Account deletion anonymizes what a person wrote instead of deleting it, so team feeds, retros and reports don't develop holes nobody chose.</p>
+
+    <h2>Integrations were built against fakes, on purpose.</h2>
+    <p>Slack commands, GitHub pull-request drafts and Linear issue drafts all use signed requests that the test suite can produce, with no live account. A merged pull request or a completed Linear issue becomes a draft entry for its author, which they confirm rather than auto-post. Each proof is labeled Local or Live in the spec logs, and the live ones are honestly marked as not run.</p>
+
+    <h2>What exists, and what doesn't.</h2>
+    <p>By the end of Phase 5 the suite stood at 748 passing pytest tests plus Playwright browser smoke tests. The app is a single FastAPI module with SQL through psycopg and numbered migrations, a React single-page front end built by Vite, and a Docker Compose stack for local runs. A follow-up pass built the sidebar workbench layout shown above.</p>
+
+    <p>Some things were deliberately not built. SSO, two-factor sign-in and the guest role were deferred. The digest command is safe to re-run, but nothing schedules it yet. There is no deployed environment, so every result here is local. Wake is a demonstration of how far a well-specified, verified agent loop can carry a real product scope. It is not yet a hosted service.</p>
+
+  </article>
+
+  <nav class="post-nav">
+    <a href="/posts/reddit-signal-command/" class="post-nav-link">
+      <span class="nav-k">← Previous</span>
+      <span class="nav-t">Reddit Signal Command</span>
+    </a>
+    <a href="/posts/ai-powered-newsletter-generator/" class="post-nav-link nav-next">
+      <span class="nav-k">Next →</span>
+      <span class="nav-t">AI-Powered Newsletter Generator</span>
+    </a>
+  </nav>
+
+  <footer class="site-footer">
+    <div class="site-footer-inner">
+      <div>
+        <div class="site-footer-cta">Let's work <em>together.</em></div>
+        <div class="site-footer-email">jteerlink@gmail.com</div>
+      </div>
+      <div class="site-footer-links">
+        <a href="https://linkedin.com/in/jaredwteerlink">LinkedIn ↗</a>
+        <a href="https://github.com/jteerlink">GitHub ↗</a>
+        <a href="/contact.html">Contact →</a>
+      </div>
+      <div class="site-footer-meta">© 2026 — set in Instrument Serif &amp; Inter</div>
+    </div>
+    <div class="site-footer-copy">
+      <span>Jared Teerlink</span>
+      <span>Data Science Leader · AI / ML</span>
+    </div>
+  </footer>
+
+  <script src="/js/portfolio.js"></script>
+</body>
+</html>
